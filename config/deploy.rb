@@ -3,10 +3,10 @@ lock '3.4.0'
 set :application, 'sync-server'
 
 # capistrano will deploy the code from this repo to the target machine
-set :repo_url, 'git@bitbucket.org:julien-orange/sync_server.git'
+set :repo_url, 'git@github.com:AllanTamdem/sync_server.git'
 
 # capistrano will deploy the code this folder
-set :deploy_to, '/home/ubuntu/sync-server'
+set :deploy_to, '/home/atscom/sync-server'
 
 
 set :log_level, :info
