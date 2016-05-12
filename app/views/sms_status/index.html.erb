@@ -1,0 +1,80 @@
+
+
+<style>
+#sms-status-table{
+	font-size: 0.8em;
+}
+#sms-status-table pre{
+	font-size: 0.95em;
+}
+#sms-status-table .pagination{
+	margin-bottom: 0;
+}
+</style>
+
+<div id="sms-status-table">
+
+
+<%= will_paginate @sms_statuses, renderer: BootstrapPagination::Rails %>
+<table class="table table-hover table-striped table-bordered table-condensed">
+	<thead>
+		<tr>
+			<th>
+				updated_at
+			</th>
+			<th>
+				sms_id
+			</th>
+			<th>
+				sent_information
+			</th>
+			<th>
+				status_information
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @sms_statuses.each do |sms| %>
+			<tr>
+				<td>
+					<%= sms.updated_at %>
+				</td>
+				<td>
+					<%= sms.sms_id %>
+				</td>
+				<td>
+					<pre class="nice-json"><%= sms.sent_information %></pre>
+				</td>
+				<td>
+					<pre class="nice-json"><%= sms.status_information %></pre>
+				</td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
+
+</div>
+
+
+
+<script>
+$(function(){
+
+	$('.nice-json').each(function(){
+
+		var json = $(this).html();
+
+		if(json){
+			try{
+				json = JSON.stringify(JSON.parse(json), null, 2);
+				$(this).html(json);
+			}
+			catch(e){}
+		}
+
+
+	});
+
+});
+</script>

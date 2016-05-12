@@ -1,0 +1,9 @@
+---
+# this one needs to be run before runing the deploy via capistrano
+- hosts: syncserver
+  remote_user: atscom
+  vars_files:
+    - vars/defaults.yml
+  roles:
+    - postgres
+    - sync-server-pre-deploy

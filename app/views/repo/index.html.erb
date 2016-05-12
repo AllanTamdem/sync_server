@@ -1,0 +1,158 @@
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Files repository</h1>
+    </div>
+</div>
+
+<%
+
+upload_path_input = nil
+upload_path_btn = nil
+
+if current_user.try(:admin?)
+  upload_path_input = '/'
+  upload_path_btn = 'root'
+else
+  if @content_providers.size > 0
+    upload_path_input = @content_providers[0][:technical_name] + '/'
+    upload_path_btn = @content_providers[0][:technical_name]
+  end
+end
+
+%>
+
+
+<div class="row">
+    <div class="col-lg-8">
+    	<h3>
+    	Upload new files to the 
+    	<input id="input-upload-folder" value="<%= upload_path_input %>" type="text" autocomplete="off" style="display:none;" />
+    	<button id="btn-upload-folder" class="btn btn-inverse btn-xs" data-toggle="tooltip" data-placement="top" title="Click to change"><%= upload_path_btn %></button> folder :</h3>
+
+		<form action="https://orange-mediaspot.s3-ap-northeast-1.amazonaws.com/" class="dropzone" id="dropzone">
+  		<div class="fallback">
+  		    <b>Sorry but your browser is not recent enough to be able to upload files to the repository. Please update your browser.</b>
+  		</div>
+		</form>
+	</div>
+</div>
+	
+<br>
+
+<div class="row">
+    <div class="col-lg-6">
+    	<div id='jobs'>
+    	</div>
+      <div id='upload-errors' class="alert alert-danger" style="display:none;">
+          <strong>
+            Upload errors :
+          </strong>
+          <br>
+      </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+      <h3>Files inside the repository.</h3>
+
+      <div <%= @content_providers.size > 1 ? '': 'style="display:none;"'.html_safe %> >
+        <p>Filter the list of files by content provider: 
+        <%= select_tag "filter_content_provider", options_for_select(@content_providers.collect {|cp| [ cp[:name], cp[:technical_name] ] } ) %>
+        </p> 
+      </div>
+  		<table id="table-files" class="table table-bordered table-hover">
+  		</table>
+    </div>
+</div>
+
+
+<div id="modal-modify-file" class="modal fade" data-backdrop="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 id="title-modify"  class="modal-title"></h4>
+      </div>
+      <div class="modal-body">
+        <form role="form" class="form-horizontal" >
+			<div class="form-group">
+				<label id="label-modify-path" for="new-path" class="col-sm-5 control-label"></label>
+				<div class="col-sm-7">
+					<input type="text" class="form-control" id="new-path" placeholder="Enter new file path" autocomplete="off">
+				</div>
+			</div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="btn-modify-file-submit" data-loading-text="Modifying..." class="btn btn-primary" autocomplete="off">Modify</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="modal-file-metadata" class="modal fade" data-backdrop="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">Metadata</h4>
+      </div>
+      <div class="modal-body" style="padding-left:0;padding-right:0;padding-bottom:0">
+		<div class="tabbable">
+			<ul class="nav nav-tabs padding-12 tab-color-blue background-blue">
+				<li class="active">
+					<a data-toggle="tab" href="#tab-metadata-form" >Form</a>
+				</li>
+				<li class="">
+					<a data-toggle="tab" href="#tab-metadata-excel" >Copy from Excel</a>
+				</li>
+				<li class="">
+					<a data-toggle="tab" href="#tab-metadata-json" >Edit raw JSON</a>
+				</li>
+			</ul>
+			<div class="tab-content">
+				<div id="tab-metadata-form" class="tab-pane active">
+				</div>
+				<div id="tab-metadata-excel" class="tab-pane">
+					<span>Tab separated values. You can copy-paste from excel</span>				
+      				<textarea id="textarea-excel" class="form-control" rows="20" ></textarea>
+				</div>
+				<div id="tab-metadata-json" class="tab-pane ">
+					<span>Edit the raw JSON (or paste one) :</span>				
+      				<textarea id="textarea-json" class="form-control" rows="20" ></textarea>
+      				<span id="msg-json-non-valid" class="red" style="visibility: hidden;"><i class="ace-icon fa fa-flag"></i> JSON non valid.</span>
+				</div>
+			</div>
+      <div id="json-errors"></div>
+		</div>
+<!-- 		<p class="text-center">
+			<i class="fa fa-long-arrow-down fa-2x"></i>
+		</p>
+      	<pre id="metadata-table-result">
+      	</pre> -->
+      </div>
+      <div class="modal-footer">
+        <button id="btn-metadata-delete" type="button" class="pull-left btn btn-danger">Delete metadata</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button id="btn-metadata-save" type="button" class="btn btn-primary" autocomplete="off"
+        data-loading-text="Saving ..."  >Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+var SyncServer = SyncServer || {};
+
+SyncServer.metadata_template = <%= @metadata_template.html_safe %>;
+
+</script>
+
+
+<%= javascript_include_tag 'dropzone' %>
+<%= javascript_include_tag 'repo' %>

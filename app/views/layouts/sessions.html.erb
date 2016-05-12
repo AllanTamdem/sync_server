@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<%= render 'header' %>
+	</head>
+	<body class="login-layout" data-no-turbolink>
+
+		<div class="main-container">
+			<div class="main-content">
+				<div class="row">
+					<div class="col-sm-10 col-sm-offset-1">
+						<div class="login-container">
+
+							<% unless notice.blank? %>
+								<br>
+								<div class="alert alert-info alert-dismissible fade in" role="alert">
+									<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+									<%= notice %>
+								</div>
+							<% end %>
+							<% unless alert.blank? %>
+								<br>
+								<div class="alert alert-warning alert-dismissible fade in" role="alert">
+									<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+									<%= alert %>
+								</div>
+							<% end %>
+
+							<div class="center">
+								<h4 class="orange" id="id-company-text">
+									<img height="53" width="53" src="/assets/orange.gif">
+								</h4>
+								<h1>
+									<span class="orange">Fast Content Download</span>
+								</h1>
+							</div>
+
+							<div class="space-6"></div>
+
+							<div class="position-relative">
+
+								<%= yield %>
+
+							</div>
+
+							<div class="space-6"></div>
+
+							<div class="center">
+									<span class="orange">© 2014-2015 Orange SA. All Rights Reserved.<br>Unauthorized access to this system is strictly prohibited.</span>
+							</div>
+							
+						</div>
+					</div><!-- /.col -->
+				</div><!-- /.row -->
+			</div><!-- /.main-content -->
+		</div><!-- /.main-container -->
+
+	<%= render 'footer' %>
+	
+  </body>
+</html>

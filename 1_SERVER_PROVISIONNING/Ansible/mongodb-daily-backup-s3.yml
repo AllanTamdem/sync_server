@@ -1,0 +1,8 @@
+---
+- hosts: tr069
+  remote_user: ubuntu
+  vars_files:
+    - vars/defaults.yml
+  roles:
+    - s3cmd-for-backup
+    - mongodb-daily-backup-s3

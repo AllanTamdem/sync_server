@@ -1,0 +1,46 @@
+This is a php sdk to read the file's catalog of Labgency
+it was provided by cedric.coutadeur@labgency.com the 05/02/2015
+
+It returns something like this:
+{"data":[{"cid":"TRAILERMP4ORANGEFCDXXXXXXXXXXX-242F","vid":"TRAILERMP4ORANGEFCDXXXXXXXXXXX-017A","active":"1","updated":"1425496550","op":"auto","service":"orange.fcd","unique":"0","download":"1","streaming":"1","transaction":"0","locale":"","title":"","version":"","lang":"","begin":"1422982244","end":"1738342244","serie,title":"","season,title":"","season,sequence":"","episode,title":"","episode,sequence":"","rights":"","data":"","wpr":"","download,quality":"","asset":"","serie,wpr":"","umid":"","initialname":"trailer.mp4","duration":"108","service_id":"orange.fcd","online":"1","vid,online":"1","vid,unique":"0","pool":"0","inventory":"1","assigned":"0","available":"1","intermediate":"1","target,inventory":"0","target,pool":"0","target,configuration":"null","copy,first":"1422929160","copy,last":"1422929220","stream,audio,count":"0","stream,video,count":"0","flag,stamp":"0","flag,tag":"","flag,message":"","flag,nonzero":"1","admin,updated":"","admin,note":""},{"cid":"ROBOTICAMP4ORANGEFCDXXXXXXXXXX-B3D3","vid":"ROBOTICAMP4ORANGEFCDXXXXXXXXXX-BF43","active":"1","updated":"1425496550","op":"auto","service":"orange.fcd","unique":"0","download":"1","streaming":"1","transaction":"0","locale":"","title":"","version":"","lang":"","begin":"1424865646","end":"1740225646","serie,title":"","season,title":"","season,sequence":"","episode,title":"","episode,sequence":"","rights":"","data":"","wpr":"","download,quality":"","asset":"","serie,wpr":"","umid":"","initialname":"Robotica.mp4","duration":"20","service_id":"orange.fcd","online":"1","vid,online":"1","vid,unique":"0","pool":"0","inventory":"1","assigned":"0","available":"1","intermediate":"1","target,inventory":"0","target,pool":"0","target,configuration":"null","copy,first":"1424864340","copy,last":"1424864400","stream,audio,count":"0","stream,video,count":"0","flag,stamp":"0","flag,tag":"","flag,message":"","flag,nonzero":"1","admin,updated":"","admin,note":""}]}
+
+--- Here is a short guide to install this on ubuntu with nginx : ---
+
+to install php and the stuff needed:
+sudo apt-get install php5-fpm
+sudo apt-get install php5-curl
+sudo apt-get install php5-mcrypt
+sudo php5enmod mcrypt
+
+in /etc/php5/fpm/php.ini
+change 
+;cgi.fix_pathinfo=1
+to 
+cgi.fix_pathinfo=0
+
+Nginx config :
+
+server {
+
+    listen 3549; # random port
+    server_name syncservereurope.tapngo.orangejapan.jp;
+
+    root /home/ubuntu/tapngo-web-sync/current/LabgencyPhpSdk;
+
+    index index.php;
+
+    access_log /var/log/nginx/labgency-api.log combined;
+    error_log /var/log/nginx/labgency-api.log;
+
+    location / {
+        try_files $uri $uri/ /index.php;
+    }
+
+    location ~ \.php$ {
+            fastcgi_split_path_info ^(.+\.php)(/.+)$;
+            fastcgi_pass unix:/var/run/php5-fpm.sock;
+            fastcgi_index index.php;
+            include fastcgi_params;
+    }
+
+}

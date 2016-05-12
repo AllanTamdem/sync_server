@@ -1,0 +1,15 @@
+pid: /syncserver/tmp/pids/thin.pid
+timeout: 700
+wait: 30
+log: /syncserver/log/thin.log
+max_conns: 1024
+require: []
+max_persistent_conns: 512
+servers: 3
+threaded: true
+no-epoll: true
+daemonize: true
+socket: /syncserver/tmp/sockets/thin.sock
+chdir: /syncserver/
+tag: sync-server-thin
+onebyone: true

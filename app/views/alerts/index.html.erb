@@ -1,0 +1,80 @@
+
+<%= will_paginate @alerts, renderer: BootstrapPagination::Rails %>
+<table class="table table-hover table-striped table-bordered table-condensed">
+	<thead>
+		<tr>
+			<th>
+				Alert type
+			</th>
+			<th>
+				Last sent to
+			</th>
+			<th>
+				Last sent at
+			</th>
+			<th>
+				Sent count
+			</th>
+			<th>
+				Resolved at
+			</th>
+			<th>
+				Mediaspot id
+			</th>
+			<th>
+				Mediaspot name
+			</th>
+			<th>
+				Mediaspot client name
+			</th>
+			<th>
+				Mediaspot client number
+			</th>
+			<th>
+				Information
+			</th>
+			<th>
+				Created at
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @alerts.each do |a| %>
+			<tr>
+				<td>
+					<%= a.type_alert %>
+				</td>
+				<td>
+					<%= a.last_sent_to %>
+				</td>
+				<td>
+					<%= a.last_sent_at %>
+				</td>
+				<td>
+					<%= a.sent_count %>
+				</td>
+				<td>
+					<%= a.resolved_at %>
+				</td>
+				<td>
+					<%= a.mediaspot_id %>
+				</td>
+				<td>
+					<%= a.mediaspot_name %>
+				</td>
+				<td>
+					<%= a.mediaspot_client_name %>
+				</td>
+				<td>
+					<%= a.mediaspot_client_number %>
+				</td>
+				<td>
+					<%= a.information %>
+				</td>
+				<td>
+					<%= a.created_at %>
+				</td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>

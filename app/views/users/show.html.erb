@@ -1,0 +1,31 @@
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">User <%= @user.email %></h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+		        <dl class="dl-horizontal dl-horizontal-large">
+                <% @user.attributes.each { |key, value| %>
+
+		            <dt><%= key %></dt>
+		            <dd><%= value %></dd>
+
+                <% } %>
+
+                  <dt>Content providers</dt>
+                  <dd>
+                    <%= @user.content_providers.map{|cp|
+                          cp.name
+                        }.to_sentence %>
+                  </dd>
+
+		        </dl>
+
+    </div>
+</div>
+
+<%= link_to 'Edit', edit_user_path(@user), class: 'btn btn-info btn-sm' %>
+<%= link_to 'Back', users_path, class: 'btn btn-info btn-sm' %>

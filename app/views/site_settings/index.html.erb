@@ -1,0 +1,129 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">SyncServer Settings</h1>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-12">
+
+		<%= form_for @settings, url: {action: "update_super_admins"}, html: {class: "form-horizontal"} do |f| %>
+
+			<div class="form-group">
+				<%= f.label :super_admins,"Super Admins list (comma separated list of emails):",  class: "col-sm-2 control-label"  %>
+				<div class="col-sm-10">
+					<%= f.text_area :super_admins, size: "80x3", html: {class: "form-control"} %>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<%= f.submit "Update", class: "btn btn-primary" %>
+				</div>
+			</div>
+
+
+		<% end %>
+
+    </div>
+</div>
+
+<hr>
+
+<div class="row">
+    <div class="col-lg-12">
+
+		<%= form_for @settings, url: {action: "update_tr69_hosts_whitelist"}, html: {class: "form-horizontal"} do |f| %>
+
+			<div class="form-group">
+				<%= f.label :tr069_hosts_white_list,"TR069 hosts white list (comma separated list):",  class: "col-sm-2 control-label"  %>
+				<div class="col-sm-10">
+					<%= f.text_area :tr069_hosts_white_list, size: "80x3", html: {class: "form-control"} %>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<%= f.submit "Update", class: "btn btn-primary" %>
+				</div>
+			</div>
+
+
+		<% end %>
+
+    </div>
+</div>
+
+<hr>
+
+<div class="row">
+    <div class="col-lg-12">
+
+		<%= form_for @settings, url: {action: "update_websocket_hosts_whitelist"}, html: {class: "form-horizontal"} do |f| %>
+
+			<div class="form-group">
+				<%= f.label :websocket_hosts_white_list,"WebSocket hosts white list (comma separated list):",  class: "col-sm-2 control-label"  %>
+				<div class="col-sm-10">
+					<%= f.text_area :websocket_hosts_white_list, size: "80x3", html: {class: "form-control"} %>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<%= f.submit "Update", class: "btn btn-primary" %>
+				</div>
+			</div>
+
+
+		<% end %>
+
+    </div>
+</div>
+
+<hr>
+
+<div class="row">
+    <div class="col-lg-12">
+
+		<%= form_for @settings, url: {action: "update_metadata_template"}, html: {class: "form-horizontal"} do |f| %>
+
+			<div class="form-group">
+				<%= f.label :metadata_template,"Metadata template. (used to generate the html form when editing file's metadata) :",  class: "col-sm-2 control-label"  %>
+				<div class="col-sm-10">
+					<%= f.text_area :metadata_template, size: "80x30", html: {class: "form-control"} %>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<%= f.submit "Update", class: "btn btn-primary" %>
+				</div>
+			</div>
+
+
+		<% end %>
+
+    </div>
+</div>
+<!-- 
+<hr>
+<div class="row">
+    <div class="col-lg-12">
+
+		<%= form_for @settings, url: {action: "update_metadata_validation_schema"}, html: {class: "form-horizontal"} do |f| %>
+
+			<div class="form-group">
+				<%= f.label :metadata_validation_schema, "Metadata validation schema per file. (used to strictly validate the metadata JSON before being saved to the repo):", class: "col-sm-2 control-label"  %>
+				<div class="col-sm-10">
+					<%= f.text_area :metadata_validation_schema, size: "80x30", html: {class: "form-control"} %>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<%= f.submit "Update", class: "btn btn-primary" %>
+				</div>
+			</div>
+
+
+		<% end %>
+
+    </div>
+</div>
+ -->

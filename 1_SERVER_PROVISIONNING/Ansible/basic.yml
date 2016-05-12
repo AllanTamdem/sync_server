@@ -1,0 +1,12 @@
+---
+- hosts: all
+  remote_user: atscom
+  vars_files:
+    - vars/defaults.yml
+  roles:
+    - common
+    - nodejs
+    - node-forever
+    - redis
+    - nginx
+    - ruby

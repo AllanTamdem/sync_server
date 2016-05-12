@@ -1,0 +1,53 @@
+---
+- stat: path={{genieacsGuiDir}}
+  register: genieacs_gui_already_cloned
+
+- name: git clone
+  git: repo=https://github.com/zaidka/genieacs-gui.git dest={{genieacsGuiDir}} version=85f3e0dfca100ebd8121b4e3f9beb67722c25940
+  when: not genieacs_gui_already_cloned.stat.exists
+  register: genieacs_gui_cloned
+
+- name: copy config files
+  when: genieacs_gui_cloned|changed
+  copy: src={{ item }} dest={{genieacsGuiDir}}/config
+  with_items:
+    - graphs.json.erb
+    - index_parameters.yml
+    - parameter_renderers.yml
+    - parameters_edit.yml
+    - roles.yml
+    - summary_parameters.yml
+    - users.yml
+
+- name: copy unicorn config file
+  when: genieacs_gui_cloned|changed
+  copy: src=unicorn_config.rb dest={{genieacsGuiDir}}/config/unicorn.rb
+
+- name: Creates folder for unicorn sockets
+  file: path={{genieacsGuiDir}}/tmp/sockets/ state=directory
+
+
+- name: Creates folder for unicorn pid file
+  file: path={{genieacsGuiDir}}/tmp/pids/ state=directory
+
+- name: add the unicorn gem
+  lineinfile: dest={{genieacsGuiDir}}/Gemfile line="gem 'unicorn'"
+
+- name: run bundle
+  when: genieacs_gui_cloned|changed
+  command: bundle chdir={{genieacsGuiDir}}
+
+- include: nginx_config.yml
+
+- name: precompile website assets
+  when: genieacs_gui_cloned|changed
+  command: bundle exec rake assets:precompile chdir={{genieacsGuiDir}}
+  environment:
+    RAILS_ENV: production
+
+- name: start website
+  when: genieacs_gui_cloned|changed
+  command: bundle exec unicorn -E production -c config/unicorn.rb -D chdir={{genieacsGuiDir}}
+
+- name: add genieacs-gui to the boot process
+  lineinfile: dest={{homeFolder}}/startup.sh line="cd {{genieacsGuiDir}}; bundle exec unicorn -E production -c config/unicorn.rb -D"

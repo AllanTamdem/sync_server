@@ -1,0 +1,132 @@
+
+
+Super admins : <%= sites_settings_super_admins %>
+<hr>
+mediaspots available on websocket:
+<pre id="lookup"><%= @lookup %></pre>
+<br>
+<br>
+
+<div class="row">
+  <div class="col-lg-12">
+    <form id="form-send-message" class="form-horizontal">
+      <div class="form-group">
+        <label for="input-mediaspot-id" class="control-label col-sm-3">Send INFORMREQUEST to a mediaspot id :</label>
+        <div class="col-sm-5">
+          <div class="input-group">
+            <input class="form-control" type="text" id="input-mediaspot-id" placeholder="mediaspot_id" >
+            <span class="input-group-btn">
+              <button class="btn btn-sm btn-primary" type="submit">Send</button>
+            </span>
+          </div>
+        </div>
+      </div>  
+    </form>
+  </div>
+</div>
+<div id="result">
+</div>
+<br>
+<br>
+<br>
+FYI, tr69 mediaspots:
+<div id="mediaspots">
+loading...
+</div>
+<br>
+<hr>
+<button id="btn-test-mongodb" class="btn btn-sm btn-primary" type="button">test mongodb</button>
+<div id="mongodb-result">
+</div>
+<hr>
+background processes (<a href="#" id="workers-refresh">refresh</a>):
+
+<div id="workers-result">loading...
+</div>
+
+
+
+
+<script>
+
+	$(function(){
+
+		$('#btn-test-mongodb').click(function(){
+			$("#mongodb-result").html('testing...');
+			$.get("sandbox/test2", function(result) {
+				if(result == 0){
+			  	$("#mongodb-result").html('connection ok but analytics are empty');
+				}
+				else{
+			  	$("#mongodb-result").html('ok');
+				}
+
+			})
+		  .fail(function() {
+		  	$("#mongodb-result").html('error');
+		  });
+		});
+
+
+		$('#form-send-message').submit(function(){
+
+			var id = $('#input-mediaspot-id').val();
+
+			$.get("sandbox/test?id="+id, function(result) {
+			  $("#result").html(result);
+			});
+
+			return false;
+		});
+
+		$.getJSON('admin_mediaspots/get_mediaspots')
+		.done(function(result){
+
+			var html = "<ul>";
+
+			_.each(result.data,function(m){
+				html += '<li>' + m.details._id + ' (' + m.details.mediaspotName + ') ';
+				html += 'last inform : ' + m.details.date_last_inform_ago;
+				html += ' (' + m.details.date_last_inform +')</li>';
+			});
+
+			html += '</ul>';
+
+			$('#mediaspots').html(html);
+
+		});
+
+		function fetch_workers(){
+			$.getJSON('sandbox/sidekiq_jobs')
+			.done(function(result){
+
+				_.each(result.running, function(job){
+
+					if(job[2]){
+						if(job[2].run_at){
+							job[2].run_at_date = new Date(job[2].run_at*1000).toString();
+						}
+						if(job[2].payload && job[2].payload.enqueued_at){
+							job[2].payload.enqueued_at_date = new Date(job[2].payload.enqueued_at*1000).toString();
+						}
+					}
+
+				})
+
+
+				$('#workers-result').html('<pre>' + JSON.stringify(result, null, 2) + '</pre>');
+			});
+		}
+
+		fetch_workers();
+
+		$('#workers-refresh').click(function(){
+			$('#workers-result').html('loading...');
+			fetch_workers();
+			return false;
+		});
+
+	})
+    
+</script>
+

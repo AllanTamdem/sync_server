@@ -1,0 +1,38 @@
+---
+# Ruby from source playbook (https://github.com/jgrowl/ansible-playbook-ruby-from-src)
+- name: upgrade
+  sudo: yes
+  action: apt update_cache=yes upgrade=yes
+
+- name: install ruby dependencies 
+  action: apt pkg=build-essential state=installed
+
+# Install correct version of ruby from source
+- name: ruby-from-src | ensure directory temporary ruby download directory is present
+  file: state=directory path={{rubyTmpDir}}
+
+- name: ruby-from-src | Download ruby source 
+  sudo: yes
+  get_url: url={{rubyUrl}} dest={{rubyTmpDir}}
+
+- name: ruby-from-src | ensure ruby is extracted
+  sudo: yes
+  command: tar -xf {{rubyCompressedFile}} chdir={{rubyTmpDir}} creates={{tmpRubyPath}}
+
+- name: ruby-from-src | ensure ruby is configured
+  sudo: yes
+  command: ./configure chdir={{tmpRubyPath}} creates={{tmpRubyPath}}/Makefile
+
+- name: ruby-from-src | ensure ruby is compiled
+  sudo: yes
+  command: make chdir={{tmpRubyPath}} creates={{tmpRubyPath}}/ruby
+
+- name: ruby-from-src | ensure ruby is installed
+  sudo: yes
+  command: make install chdir={{tmpRubyPath}} creates=/usr/local/bin/ruby
+  register: ruby_installed
+
+- name: Install Bundler
+  when: ruby_installed|changed
+  sudo: yes
+  command: bash -lc "gem install bundler"

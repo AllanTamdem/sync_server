@@ -1,0 +1,45 @@
+redis:
+  restart: always
+  image: fcd/redis
+  ports:
+   - "6379:6379"
+  volumes:
+   - /var/log/docker_redis:/var/log/redis
+
+postgres:
+  restart: always
+  image: fcd/postgres
+  ports:
+   - "5432:5432"
+  volumes:
+   - /var/log/docker_postgresql:/var/log/postgresql
+  environment:
+    DB: production
+    USER: rails-mediaspot-sync
+    PW: dx9zrBnq
+
+labgency0sdk0php:
+  restart: always
+  image: fcd/labgency-sdk-php
+  ports:
+   - "3549:80"
+
+websocket0node:
+  restart: always
+  image: fcd/websocket-node
+  ports:
+   - "3051:3051"
+   - "3052:3052"
+
+syncserver0web:
+  restart: always
+  image: fcd/syncserver-web
+  net: "host"
+  volumes:
+   - /var/log/docker_syncserver-web:/syncserver/log
+  environment:
+    environment: production
+    logentries: 20c59777-0bbe-4fa3-99f7-41109405b7fc
+    domain: syncserver.tapngo.orangejapan.jp
+    tr069: 52.68.160.44
+    mongodb: 52.68.160.44:27017

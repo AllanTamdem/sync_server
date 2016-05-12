@@ -1,0 +1,64 @@
+---
+- name: Install php stuff for the labgency api
+  sudo: yes
+  apt: pkg={{ item }} state=installed update_cache=true
+  with_items:
+    - php5-fpm
+    - php5-curl
+    - php5-mcrypt
+  register: php_installed
+
+- name: install php5enmod mcrypt
+  when: php_installed|changed
+  sudo: yes
+  command: php5enmod mcrypt
+
+- name: php config
+  sudo: yes
+  register: php_config_changed
+  lineinfile: dest=/etc/php5/fpm/php.ini line="cgi.fix_pathinfo=0"
+
+- name: restart php
+  when: php_config_changed|changed
+  sudo: yes
+  action: service name=php5-fpm state=restarted
+
+# - name: copy thin service file
+#   sudo: yes
+#   template: src=init_d_syncserver.j2 dest=/etc/init.d/syncserver mode=0755
+#   register: syncserver_service_file_created
+
+- name: add starting thin to the boot process
+  lineinfile: dest={{homeFolder}}/startup.sh line="/etc/init.d/syncserver start"
+
+- include: nginx_config.yml
+
+- name: add starting sidekiq to the boot process
+  lineinfile: dest={{homeFolder}}/startup.sh line="cd {{syncServerRailsDir}} && bundle exec sidekiq -d -e {{railsEnv}} -P {{syncServerPidFilesDir}}/sidekiq.pid -L {{syncServerLogDir}}/sidekiq.log"
+
+- name: "Check list of Node.js apps running."
+  command: forever list
+  register: forever_list
+  changed_when: false
+
+- name: "Start syncserver websocket"
+  command: forever --uid "syncserver-node-ws" -al {{syncServerLogDir}}/node_ws_log.log start {{syncServerRailsDir}}/NodeWebSocket/index.js
+  when: "forever_list.stdout.find('syncserver-node-ws') == -1"
+
+- name: add the websocket server to the boot process
+  lineinfile: dest={{homeFolder}}/startup.sh line="forever --uid "syncserver-node-ws" -al {{syncServerLogDir}}/node_ws_log.log start {{syncServerRailsDir}}/NodeWebSocket/index.js"
+
+- name: Add PATH to the crontab file
+  sudo: yes
+  lineinfile: dest=/var/spool/cron/crontabs/{{ansible_ssh_user}} insertafter="Cron version" line="PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+
+- name: seed the database (creates the first admin user)
+  # command: chdir={{syncServerRailsDir}} RAILS_ENV={{railsEnv}} bundle exec rake db:seed
+  command: bash -lc "cd {{syncServerRailsDir}} && RAILS_ENV={{railsEnv}} bundle exec rake db:seed"
+
+
+
+
+
+

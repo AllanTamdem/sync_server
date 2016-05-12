@@ -1,0 +1,133 @@
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Files repository</h1>
+    </div>
+</div>
+
+<% if @content_providers.size > 1 %>
+
+	<form id="form-change-content-provider" action="" type="get">
+		<div class="row">
+		    <div class="col-md-12" style="width:auto">
+					<div class="well well-sm" style="padding-bottom:0">			
+						<p>
+					 		Content provider : 
+		      		<%= select_tag "content_provider", options_for_select(@content_providers.collect {|cp| [ cp[:name], cp[:id] ] }, selected: @selected_content_provider_id) %>
+						</p>
+					</div>
+		    </div>
+		</div>
+	</form>
+
+<% end %>
+
+<input id="selected-bucket" type="hidden" value="<%= @s3_info[:aws_bucket_name] %>" />
+
+<div class="row">
+    <div class="col-lg-12">
+	    <div class="s3-manager">
+				<%= react_component('Repository', {
+		      files_url: 's3/get_files_as_tree',
+					create_folder_url: 's3/create_folder',
+		      auth_sign_url: 's3/sign_auth_upload',
+		      delete_files_url: 's3/delete_files',
+		      cut_paste_files_url: 's3/cut_paste_files',
+		      copy_paste_files_url: 's3/copy_paste_files',
+					rename_file_url: 's3/rename_file',
+					download_file_url: 's3/file_download_url',
+					upload_complete_url: 's3/upload_complete',
+		      path_prefix: @path_prefix,
+					s3_options:{
+						access_key: @s3_info[:aws_bucket_access_key_id],
+						bucket: @s3_info[:aws_bucket_name],
+						url: @s3_info[:aws_bucket_host]
+					},
+					logging: false
+				}) %>
+			</div>
+    </div>
+</div>
+
+
+
+
+<input id="filter_content_provider" type="hidden" value="client1">
+
+
+
+<div id="modal-file-metadata" class="modal fade" data-backdrop="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">Metadata</h4>
+      </div>
+      <div class="modal-body" style="padding-left:0;padding-right:0;padding-bottom:0">
+		<div class="tabbable">
+			<ul class="nav nav-tabs padding-12 tab-color-blue background-blue">
+				<li class="active">
+					<a data-toggle="tab" href="#tab-metadata-form" >Form</a>
+				</li>
+				<li class="">
+					<a data-toggle="tab" href="#tab-metadata-excel" >Copy from Excel</a>
+				</li>
+				<li class="">
+					<a data-toggle="tab" href="#tab-metadata-json" >Edit raw JSON</a>
+				</li>
+			</ul>
+			<div class="tab-content">
+				<div id="tab-metadata-form" class="tab-pane active">
+				</div>
+				<div id="tab-metadata-excel" class="tab-pane">
+					<span>Tab separated values. You can copy-paste from excel</span>				
+      				<textarea id="textarea-excel" class="form-control" rows="20" ></textarea>
+				</div>
+				<div id="tab-metadata-json" class="tab-pane ">
+					<span>Edit the raw JSON (or paste one) :</span>				
+      				<textarea id="textarea-json" class="form-control" rows="20" ></textarea>
+      				<span id="msg-json-non-valid" class="red" style="visibility: hidden;"><i class="ace-icon fa fa-flag"></i> JSON non valid.</span>
+				</div>
+			</div>
+      <div id="json-errors"></div>
+		</div>
+<!-- 		<p class="text-center">
+			<i class="fa fa-long-arrow-down fa-2x"></i>
+		</p>
+      	<pre id="metadata-table-result">
+      	</pre> -->
+      </div>
+      <div class="modal-footer">
+        <button id="btn-metadata-delete" type="button" class="pull-left btn btn-danger">Delete metadata</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button id="btn-metadata-save" type="button" class="btn btn-primary" autocomplete="off"
+        data-loading-text="Saving ..."  >Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+var SyncServer = SyncServer || {};
+
+SyncServer.metadata_template = <%= @metadata_template.html_safe %>;
+
+$(function(){
+
+	$('#bucket').change(function(){
+		location.hash = '';
+		$('#form-change-bucket').submit();
+	});
+
+	$('#content_provider').change(function(){
+		location.hash = '';
+		$('#form-change-content-provider').submit();
+	});
+
+})
+
+</script>
+
+
+<%= javascript_include_tag 'edit-metadata' %>

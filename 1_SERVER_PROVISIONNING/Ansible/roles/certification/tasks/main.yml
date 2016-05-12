@@ -1,0 +1,17 @@
+---
+- name: Creates directory
+  file: path={{certificationDir}} state=directory
+
+- stat: path={{certificationDir}}/server.crt
+  register: server_crt
+
+- name: copy certification files
+  copy: src=server.crt dest={{certificationDir}}/server.crt
+  when: not server_crt.stat.exists
+
+- stat: path={{certificationDir}}/server.key
+  register: server_key
+
+- name: copy certification files
+  copy: src=server.key dest={{certificationDir}}/server.key
+  when: not server_key.stat.exists

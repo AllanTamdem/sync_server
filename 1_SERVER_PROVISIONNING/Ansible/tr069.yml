@@ -1,0 +1,13 @@
+---
+
+# ansible-playbook -i hosts tr069.yml
+
+- hosts: tr069
+  remote_user: ubuntu
+  vars_files:
+    - vars/defaults.yml
+  roles:
+    - mongodb
+    - certification
+    - genieacs
+    - genieacs-gui

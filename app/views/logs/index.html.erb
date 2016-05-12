@@ -1,0 +1,30 @@
+
+<a href="/logs?lines=100">logs</a> |
+<a href="/logs/sidekiq?lines=100">sidekiq logs</a> |
+<a href="/logs/cron?lines=100">cron logs</a> |
+<a href="/logs/node_ws?lines=100">node websockets logs</a>
+
+<div class="row">
+
+<% if @logs4 %>
+
+	<div class="col-lg-3">
+		<pre><%= @logs %></pre>
+	</div>
+	<div class="col-lg-3">
+		<pre><%= @logs2 %></pre>
+	</div>
+	<div class="col-lg-3">
+		<pre><%= @logs3 %></pre>
+	</div>
+	<div class="col-lg-3">
+		<pre><%= @logs4 %></pre>
+	</div>
+<% else %>
+
+	<div class="col-lg-12">
+		<pre><%= @logs %></pre>
+	</div>
+<% end %>
+
+</div>

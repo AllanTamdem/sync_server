@@ -1,0 +1,25 @@
+
+<%= will_paginate @logs, renderer: BootstrapPagination::Rails %>
+
+<table class="table table-hover table-condensed table-bordered table-striped">
+	<thead>
+		<tr>
+			<th>Time</th>
+			<th>User</th>
+			<th>Action ype</th>
+			<th>Action</th>
+			<th>Details</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @logs.each { |log| -%>
+		    <tr>
+		    	<td><%= log.time %> (<%= time_ago_in_words(log.time) %> ago)</td>
+		    	<td><%= log.user %></td>
+		    	<td><%= log.action_type %></td>
+		    	<td><%= log.action %></td>
+		    	<td><%= log.details %></td>
+		    </tr>
+		<% } -%>		
+	</tbody>
+</table>

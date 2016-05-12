@@ -1,0 +1,30 @@
+---
+- name: Add mongo ppa key
+  sudo: yes
+  apt_key: >
+    keyserver=hkp://keyserver.ubuntu.com:80
+    id=7F0CEB10
+    state=present
+
+- name: Add mongo sources list
+  sudo: yes
+  lineinfile: >
+    line="deb http://repo.mongodb.org/apt/ubuntu {{ ansible_distribution_release }}/mongodb-org/3.0 multiverse"
+    dest=/etc/apt/sources.list.d/mongodb-org-3.0.list
+    state=present
+    create=yes
+
+- name: Install mongo
+  sudo: yes
+  apt: name=mongodb-org state=present update_cache=yes
+  register: mongo_installed
+
+- name: open mongo to the outside world. (be sure to not open mongo s port (27017))
+  when: mongo_installed|changed
+  sudo: yes
+  replace: dest=/etc/mongod.conf regexp='bind_ip = 127.0.0.1' replace='#bind_ip = 127.0.0.1' backup=yes
+
+- name: restart mongo
+  when: mongo_installed|changed
+  sudo: yes
+  action: service name=mongod state=restarted 

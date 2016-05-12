@@ -1,0 +1,12 @@
+server {
+	listen 80 default_server;
+	listen 443 default_server ssl;
+
+	ssl_certificate /home/ubuntu/cert/server.crt;
+	ssl_certificate_key /home/ubuntu/cert/server.key;
+
+	access_log /var/log/nginx/default.log combined;
+	error_log /var/log/nginx/default.log;
+
+	return 404;
+}

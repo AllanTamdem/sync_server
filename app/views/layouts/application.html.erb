@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<%= render 'header' %>
+	</head>
+
+	<body class="skin-1" data-no-turbolink>
+		<!-- #section:basics/navbar.layout -->
+		<div id="navbar" class="navbar navbar-default">
+			<div class="navbar-container" id="navbar-container">
+				<!-- #section:basics/sidebar.mobile.toggle -->
+				<button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
+					<span class="sr-only">Toggle sidebar</span>
+
+					<span class="icon-bar"></span>
+
+					<span class="icon-bar"></span>
+
+					<span class="icon-bar"></span>
+				</button>
+
+				<!-- /section:basics/sidebar.mobile.toggle -->
+				<div class="navbar-header pull-left">
+					<!-- #section:basics/navbar.layout.brand -->
+					<a href="/" class="navbar-brand">
+						<small>
+							<img class="img-logo" height="45" width="45" src="/assets/orange.gif" style="margin:-10px 0px -10px -15px">
+							Fast Content Download
+							<% if Rails.env.production? == false %>
+								(<%= Rails.env %>)
+							<% end %>
+						</small>
+					</a>
+
+					<!-- /section:basics/navbar.layout.brand -->
+
+					<!-- #section:basics/navbar.toggle -->
+
+					<!-- /section:basics/navbar.toggle -->
+				</div>
+
+				<!-- #section:basics/navbar.dropdown -->
+				<div class="navbar-buttons navbar-header pull-right" role="navigation">
+					<ul class="nav ace-nav">
+
+						<!-- #section:basics/navbar.user_menu -->
+						<li class="light-orange">
+							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
+								<span class="user-info">
+									<small>Welcome,</small>
+									<%= current_user.email %>
+								</span>
+
+								<i class="ace-icon fa fa-caret-down"></i>
+							</a>
+
+							<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+
+								<li>
+									<a href="/profile">
+										<i class="ace-icon fa fa-user"></i>
+										Profile
+									</a>
+								</li>
+
+								<li class="divider"></li>
+
+								<li>
+									<%= link_to :destroy_user_session, :method => :delete do %>
+										<i class="ace-icon fa fa-power-off"></i>
+										Logout
+									<% end %>
+								</li>
+							</ul>
+						</li>
+
+						<!-- /section:basics/navbar.user_menu -->
+					</ul>
+				</div>
+
+				<!-- /section:basics/navbar.dropdown -->
+			</div><!-- /.navbar-container -->
+		</div>
+
+		<!-- /section:basics/navbar.layout -->
+		<div class="main-container" id="main-container">
+
+			<!-- #section:basics/sidebar -->
+			<div id="sidebar" class="sidebar responsive">
+
+
+
+				<ul class="nav nav-list">
+					<li class="<%= request.path == '/' ? 'active' : '' %>">
+						<a href="/">
+							<i class="menu-icon fa fa-cloud fa-fw"></i>
+							<span class="menu-text"> Files </span>
+						</a>
+
+						<b class="arrow"></b>
+					</li>
+<!-- 					<li class="<%= request.fullpath == '/api' ? 'active' : '' %>">
+						<a href="/api">
+							<i class="menu-icon fa fa-cogs fa-fw"></i>
+							<span class="menu-text"> Api </span>
+						</a>
+
+						<b class="arrow"></b>
+					</li> -->
+	<!-- 				<li class="<%= request.fullpath == '/analytics' ? 'active' : '' %>">
+						<a href="/analytics">
+							<i class="menu-icon fa fa-line-chart fa-fw"></i>
+							<span class="menu-text"> Analytics </span>
+						</a>
+
+						<b class="arrow"></b>
+					</li>
+ -->
+					<% if true %>
+					<li class="<%= request.fullpath == '/mediaspots' ? 'active' : '' %>">
+						<a href="/mediaspots">
+							<i class="menu-icon fa fa-globe fa-fw"></i>
+							<span class="menu-text"> Mediaspots </span>
+						</a>
+
+						<b class="arrow"></b>
+					</li>
+					<% end %>
+
+
+					<% if current_user.try(:admin?) %>
+
+						<%
+
+							admin_paths = ['/users', '/content_providers', '/admin_mediaspots', '/repository_log', '/labgency' ]
+
+
+							admin_opened = admin_paths.any? { |path|
+								request.fullpath.starts_with? path
+							}
+						%>
+
+
+						<li class="<%= admin_opened ? 'active' : '' %>">
+							<a href="#" class="dropdown-toggle">
+								<i class="menu-icon fa fa-wrench"></i>
+								<span class="menu-text"> Admin </span>
+
+								<b class="arrow fa fa-angle-down"></b>
+							</a>
+
+							<b class="arrow"></b>
+
+							<ul class="submenu">
+
+								<li class="<%= request.fullpath.starts_with?('/admin_mediaspots') ? 'active' : '' %>">
+									<a href="/admin_mediaspots">
+										<i class="menu-icon fa fa-caret-right"></i>
+										<i class="fa fa-globe fa-fw"></i>
+										All mediaspots
+									</a>
+
+									<b class="arrow"></b>
+								</li>
+
+								<li class="<%= request.fullpath.starts_with?('/content_providers') ? 'active' : '' %>">
+									<a href="/content_providers">
+										<i class="menu-icon fa fa-caret-right"></i>
+										<i class="fa fa-users fa-fw"></i>
+										Content Providers
+									</a>
+
+									<b class="arrow"></b>
+								</li>
+
+								<li class="<%= request.fullpath.starts_with?('/users') ? 'active' : '' %>">
+									<a href="/users">
+										<i class="menu-icon fa fa-caret-right"></i>
+										<i class="fa fa-user fa-fw"></i> 
+										Users
+									</a>
+
+									<b class="arrow"></b>
+								</li>
+
+								<li class="<%= request.fullpath.starts_with?('/labgency') ? 'active' : '' %>">
+									<a href="/labgency">
+										<i class="menu-icon fa fa-caret-right"></i>
+										<i class="fa fa-file-video-o"></i>
+										Integration - Labgency
+									</a>
+
+									<b class="arrow"></b>
+								</li>
+							</ul>
+						</li>
+
+					<% end %>
+
+					<% if sites_settings_super_admins.include?(current_user.email) %>
+
+						<%
+
+							super_admin_paths = ['/alerts', '/logs', '/application_logs', '/sms_status', '/sandbox', '/site_settings']
+
+
+							super_admin_opened = super_admin_paths.any? { |path|
+								request.fullpath.starts_with? path
+							}
+						%>
+
+
+						<li class="<%= super_admin_opened ? 'active' : '' %>">
+							<a href="#" class="dropdown-toggle">
+								<i class="menu-icon fa fa-coffee"></i>
+								<span class="menu-text"> Super Admin </span>
+
+								<b class="arrow fa fa-angle-down"></b>
+							</a>
+
+							<b class="arrow"></b>
+
+							<ul class="submenu">
+
+								<li class="<%= request.fullpath.starts_with?('/alerts') ? 'active' : '' %>">
+									<a href="/alerts">
+										<i class="menu-icon fa fa-caret-right"></i>
+										Alerts
+									</a>
+
+									<b class="arrow"></b>
+								</li>
+
+								<li class="<%= request.fullpath.starts_with?('/sms_status') ? 'active' : '' %>">
+									<a href="/sms_status">
+										<i class="menu-icon fa fa-caret-right"></i>
+										SMS alert events
+									</a>
+
+									<b class="arrow"></b>
+								</li>
+
+								<li class="<%= request.fullpath.starts_with?('/application_logs') ? 'active' : '' %>">
+									<a href="/application_logs">
+										<i class="menu-icon fa fa-caret-right"></i>
+										System events
+									</a>
+
+									<b class="arrow"></b>
+								</li>
+
+<!-- 								<li class="<%= request.fullpath.starts_with?('/repository_log') ? 'active' : '' %>">
+									<a href="/repository_log">
+										<i class="menu-icon fa fa-caret-right"></i>
+										<i class="fa fa-search fa-fw"></i>
+										Repository Access Logs
+									</a>
+
+									<b class="arrow"></b>
+								</li> -->
+
+								<li class="<%= request.fullpath.starts_with?('/logs') ? 'active' : '' %>">
+									<a href="/logs">
+										<i class="menu-icon fa fa-caret-right"></i>
+										System logs
+									</a>
+
+									<b class="arrow"></b>
+								</li>
+
+								<li class="<%= request.fullpath.starts_with?('/site_settings') ? 'active' : '' %>">
+									<a href="/site_settings">
+										<i class="menu-icon fa fa-caret-right"></i>
+										General settings
+									</a>
+
+									<b class="arrow"></b>
+								</li>
+
+								<li class="<%= request.fullpath.starts_with?('/sandbox') ? 'active' : '' %>">
+									<a href="/sandbox">
+										<i class="menu-icon fa fa-caret-right"></i>
+										Sandbox
+									</a>
+
+									<b class="arrow"></b>
+								</li>
+
+							</ul>
+						</li>
+
+					<% end %>
+
+				</ul><!-- /.nav-list -->
+
+				<!-- #section:basics/sidebar.layout.minimize -->
+				<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+					<i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+				</div>
+			</div>
+
+			<!-- /section:basics/sidebar -->
+			<div class="main-content">
+				<div class="main-content-inner">
+
+					<div class="page-content">
+
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+
+								<% unless notice.blank? %>
+									<br>
+									<div class="row">
+									    <div class="col-lg-6">
+											<div class="alert alert-info alert-dismissible fade in" role="alert">
+										      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+										      <%= notice %>
+										    </div>
+									    </div>
+									</div>
+								<% end %>
+
+								<% unless alert.blank? %>
+									<br>
+									<div class="row">
+									    <div class="col-lg-6">
+											<div class="alert alert-warning alert-dismissible fade in" role="alert">
+										      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+										      <%= alert %>
+										    </div>
+									    </div>
+									</div>
+								<% end %>
+
+
+
+								<%= yield %>
+
+
+
+
+
+
+								<!-- PAGE CONTENT ENDS -->
+							</div><!-- /.col -->
+						</div><!-- /.row -->
+					</div><!-- /.page-content -->
+				</div>
+			</div><!-- /.main-content -->
+
+			<div class="footer">
+				<div class="footer-inner">
+					<!-- #section:basics/footer -->
+					<div class="footer-content">
+						<span class="bigger-120">
+							<span class="orange bolder">Fast Content Download <%= Rails.configuration.version %></span>							
+						</span>
+						<div class="">© 2014-2015 Orange SA. All Rights Reserved. Unauthorized access to this system is strictly prohibited.</div>
+					</div>
+
+					<!-- /section:basics/footer -->
+				</div>
+			</div>
+
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+			</a>
+		</div><!-- /.main-container -->
+
+	</body>
+
+	<script>
+	 $(function(){
+
+	 	$('.sidebar').ace_sidebar();
+	 });
+	</script>
+
+	<script>
+		var $buoop = {vs:{i:9,f:15,o:12.1,s:5.1},c:2}; 
+		function $buo_f(){ 
+		 var e = document.createElement("script"); 
+		 e.src = "//browser-update.org/update.js"; 
+		 document.body.appendChild(e);
+		};
+		try {document.addEventListener("DOMContentLoaded", $buo_f,false)}
+		catch(e){window.attachEvent("onload", $buo_f)}
+	</script>
+
+
+	<%= render 'footer' %>
+
+</html>

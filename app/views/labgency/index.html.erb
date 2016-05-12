@@ -1,0 +1,135 @@
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Labgency administration</h1>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-12">
+
+    	<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h5>Labgency catalog</h5>
+			</div>
+			<div class="panel-body">
+				<table id="table-catalog" class="table table-hover table-condensed table-bordered table-striped">
+				</table>
+
+				<a data-toggle="collapse" href="#row-catalog">view raw labgency catalog</a>
+				<pre id="row-catalog" class="collapse" style="max-height: 400px;">
+				</pre>
+			</div>
+		</div>
+
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-lg-12">
+
+    	<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h5>Batch CID matching</h5>
+			</div>
+
+			<div class="panel-body">
+				<p>Everyday at 2am and 2pm (UTC) a batch runs and do this :</p>
+				<ol>
+					<li>List the files in the repository in the <b>labgency/</b> folder.</li>
+					<li>Try to match a <b>vid</b> from the labgency catalog (see table above) to the name of the file like this :
+						<pre>file_key.startsWith('labgency/[[vid]]/');</pre>
+					</li>
+					<li>
+						If it matches, put the matching <b>cid</b> in the metadata of the file. like this:
+						<pre>"validationPlatformData": {
+	"cid": "[[cid]]"
+}</pre>
+		    			and move the file from <b>labgency/</b> to <b>mediatransport-labgency/.staging/</b>.
+					</li>
+					<li>If it doesn't match, proceed to next file.</li>
+				</ol>
+
+<br>
+				<p>You can run the batch now if you want :
+				<button id="btn-run-batch"  autocomplete="off"
+				data-loading-text="Batch is running ..." 
+				class="btn btn-primary btn-minier">Run the batch now</button></p>
+
+
+				<div id="batch-result">
+				</div>
+
+				<br>
+				<br>
+
+				<div id="div_logs">
+
+					<%= render "logs" %>
+				</div>
+			</div>
+		</div>
+    </div>
+</div>
+
+
+<script>
+	$(function(){
+
+		var _catalogTable = $('#table-catalog').dataTable({
+    	dom: 'ftip',
+			columns:[
+				{data: 'updated', visible: false },
+				{data: 'initialname', title:'initialname'},
+				{data: 'cid', title:'cid'},
+				{data: 'vid', title:'vid'},
+				{
+					data: 'updated',
+					title:'updated',
+	            	dataSort: 0,
+	                render: function(data, type, row){
+	                	var m = moment(data, 'X');
+	                	if(m.isValid()){
+	                		return moment.duration(moment().diff(m)).humanize() + ' ago ('
+	                		+ m.format() + ')';
+	                	}
+	                	else{
+	                		return data;
+	                	}
+	                }
+	            }
+			],
+	        lengthChange: false,
+	        paging: false,
+	        searching: true,
+	        info: false
+		});
+
+		$.getJSON('/labgency/catalog')
+		.done(function(result){
+    	if(result.data && result.data.length > 0){
+      	_catalogTable.fnAddData(result.data);
+				$('#row-catalog').html(JSON.stringify(result.data, null, 2));
+    	}
+		});
+
+
+		$('#btn-run-batch').click(function(){
+			toastr.info('Batch started');
+			$(this).button('loading')
+			$.post('/labgency/run_batch')
+			.done(function(result){
+				toastr.info('Batch finished');
+				$('#batch-result').html('Result: <pre>' + result.result + '</pre>');
+			})
+			.complete(function(){
+				$('#btn-run-batch').button('reset');
+
+				$.get('/labgency/logs', function(html){
+					$('#div_logs').html(html);
+				})
+			});
+		});
+	});
+</script>

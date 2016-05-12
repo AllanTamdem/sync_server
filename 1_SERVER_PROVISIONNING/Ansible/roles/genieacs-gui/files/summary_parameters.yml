@@ -1,0 +1,15 @@
+Serial number: summary.serialNumber
+Product class: summary.productClass
+OUI: summary.oui
+Manufacturer: summary.manufacturer
+Hardware version: summary.hardwareVersion
+Software version: summary.softwareVersion
+MAC: summary.mac
+IP: summary.ip
+WLAN SSID: summary.wlanSsid
+WLAN passphrase: summary.wlanPassphrase
+Hosts:
+    _object: InternetGatewayDevice.LANDevice.1.Hosts.Host
+    Host name: HostName
+    IP: IPAddress
+    MAC: MACAddress

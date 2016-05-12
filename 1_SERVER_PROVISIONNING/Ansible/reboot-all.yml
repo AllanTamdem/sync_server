@@ -1,0 +1,8 @@
+
+# it just reboot the servers
+
+---
+- hosts: all
+  remote_user: ubuntu
+  roles:
+    - reboot

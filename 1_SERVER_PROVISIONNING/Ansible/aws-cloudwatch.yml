@@ -1,0 +1,7 @@
+---
+- hosts: all
+  remote_user: ubuntu
+  vars_files:
+    - vars/defaults.yml
+  roles:
+    - aws-cloudwatch

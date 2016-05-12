@@ -1,0 +1,144 @@
+<br>
+<div class="row">
+    <div class="col-md-3 col-lg-2">
+    	<div class="well">
+	    	<h4>API</h4>
+	    	<ul>
+	    		<li><a href="#Introduction">Introduction</a></li>
+	    		<li><a href="#Authentication">Authentication</a></li>
+	    	</ul>
+	    	<br>
+	    	<h4>METHODS</h4>
+	    	<ul>
+	    		<li><a href="#Get-files">Get files</a></li>
+	    		<li><a href="#Delete-a-file">Delete a file</a></li>
+	    		<li><a href="#Get-a-presigned-post">Get a presigned post for uploading a file</a></li>
+	    	</ul>
+    	</div>
+    </div>
+    <div class="col-md-9 col-lg-10">
+
+    	<h3>API</h3>
+
+    	<h2 id="Introduction">Introduction</h2>
+    	<p>The API allows you ro administrate the files on your repository. You can list, delete, upload files.</p>
+
+
+    	<h2 id="Authentication">Authentication</h2>
+    		 You authenticate to the API by sending your API key in each request.<br>
+    		 You can provide it as a parameter in the url like this :
+<pre>
+<%= @protocol %><%= @host %>/api/files?api-key=<%= @api_key %>
+</pre>
+
+    		 Or in the header of the http request like this:
+
+<pre>
+GET /api/files HTTP/1.1
+Host: <%= @host %>
+api-key: <%= @api_key %>
+</pre>
+
+				
+    	<p>
+    		
+
+    	</p>
+
+    	<h3>METHODS</h3>
+
+    	<h2 id="Get-files">Get files</h2>
+    	<p>Get the list of files in the repository</p>
+<pre>
+GET <%= @protocol %><%= @host %>/api/files?api-key=<%= @api_key %>
+</pre>
+    	<p>Example of response :</p>
+<pre>
+[{
+    "key": "netflix/movies/horror/night_of_the_living_dead.mpeg",
+    "meta": {
+        "description": "an other old movie in public domain",
+        "owner": "Netflix"
+    },
+    "content_type": "binary/octet-stream",
+    "content_length": 4127671704
+}, {
+    "key": "trailers/Fury_Trailer_1_5.1-480p-HDTN.mp4",
+    "meta": {
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    },
+    "content_type": "binary/octet-stream",
+    "content_length": 40616045
+}, {
+    "key": "trailers/INTERSTELLAR_DOMESTIC_TRAILER_3-h264_480p.mov",
+    "meta": {
+        "description": "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo"
+    },
+    "content_type": "binary/octet-stream",
+    "content_length": 147394805
+}]
+</pre>
+
+
+    	<h2 id="Delete-a-file">Delete a file</h2>
+    	<p>Delete a file from the repository</p>
+    	<p>Example of request :</p>
+<pre>
+DELETE <%= @protocol %><%= @host %>/api/files?api-key=<%= @api_key %>&amp;key=netflix/movies/horror/night_of_the_living_dead.mpeg
+</pre>
+
+
+    	<h2 id="Get-a-presigned-post">Get a presigned post for uploading a file</h2>
+    	<p>Get the form fields for creating a presigned POST request to the repository. You can use this to create a form that can be used from a web browser to upload a file to the repository.</p>
+    	<p>Expires after one hour.</p>
+    	<p>Example of request :</p>
+<pre>
+GET <%= @protocol %><%= @host %>/api/presigned_post?api-key=<%= @api_key %>&amp;path=netflix&amp;meta_keys[]=description&amp;meta_keys[]=owner
+</pre>
+    	<p>Example of response :</p>
+<pre>
+{
+    "url": "https://orange-mediaspot.s3-ap-northeast-1.amazonaws.com/",
+    "fields": {
+        "AWSAccessKeyId": "AKIAIGSXG6GB3SMHE5PQ",
+        "key": "netflix/${filename}",
+        "policy": "eyJleHBpcmF0aW9uIjoiMjAxNC0xMi0wNVQwMTozNjozMloiLCJjb25kaXRpb25zIjpbWyJzdGFydHMtd2l0aCIsIiRYLUFtei1NZXRhLURlc2NyaXB0aW9uIiwiIl0sWyJzdGFydHMtd2l0aCIsIiRYLUFtei1NZXRhLU93bmVyIiwiIl0seyJidWNrZXQiOiJvcmFuZ2UtbWVkaWFzcG90In0sWyJzdGFydHMtd2l0aCIsIiRrZXkiLCJuZXRmbGl4L25ldGZsaXgvIl0seyJTZWN1cmUiOiJ0cnVlIn1dfQ==",
+        "signature": "E/B0UFG3mjBRnoTGncEfcY48Y38=",
+        "Secure": "true",
+        "file": null,
+        "x-amz-meta-description": null,
+        "x-amz-meta-owner": null
+    }
+}
+</pre>
+
+	<p>You could generate an html form like this :</p>
+<pre>
+<%= h '<form action="https://orange-mediaspot.s3-ap-northeast-1.amazonaws.com/" method="post" enctype="multipart/form-data">
+  <input type="hidden" name="AWSAccessKeyId" value="AKIAIGSXG6GB3SMHE5PQ">
+  <input type="hidden" name="key" value="netflix/${filename}">
+  <input type="hidden" name="policy" value="eyJleHBpcmF0aW9uIjoiMjAxNC0xMi0wNVQwMTozNjozMloiLCJjb25kaXRpb25zIjpbWyJzdGFydHMtd2l0aCIsIiRYLUFtei1NZXRhLURlc2NyaXB0aW9uIiwiIl0sWyJzdGFydHMtd2l0aCIsIiRYLUFtei1NZXRhLU93bmVyIiwiIl0seyJidWNrZXQiOiJvcmFuZ2UtbWVkaWFzcG90In0sWyJzdGFydHMtd2l0aCIsIiRrZXkiLCJuZXRmbGl4L25ldGZsaXgvIl0seyJTZWN1cmUiOiJ0cnVlIn1dfQ==">
+  <input type="hidden" name="signature" value="E/B0UFG3mjBRnoTGncEfcY48Y38=">
+  <input type="hidden" name="Secure" value="true">
+
+  description: <input type="text" name="x-amz-meta-description"><br>
+  owner:       <input type="text" name="x-amz-meta-owner"><br>
+  <input name="file" type="file"><br>
+  <input value="submit" type="submit">
+</form>'
+ %>
+</pre>
+
+
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>

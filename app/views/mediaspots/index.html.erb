@@ -1,0 +1,235 @@
+<style>
+#div-chart-downloads .amChartsCompareList{
+	display: none;
+}
+#div-chart-downloads .amChartsDataSetSelector select:not(.amcharts-data-set-select){
+	display: none;
+}
+
+</style>
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Mediaspots</h1>
+    </div>
+</div>
+
+
+<% if current_user.try(:admin?) %>
+
+	<div id="message-mediaspots-admin" class="row" style="display:none;">
+    <div class="col-lg-12">
+      <div class="alert alert-warning">
+				<button type="button" class="close" data-dismiss="alert">
+					<i class="ace-icon fa fa-times"></i>
+				</button>
+				<span class="label label-sm label-warning arrowed arrowed-right">admin</span><br>
+				As an admin, you can see mediaspots linked to all content providers.<br>A non-adminstrator can only see the mediaspots linked to the content provider(s) it is associated with.
+				<a href="#" style="font-size:0.85em" class="localstorage-hide" data-target="#message-mediaspots-admin">stop showing me this message.</a>
+				<br>
+			</div>
+    </div>
+	</div>
+
+<% end %>
+
+
+<div class="row">
+    <div class="col-lg-12">
+
+      <div <%= @content_providers.size > 1 ? '': 'style="display:none;"'.html_safe %> >
+        <p>Select a content provider: 
+        <%= select_tag "select_content_provider", options_for_select(@content_providers.collect {|cp| [ cp[:name], cp[:technical_name] ] } ) %>
+        </p> 
+      </div>
+  		<table id="table-files" class="table table-bordered table-hover">
+  		</table>
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col-lg-12">
+			<div class="datatables-no-padding">
+				<div class="btn-group">
+					<button id="btn-refresh" data-loading-text="Loading..." class="btn btn-default btn-sm" autocomplete="off"><i class="fa fa-refresh"></i> Refresh</button>
+					<div class="btn-group">
+						<button id="btn-action" type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Actions <span class="ace-icon fa fa-caret-down icon-on-right"></span>
+						</button>
+						<ul id="lnk-actions" class="dropdown-menu dropdown-default">
+							<li class="disabled"><a href="#" id="lnk-sync">Synchronize now</a></li>
+							<li class="disabled"><a href="#" id="lnk-make-analytics">Update analytics now</a></li>
+							<li class="disabled"><a href="#" id="lnk-download-on">Set <b>Download enabled</b> to <b>ON</b></a></li>
+							<li class="disabled"><a href="#" id="lnk-download-off">Set <b>Download enabled</b> to <b>OFF</b></a></li>
+						</ul>
+					</div>
+				</div>
+
+				<table id="mediaspots-table"  class="table table-hover table-bordered "></table>
+			</div>
+    </div>
+</div>
+
+<div class="row" id="msg-no-mediaspots" style="display:none;">
+    <div class="col-lg-12">
+        <div class="alert alert-info">
+        	<p>No mediaspots.</p>
+		</div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+	    <div id="mediaspot-detail" style="display:none;">
+			<hr>
+			<h4></h4>
+			<div class="tabbable">
+				<ul class="mediaspot-tabs nav nav-tabs padding-12 tab-color-blue background-blue">
+					<li class="active">
+						<a data-toggle="tab" href="#tab-analytics">Analytics</a>
+					</li>
+					<li>
+						<a data-toggle="tab" href="#tab-contents-tree">Mediaspot content</a>
+					</li>
+					<li>
+						<a data-toggle="tab" href="#tab-sync-log">
+						<span id="sync-info"></span>
+						Synchronization log</a>
+					</li>
+					<li>
+						<a data-toggle="tab" href="#tab-index-json">Index JSON file</a>
+					</li>
+				</ul>
+
+				<div class="tab-content">
+					<div id="tab-analytics" class="tab-pane active">
+
+
+
+						<div id="global-chart-container">
+							<div class="panel panel-primary">
+								<div class="panel-heading">
+									<h5>Downloads over time</h5>
+								</div>
+								<div class="panel-body">
+									<div>
+										<div class="chart-type btn-group btn-overlap" data-toggle="buttons">
+										  <label class="btn btn-sm btn-white btn-inverse active">
+										    <input value="file" type="radio" name="chart-type" autocomplete="off"> downloads per file
+										  </label>
+										  <label class="btn btn-sm btn-white btn-inverse">
+										    <input value="mediaspot" type="radio" name="options" autocomplete="off"> downloads per mediaspot
+										  </label>
+										  <label class="btn btn-sm btn-white btn-inverse">
+										    <input value="content-type" type="radio" name="options" autocomplete="off"> downloads per content type
+										  </label>
+										  <label class="btn btn-sm btn-white btn-inverse">
+										    <input value="device-type" type="radio" name="options" autocomplete="off"> HTTP requests per device type
+										  </label>
+										  <label class="btn btn-sm btn-white btn-inverse">
+										    <input value="failed-downloads" type="radio" name="options" autocomplete="off"> failed/incomplete HTTP requests
+										  </label>
+										</div>
+										&nbsp;
+										&nbsp;
+										&nbsp;
+										<div class="chart-period btn-group btn-overlap" data-toggle="buttons">
+										  <label class="btn btn-sm btn-white btn-primary"
+										  data-toggle="tooltip" data-placement="top" data-html="true" title="Up to one month of data.<br>Local time.">
+										    <input value="hour" type="radio" name="options" autocomplete="off"> per hour
+										  </label>
+										  <label class="btn btn-sm btn-white btn-primary active"
+										  data-toggle="tooltip" data-placement="top" data-html="true" title="Up to six month of data.<br>UTC time.">
+										    <input value="day" type="radio" name="options" autocomplete="off"> per day
+										  </label>
+										  <label class="btn btn-sm btn-white btn-primary"
+										  data-toggle="tooltip" data-placement="top" data-html="true" title="Up to one year of data.<br>UTC time.">
+										    <input value="month" type="radio" name="options" autocomplete="off"> per month
+										  </label>
+										</div>
+										&nbsp;
+										<span class="loader" style="display:none;">
+											<img width="25" height="25" src="/assets/loader.gif" >
+										</span>
+									</div>
+									<div id="global-chart-no-data" style="display:none;">
+										No data
+									</div>
+									<div id="global-chart" style="width:100%;height:500px">
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+						<div id="top-files">
+							<div class="panel panel-primary">
+								<div class="panel-heading">
+									<h5>Top ranked files by number of downloads</h5>
+								</div>
+								<div class="panel-body">
+									<div class="btn-group btn-overlap" data-toggle="buttons" >
+									  <label class="btn btn-sm btn-white btn-primary">
+									    <input data-days="1" type="radio" name="options" id="option22" autocomplete="off"> last 24 hours
+									  </label>
+									  <label class="btn btn-sm btn-white btn-primary">
+									    <input data-days="7" type="radio" name="options" id="option33" autocomplete="off"> last 7 days
+									  </label>
+									  <label class="btn btn-sm btn-white btn-primary">
+									    <input data-days="30" type="radio" name="options" id="option44" autocomplete="off"> last 30 days
+									  </label>
+									  <label class="btn btn-sm btn-white btn-primary active">
+									    <input data-days="" type="radio" name="options" id="option11" autocomplete="off"> any time
+									  </label>
+									</div>
+									<span class="loader" style="display:none;">
+										<img width="25" height="25" src="/assets/loader.gif" >
+									</span>
+									<div class="datatables-no-padding">
+              				<table id="table-top-files" class="table table-hover table-condensed table-hover table-bordered table-striped"></table>
+          				</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+					<div id="tab-sync-log" class="tab-pane">
+						<div class="row">
+					    <div class="col-lg-12">
+								<pre id="sync-log"></pre>
+					    </div>
+				    </div>
+					</div>
+
+					<div id="tab-contents-tree" class="tab-pane">
+						<div class="row">
+					    <div class="col-lg-12">
+								<pre id="contents-tree"></pre>
+					    </div>
+				    </div>
+					</div>
+
+					<div id="tab-index-json" class="tab-pane">
+						<div class="row">
+					    <div class="col-lg-12">
+								<pre id="index-json"></pre>
+					    </div>
+				    </div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<%= javascript_include_tag 'amcharts/amcharts' %>
+<%= javascript_include_tag 'amcharts/pie' %>
+<%= javascript_include_tag 'amcharts/serial' %>
+<%= javascript_include_tag 'amcharts/themes/light' %>
+<%= javascript_include_tag 'amcharts/amstock' %>
+
+<%= javascript_include_tag 'analytics' %>
+<%= javascript_include_tag 'mediaspots' %>

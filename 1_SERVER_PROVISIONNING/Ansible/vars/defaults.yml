@@ -1,0 +1,45 @@
+
+homeFolder: /home/atscom
+
+# ruby version
+rubyTmpDir: /usr/local/src
+rubyUrl: http://cache.ruby-lang.org/pub/ruby/2.3/ruby-2.3.0.tar.gz
+rubyCompressedFile: ruby-2.3.0.tar.gz 
+rubyName: ruby-2.3.0
+tmpRubyPath: "{{rubyTmpDir}}/{{rubyName}}"
+
+# certification
+certificationDir: "{{homeFolder}}/cert"
+
+# genieac
+genieacsDir: "{{homeFolder}}/genieacs"
+
+# genieacs-gui
+genieacsGuiDir: "{{homeFolder}}/genieacs-gui"
+
+
+# sync-server
+# these folders must match with the capistrano config
+syncServerRailsDir: "{{homeFolder}}/sync-server/current"
+syncServerRailsSocketsDir: "{{homeFolder}}/sync-server/shared/tmp/sockets"
+syncServerThinConfig: "{{homeFolder}}/sync-server/current/config/thin.yml"
+syncServerPidFilesDir: "{{homeFolder}}/sync-server/shared/tmp/pids"
+syncServerLogDir: "{{homeFolder}}/sync-server/shared/log"
+syncServerSharedFolder: "{{homeFolder}}/sync-server/shared"
+postgresDbUser: rails-mediaspot-sync
+postgresDbPassword: dx9zrBnq
+
+# domain names
+domainWebSocket: wseurope.tapngo.orangejapan.jp
+domainTr069Mediapost: mseurope.tapngo.orangejapan.jp
+
+
+# AWS credentials for CloudWatch
+AwsCloudWatchAccessKeyId: AKIAJJ6X7F572SSXXXSA
+AwsCloudWatchSecretKey: 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
+
+# Daily backups to S3
+s3BackupBucket: fcd-data-backups
+s3BackupBucketAccessKey: AKIAIANWS622FUUP7GLA
+s3BackupBucketSecretKey: 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
+

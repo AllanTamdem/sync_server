@@ -1,0 +1,16 @@
+---
+- name: Install Nginx
+  sudo: yes
+  apt: pkg=nginx state=installed update_cache=true
+
+- name: check if Nginx is running
+  sudo: yes
+  service: name=nginx state=started
+
+- stat: path=/etc/nginx/sites-enabled/default
+  register: default_app
+
+- name: Remove the default app
+  sudo: yes
+  command: rm -rf /etc/nginx/sites-enabled/default
+  when: default_app.stat.exists

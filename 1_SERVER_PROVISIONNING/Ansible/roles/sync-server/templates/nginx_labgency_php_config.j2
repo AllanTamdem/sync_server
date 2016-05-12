@@ -1,0 +1,23 @@
+server {                                                    
+                                                                                                                                                                                                   
+    listen 3549;
+
+    root {{syncServerRailsDir}}/LabgencyPhpSdk;
+
+    index index.php;
+
+    access_log /var/log/nginx/labgency-api.log combined;
+    error_log /var/log/nginx/labgency-api.log;
+
+    location / {
+        try_files $uri $uri/ /index.php;
+    }
+
+    location ~ \.php$ {
+            fastcgi_split_path_info ^(.+\.php)(/.+)$;
+            fastcgi_pass unix:/var/run/php5-fpm.sock;
+            fastcgi_index index.php;
+            include fastcgi_params;
+    }
+
+}

@@ -1,0 +1,174 @@
+
+@media (min-width: 992px) {
+  .modal-xl {
+    width: 900px;
+  }
+}
+@media (min-width: 1200px) {
+  .modal-xl {
+    width: 1190px;
+  }
+}
+
+.dropzone a.dz-remove{
+	margin-top: 6px;
+}
+
+.dropzone .dz-preview .dz-details img, .dropzone-previews .dz-preview .dz-details img {
+	height: 50px;
+}
+.dropzone .dz-preview .dz-details, .dropzone-previews .dz-preview .dz-details {
+	height: 50px;
+}
+
+
+.dropzone {
+  min-height: 200px;
+}
+
+
+.dataTables_wrapper .col-sm-12{
+  padding-left: 0;
+  padding-right: 0;
+}
+
+
+.panel-primary>.panel-heading .badge{
+  color: #fff
+}
+
+.dl-horizontal-large dt{
+  width: 260px;
+}
+.dl-horizontal-large dd{
+  margin-left: 280px;
+}
+
+
+.s3-manager .upload-queue{
+  margin-bottom: 10px;
+}
+
+.s3-manager .upload-queue-item {
+  border: 1px solid #ddd;
+  background-color:#F5F5F5;
+  -webkit-border-radius:3px;
+  -moz-border-radius:3px;
+  border-radius:3px;
+  font-size:11px;
+  margin-top:5px;
+  max-width:500px;
+  padding:10px
+}
+
+
+.s3-manager .upload-queue-item.error {
+  border-color: #f2dede;
+  background-color: #f2dede;
+  color: #a94442;
+}
+
+
+.s3-manager .upload-progress {
+    background-color:#E5E5E5;
+    margin-top:10px;
+    width:100%
+}
+
+.s3-manager .upload-progress-bar {
+    background-color:#09F;
+    height:3px;
+    width:1px
+}
+
+.s3-manager .upload-queue-item .actions i {
+    float:right;
+    height:16px;
+    width:16px;
+    color: #333;
+}
+
+.s3-manager .file-input-container {
+  border: 1px dashed #ddd;
+  background-color: #F7F7F7;
+}
+.s3-manager .file-input-container:hover {
+  border: 1px solid #ddd;
+}
+
+.s3-manager .file-input-text {
+  padding-top: 3em;
+  position: absolute;
+  margin: auto 30%;
+}
+
+.s3-manager input[type="file"]{
+  opacity: 0;
+  padding-bottom: 4em;
+  padding-top: 2em;
+  width: 100%;
+  cursor: pointer;
+}
+
+.s3-manager input[type="file"]:after {
+    display: block;
+    min-width: 20em;
+    margin: auto 40%;
+}
+
+.s3-manager table .form-control {
+    display: inline;
+    height: 25px;
+    width: 60%;
+    padding: 5px;
+}
+
+.s3-manager .file-row .btn-metadata {
+    line-height: 11px;
+    display: none;
+}
+
+.s3-manager .file-row:hover .btn-metadata {
+    display: inline-block;
+}
+
+
+.s3-manager .file-row .file-download {
+    display: none;
+}
+
+.s3-manager .file-row:hover .file-download {
+    display: inline-block;
+}
+
+.pointer{
+  cursor: pointer;
+}
+
+.hover-underline:hover {
+  text-decoration: underline;
+}
+
+
+.s3-manager .folder-row .info-folder {
+    display: none;
+}
+
+.s3-manager .folder-row:hover .info-folder {
+    display: inline-block;
+}
+
+@media (max-width: 767px) {
+  .img-logo{
+    display: none;
+  }
+}
+
+table {
+  background-color: white;
+}
+
+.footer-content{
+  padding-bottom: 0px !important;
+  line-height: normal !important;
+}

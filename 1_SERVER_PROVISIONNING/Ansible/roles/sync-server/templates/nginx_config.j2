@@ -1,0 +1,44 @@
+upstream sync-server {
+    # Path to Thin  SOCK files
+    server unix:{{syncServerRailsSocketsDir}}/thin.0.sock;
+    server unix:{{syncServerRailsSocketsDir}}/thin.1.sock;
+    server unix:{{syncServerRailsSocketsDir}}/thin.2.sock;
+}
+
+server {
+    listen         80;
+    return 301 https://$host$request_uri;
+}
+
+server {
+
+    listen 443;
+    server_name {{domainSyncServer}};
+
+    # Application root, as defined previously
+    root {{syncServerRailsDir}}/public;
+
+    ssl on;
+    ssl_certificate {{certificationDir}}/server.crt;
+    ssl_certificate_key {{certificationDir}}/server.key;
+
+    try_files $uri/index.html $uri @sync-server;
+
+    access_log /var/log/nginx/sync-server.log combined;
+    error_log /var/log/nginx/sync-server.log;
+
+    location @sync-server {
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Host $http_host;
+        proxy_redirect off;
+        proxy_pass http://sync-server;
+        proxy_set_header   X-Forwarded-Proto https;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+    }
+
+    error_page 500 502 503 504 /500.html;
+    client_max_body_size 4G;
+    keepalive_timeout 10;
+}

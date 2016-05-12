@@ -1,0 +1,18 @@
+---
+- name: copy password for mediaspot basic auth
+  sudo: yes
+  copy: src=ms-htpasswd dest=/etc/nginx/ms-htpasswd
+
+- name: copy nginx config file
+  sudo: yes
+  template: src=nginx_config.j2 dest=/etc/nginx/sites-available/genieacs-tr069
+  register: genieacs_tr069_ngninx_config_created
+
+- name: enable the website
+  sudo: yes
+  file: src=/etc/nginx/sites-available/genieacs-tr069 dest=/etc/nginx/sites-enabled/genieacs-tr069 state=link
+
+- name: restart nginx
+  when: genieacs_tr069_ngninx_config_created|changed
+  sudo: yes
+  action: service name=nginx state=restarted

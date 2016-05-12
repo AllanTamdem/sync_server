@@ -1,0 +1,4 @@
+---
+- name: "Install forever (to run Node.js app)."
+  sudo: yes
+  npm: name=forever global=yes state=present

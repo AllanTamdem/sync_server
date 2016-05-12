@@ -1,0 +1,42 @@
+
+<div id="forgot-box" class="forgot-box visible widget-box no-border">
+  <div class="widget-body">
+    <div class="widget-main">
+      <h4 class="header red lighter bigger">
+        <i class="ace-icon fa fa-key"></i>
+        Retrieve Password
+      </h4>
+
+      <div class="space-6"></div>
+      <p>
+        Enter your email to receive instructions
+      </p>
+
+      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post}) do |f| %>
+        <fieldset>
+          <label class="block clearfix">
+            <span class="block input-icon input-icon-right">
+              <%= f.email_field :email, autofocus: true, placeholder: "E-mail", class: "form-control" %>
+              <i class="ace-icon fa fa-envelope"></i>
+            </span>
+          </label>
+
+          <div class="clearfix">
+            <button type="submit" class="width-35 pull-right btn btn-sm btn-danger">
+              <i class="ace-icon fa fa-lightbulb-o"></i>
+              <span class="bigger-110">Send Me!</span>
+            </button>
+          </div>
+        </fieldset>
+      <% end %>
+    </div><!-- /.widget-main -->
+
+    <div class="toolbar center">
+      <a href="/users/sign_in" data-target="#login-box" class="back-to-login-link">
+        Back to login
+        <i class="ace-icon fa fa-arrow-right"></i>
+      </a>
+    </div>
+  </div><!-- /.widget-body -->
+</div><!-- /.forgot-box -->
+

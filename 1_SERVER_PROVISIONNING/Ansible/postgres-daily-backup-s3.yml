@@ -1,0 +1,8 @@
+---
+- hosts: syncserver
+  remote_user: ubuntu
+  vars_files:
+    - vars/defaults.yml
+  roles:
+    - s3cmd-for-backup
+    - postgres-daily-backup-s3

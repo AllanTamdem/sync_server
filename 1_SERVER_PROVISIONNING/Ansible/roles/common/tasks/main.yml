@@ -1,0 +1,35 @@
+---
+- name: Install Server Basics
+  sudo: yes
+  apt: pkg={{ item }} state=installed update_cache=true
+  with_items:
+    - git-core
+    - curl
+    - zlib1g-dev
+    - build-essential
+    - libssl-dev
+    - libreadline-dev
+    - libyaml-dev
+    - libsqlite3-dev
+    - sqlite3
+    - libxml2-dev
+    - libxslt1-dev
+    - libcurl4-openssl-dev
+    - python-software-properties
+    - libffi-dev
+
+- name: add user to the syslog group
+  sudo: yes
+  user: name={{ansible_ssh_user}} groups=syslog append=yes
+
+
+- stat: path={{homeFolder}}/startup.sh
+  register: startup_file
+
+- name: copy startup file
+  when: not startup_file.stat.exists
+  copy: src=startup.sh dest={{homeFolder}}/startup.sh mode=0777
+
+- name: copy root startup file
+  sudo: yes
+  template: src=etc_rc.local.j2 dest=/etc/rc.local

@@ -1,0 +1,22 @@
+---
+- name: install Redis server
+  sudo: yes
+  apt: name=redis-server state=present update_cache=yes
+  register: redis_installed
+
+- name: check if Redis is running
+  sudo: yes
+  service: name=redis-server state=started
+
+- name: enable redis-server to survive reboot
+  service: name=redis-server enabled=yes
+
+- name: open redis to the outside world. (be sure to not open redis s port (6379))
+  when: redis_installed|changed
+  sudo: yes
+  replace: dest=/etc/redis/redis.conf regexp='bind 127.0.0.1' replace='# bind 127.0.0.1' backup=yes
+
+- name: restart redis
+  when: redis_installed|changed
+  sudo: yes
+  action: service name=redis-server state=restarted 

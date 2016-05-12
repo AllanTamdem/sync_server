@@ -1,0 +1,28 @@
+redis:
+  restart: always
+  image: fcd/redis
+  ports:
+   - "6379:6379"
+
+mongodb:
+  restart: always
+  image: fcd/mongodb
+  ports:
+   - "27017:27017"
+  volumes:
+   - /var/log/docker_mongodb:/var/log/mongodb
+   - /var/lib/docker_mongodb_data:/data/db
+
+genieacs:
+  restart: always
+  image: fcd/genieacs
+  net: "host"
+  volumes:
+   - /var/log/docker_genieacs:/var/log/supervisor
+
+genieacs0gui:
+  restart: always
+  image: fcd/genieacs-gui
+  net: "host"
+  volumes:
+   - /var/log/docker_genieacs-gui:/geniacs-gui/log

@@ -1,0 +1,56 @@
+
+<% unless devise_error_messages!.blank? %>
+  <div class="alert alert-block alert-danger">
+    <button type="button" class="close" data-dismiss="alert">
+      <i class="ace-icon fa fa-times"></i>
+    </button>
+    <%= devise_error_messages! %>
+  </div>
+<% end %>
+
+<div id="forgot-box" class="forgot-box visible widget-box no-border">
+  <div class="widget-body">
+    <div class="widget-main">
+      <h4 class="header red lighter bigger">
+        <i class="ace-icon fa fa-key"></i>
+        Change your password
+      </h4>
+
+      <div class="space-6"></div>
+        <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+          <%= f.hidden_field :reset_password_token %>
+        <fieldset>
+          <label class="block clearfix">
+            <span class="block input-icon input-icon-right">
+              <%= f.password_field :password, autocomplete: "off", placeholder: "New password", class: "form-control" %>
+              <i class="ace-icon fa fa-lock"></i>
+            </span>
+          </label>
+
+          <label class="block clearfix">
+            <span class="block input-icon input-icon-right">
+              <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "Confirm new password", class: "form-control" %>
+              <i class="ace-icon fa fa-lock"></i>
+            </span>
+          </label>
+
+
+
+          <div class="clearfix">
+            <button type="submit" class="pull-right btn btn-sm btn-danger">
+              <i class="ace-icon fa fa-lightbulb-o"></i>
+              <span class="bigger-110">Change my password</span>
+            </button>
+          </div>
+        </fieldset>
+      <% end %>
+    </div><!-- /.widget-main -->
+
+    <div class="toolbar center">
+      <a href="/users/sign_in" data-target="#login-box" class="back-to-login-link">
+        Login
+        <i class="ace-icon fa fa-arrow-right"></i>
+      </a>
+    </div>
+  </div><!-- /.widget-body -->
+</div><!-- /.forgot-box -->

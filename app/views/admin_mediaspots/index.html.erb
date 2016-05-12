@@ -1,0 +1,446 @@
+
+
+<style>
+    #btn-running-tasks,
+    #table-mediaspots tr {
+        cursor: pointer;
+    }
+
+    #btn-running-tasks .popover{
+      max-width: none;
+    }
+
+    #btn-running-tasks .popover-content{
+      padding: 0;
+      margin:0;
+    }
+
+    #btn-running-tasks table{
+      border-left-style: none;
+      border-right-style: none;
+      margin:0;
+    }
+
+    #btn-running-tasks .label{
+      cursor:pointer;
+      height:18px;
+    }
+
+    input.changed, select.changed {
+      color: #4b89aa;
+      border-color: #72aec2;
+      background-color: #f1f7f9 !important;
+    }
+
+    input.changed:focus, select.changed:focus {
+      -webkit-box-shadow: 0px 0px 0px 2px rgba(58, 120, 188, 0.3);
+      box-shadow: 0px 0px 0px 2px rgba(58, 120, 188, 0.3);
+      color: #4b89aa;
+      border-color: #72aec2;
+    }
+
+
+    input.error {
+      color: #d68273;
+      border-color: #f2a696;
+      background-color: #fef9f8 !important;
+    }
+
+    input.error:focus {
+      -webkit-box-shadow: 0px 0px 0px 2px rgba(219, 137, 120, 0.3);
+      box-shadow: 0px 0px 0px 2px rgba(219, 137, 120, 0.3);
+      color: #d68273;
+      border-color: #fef9f8;
+      border-color: #f2a696;
+    }
+    
+
+</style>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Mediaspots administration</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+
+		<table id="table-mediaspots" class="table table-hover table-condensed table-bordered table-striped">
+		</table>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div id="details" style="display:none;" class="panel panel-primary">
+            <div class="panel-heading">
+                <span  id="details-title"></span>
+                &nbsp;
+
+                <span id="btn-running-tasks" ></span>
+
+               <a id="btn-delete-tasks" class="btn btn-minier btn-inverse" style="display:none;">delete all tasks</a>
+
+            </div>
+
+            <div class="panel-body">
+
+                <div id="progress-bar-client" class="row" style="display:none;">
+                    <div class="col-xs-12 ">
+                        <div class="progress">
+                          <div class="progress-bar progress-bar-striped active" style="width: 100%">
+                          </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div id="div-sync-status">
+                </div>
+
+                <div id="div-task-queue">
+                </div>
+
+                <div>
+                    <h5>Mediaspot information updated <span id="details-date-updated"></span> <button id="btn-refresh-all" class="btn btn-default btn-minier"><i class="fa fa-refresh"></i> Update now</button> 
+                    <img id="updating-loader" width="20" height="20" src="/assets/loader.gif" style="display:none;" ></h5> 
+                </div>
+
+                <div id="tabs-client" role="tabpanel">
+                  <ul class="nav nav-tabs" role="tablist">
+                    <li class="active"><a href="#tab-clients" aria-controls="tab-clients" role="tab" data-toggle="tab">Content providers</a></li>
+                    <li ><a href="#tab-wifi" aria-controls="tab-wifi" role="tab" data-toggle="tab">Wi-Fi</a></li>
+                    <li ><a href="#tab-internet-white-list" aria-controls="tab-internet-white-list" role="tab" data-toggle="tab">Firewall</a></li>
+                    <li ><a href="#tab-welcome" aria-controls="tab-welcome" role="tab" data-toggle="tab">Welcome Page</a></li>
+                    <li ><a href="#tab-system-monitor" aria-controls="tab-system-monitor" role="tab" data-toggle="tab">Mediaspot status monitor</a></li>
+                    <li ><a href="#tab-details" aria-controls="tab-details" role="tab" data-toggle="tab">TR-069 parameters</a></li>
+                    <li ><a href="#tab-advanced" aria-controls="tab-advanced" role="tab" data-toggle="tab">Advanced</a></li>
+                    <li ><a href="#tab-custom-info" aria-controls="tab-custom-info" role="tab" data-toggle="tab">Custom JSON</a></li>
+                  </ul>
+
+                  <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="tab-clients">
+                        <button id="btn-add-client" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Add new content provider</button>
+                        <br>
+                        <br>
+                        <div class="datatables-no-padding">
+                            <table id="table-clients" class="table table-hover table-condensed table-hover table-bordered table-striped"></table>
+                        </div>
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane" id="tab-details">
+                        <div class="btn-group">
+                            <button id="btn-expand" class="btn btn-primary btn-xs" >Expand</button>
+                            <button id="btn-collapse" class="btn btn-primary btn-xs" >Collapse</button>
+                        </div>
+                        <div id="details-json-view"></div>
+
+                    </div>
+
+
+                    <div role="tabpanel" class="tab-pane" id="tab-system-monitor">
+                      <pre id="system-info"></pre>
+                      <pre id="system-monitor"></pre>
+
+                      <span>System logs :</span>
+                      <pre id="logs"></pre>
+                    </div>
+
+
+                    <div role="tabpanel" class="tab-pane" id="tab-internet-white-list">
+
+                      <div id="div-internet-blocking">
+
+                        <span class="help-block">
+                        <i class="fa fa-info-circle"></i>
+                        Mediaspot performs NAT for outgoing traffic from LAN devices. Outgoing ports are 80 (TCP), 123 (UDP), 443 (TCP), 4500 (UDP), 5060 (TCP/UDP), 5122 (TCP) and 5228 (TCP/UDP) only. All incoming ports are blocked.</span>
+
+                        <hr>
+
+                        <label>
+                          <span>Internet blocking :</span>
+                          <input class="ace ace-switch ace-switch-4 btn-flat" type="checkbox" >
+                          <span class="lbl"></span>
+                        </label>
+
+                        <span class="help-block">
+                        <i class="fa fa-info-circle"></i>
+                        If set to OFF, LAN devices can make outgoing connections to any domains on the enabled ports. If set to ON, LAN devices can make outgoing connections only to the domains white-listed below.</span>
+                      </div>
+
+                      <div id="div-internet-white-list">
+                        <hr>
+                        <h4>Internet white list :</h4>
+                        <button id="btn-edit-internet-white-list" class="btn btn-sm btn-primary">Edit</button>
+                        <button id="btn-cancel-internet-white-list" class="btn btn-sm btn-default">Cancel</button>
+                        <button id="btn-save-internet-white-list" class="btn btn-sm btn-primary">Save</button>
+                        <div style="padding-top:5px">
+                            <pre id="pre-internet-white-list"></pre>             
+                            <textarea id="txt-internet-white-list" class="form-control" rows="30"></textarea>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane" id="tab-custom-info">
+
+                      <div id="div-custom-info">
+                        <span class="help-block">
+                        <i class="fa fa-info-circle"></i>
+                        Any valid JSON can be entered in this field. It will be available to LAN devices at http://api.tapngo/mediaspotinfo</span>
+
+                        <button id="btn-edit-custom-info" class="btn btn-sm btn-primary">Edit</button>
+                        <button id="btn-cancel-custom-info" class="btn btn-sm btn-default">Cancel</button>
+                        <button id="btn-save-custom-info" class="btn btn-sm btn-primary">Save</button>
+                        <div style="padding-top:5px">
+                            <pre id="pre-custom-info"></pre>             
+                            <textarea id="txt-custom-info" class="form-control" rows="30"></textarea>
+                        </div>
+                      </div>
+                      
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane" id="tab-wifi">
+
+                      <div id="wifi-settings">
+                      </div>
+                      
+                      <div id="wifi-survey">
+                      </div>
+                      
+                      <div id="wifi-wan-settings" >
+                        <hr>
+                        <h4>WAN Wi-Fi settings :</h4>
+
+
+                        <form id="form-wan-wifi-ssid" class="form-horizontal">
+                          <div class="form-group">
+                            <label for="input-wan-wifi-ssid" class="control-label col-sm-3">Set SSID :</label>
+                            <div class="col-sm-5">
+                              <div class="input-group">
+                                <input class="form-control" type="text" id="input-wan-wifi-ssid" >
+                                <span class="input-group-btn">
+                                  <button class="btn btn-sm btn-primary" type="submit">Set</button>
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+
+
+                        <form id="form-wan-wifi-psk" class="form-horizontal">
+                          <div class="form-group">
+                            <label for="input-wan-wifi-psk" class="control-label col-sm-3">Set PSK (password) :</label>
+                            <div class="col-sm-5">
+                              <div class="input-group">
+                                <input class="form-control" type="text" id="input-wan-wifi-psk" >
+                                <span class="input-group-btn">
+                                  <button class="btn btn-sm btn-primary" type="submit">Set</button>
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+
+
+
+                      </div>
+                      
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane" id="tab-welcome">
+
+                      <div id="welcome-page-settings">
+                        <span class="help-block">
+                        <i class="fa fa-info-circle"></i>
+                        When connected to the mediaspot a web browser will show a welcome web page. If you provide the url of a zip file, the mediaspot will download it an update its welcome page.</span>
+
+                        <hr>
+                        <form id="form-welcome-page-zip-url" class="form-horizontal">
+                          <div class="form-group">
+                            <label for="input-welcome-page-zip-url" class="control-label col-sm-3">Set Welcome page zip url :</label>
+                            <div class="col-sm-5">
+                              <div class="input-group">
+                                <input class="form-control" type="text" id="input-welcome-page-zip-url" >
+                                <span class="input-group-btn">
+                                  <button class="btn btn-sm btn-primary" type="submit">Set</button>
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+
+
+                        <hr>
+                        <h5>Welcome page folder content on this mediaspot:</h5>
+                        <pre id="welcome-page-tree">
+                        </pre>
+
+
+                      </div>
+
+                    </div>
+
+
+                    <div role="tabpanel" class="tab-pane" id="tab-advanced">
+
+
+                      <form id="form-mediaspot-name" class="form-horizontal">
+                        <div class="form-group">
+                          <label for="input-mediaspot-name" class="control-label col-sm-3">Set mediaspot name :</label>
+                          <div class="col-sm-5">
+                            <div class="input-group">
+                              <input class="form-control" type="text" id="input-mediaspot-name" >
+                              <span class="input-group-btn">
+                                <button class="btn btn-sm btn-primary" type="submit">Set</button>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+
+                      <hr>
+                      
+                      <form id="form-mediaspot-mediacenter-host" class="form-horizontal">
+                        <div class="form-group">
+                          <label for="input-mediaspot-mediacenter-host" class="control-label col-sm-3">Set mediacenter host :</label>
+                          <div class="col-sm-5">
+                            <div class="input-group">
+                              <input class="form-control" type="text" id="input-mediaspot-mediacenter-host" >
+                              <span class="input-group-btn">
+                                <button class="btn btn-sm btn-primary" type="submit">Set</button>
+                              </span>
+                            </div>
+                          </div>
+                        </div>  
+                      </form>
+
+                      <hr>
+                      
+                      <form id="form-mediaspot-tr069-host" class="form-horizontal">
+                        <div class="form-group">
+                          <label for="input-mediaspot-tr069-host" class="control-label col-sm-3">Set TR069 host :</label>
+                          <div class="col-sm-5">
+                            <div class="input-group">
+
+                                <%= select_tag "input-mediaspot-tr069-host",
+                                options_for_select(@tr069_hosts_white_list.collect {|x| [ x, x ] } ), {class: 'form-control'} %>
+                              <!-- <input class="form-control" type="text" id="input-mediaspot-tr069-host" > -->
+                              <span class="input-group-btn">
+                                <button class="btn btn-sm btn-primary" type="submit">Set</button>
+                              </span>
+                            </div>
+                          </div>
+                        </div>  
+                      </form>
+
+                      <hr>
+                      
+                      <form id="form-mediaspot-websocket-host" class="form-horizontal">
+                        <div class="form-group">
+                          <label for="input-mediaspot-websocket-host" class="control-label col-sm-3">Set sync-server WebSocket host :</label>
+                          <div class="col-sm-5">
+                            <div class="input-group">
+                                <%= select_tag "input-mediaspot-websocket-host",
+                                options_for_select(@websocket_hosts_white_list.collect {|x| [ x, x ] } ), {class: 'form-control'} %>
+                              <span class="input-group-btn">
+                                <button class="btn btn-sm btn-primary" type="submit">Set</button>
+                              </span>
+                            </div>
+                          </div>
+                        </div>  
+                      </form>
+
+                      <hr>
+                      <button class="btn-reboot-mediaspot btn btn-primary"><i class="fa fa-refresh"></i> Reboot this mediaspot</button>
+
+                      <hr>
+                      <button class="btn-delete-mediaspot btn btn-danger"><i class="fa fa-trash"></i> Delete this mediaspot</button>
+                      <span class="help-block"><i class="fa fa-info-circle"></i> Use this button to remove mediaspots that are not in use anymore.<br>Mediaspots which are online will be recreated automatically a few minutes later. </span>
+                      <hr>
+                    </div>
+                  </div>           
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div id="modal-add-client" class="modal fade" data-backdrop="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">Add content provider</h4>
+      </div>
+      <div class="modal-body">
+        <form role="form">
+          <div class="form-group">
+            <label for="content_provider_technical_name">Content provider</label>
+            <%= collection_select :content_provider, :technical_name, ContentProvider.order(:name), :technical_name, :name, { include_blank: true }, { class: "form-control" } %>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button id="btn-add-client-submit" type="button" class="btn btn-primary" >Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal-change-token" class="modal fade" data-backdrop="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body">
+        <form role="form">
+          <div class="form-group">
+            <label for="client-token">Authentication Token Secret :</label>
+            <input type="text" id="client-token" class="form-control" />
+            <input type="hidden" id="client-number" />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button id="btn-change-token-submit" type="button" class="btn btn-primary" >Change</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div id="modal-view-client-logs" class="modal fade" data-backdrop="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+var SyncServer = SyncServer || {};
+
+SyncServer.default_bucket = "<%= @default_bucket %>";
+
+</script>
+
+<%= javascript_include_tag 'admin-mediaspots' %>

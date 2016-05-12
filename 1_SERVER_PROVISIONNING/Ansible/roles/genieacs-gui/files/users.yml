@@ -1,0 +1,7 @@
+admin:
+    password: sAywbbLsgag7SEyT
+    roles: [admin]
+
+user:
+    password: zQHbYfQMkEYbEdq8
+    roles: [view]

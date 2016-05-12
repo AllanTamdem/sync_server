@@ -1,0 +1,6 @@
+---
+- name: copy backup script
+  template: src=backup_script.sh.j2 dest={{homeFolder}}/postgres_backup_to_s3.sh mode=0755
+
+- name: create cron command
+  cron: name="daily postgres backup to s3" special_time="daily" state="present" job="{{homeFolder}}/postgres_backup_to_s3.sh >> {{homeFolder}}/postgres_backup_to_s3.log"

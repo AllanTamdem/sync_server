@@ -1,0 +1,7 @@
+---
+- name: Install s3cmd
+  sudo: yes
+  apt: pkg=s3cmd state=installed update_cache=true
+
+- name: copy s3cmd config file
+  template: src=s3cfg.j2 dest={{homeFolder}}/.s3cfg

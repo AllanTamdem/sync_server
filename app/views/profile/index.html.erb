@@ -1,0 +1,147 @@
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Your profile</h1>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <dl class="dl-horizontal dl-horizontal-large">
+
+            <dt>Email</dt>
+            <dd><%= @user.email %></dd>
+
+            <dt>Api-key</dt>
+            <dd><%= @user.api_key %></dd>
+        </dl>
+
+    </div>
+</div>
+
+
+
+<% if @user.errors.any? %>
+<hr>
+	<div class="row">
+	    <div class="col-lg-8">
+			<div class="alert alert-danger" role="alert">
+	  			<strong><%= pluralize(@user.errors.count, "error") %> :</strong>
+				<ul>
+					<% @user.errors.full_messages.each do |message| %>
+						<li><%= message %></li>
+					<% end %>
+				</ul>      		
+	  		</div>
+	    </div>
+	</div>
+<% end %>
+
+<br>
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Notifications</h1>
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col-lg-8">
+		<%= form_for(@user, method: 'POST', :url => url_for(:controller => 'profile', :action => 'index'), :html => { :class => "form-horizontal", :role => "form" }) do |f| %>
+		  
+		  		  
+		  <div class="form-group">
+		  	<%= f.label :subscribed_alert_mediaspot_offline, "Receive an email when a mediaspot becomes offline", :class => "col-sm-4 control-label" %>
+		    <div class="col-sm-8">
+					<%= f.check_box :subscribed_alert_mediaspot_offline %>
+		    </div>
+		  </div>
+		  		  
+		  <div class="form-group">
+		  	<%= f.label :sms_subscribed_alert_mediaspot_offline, "Receive an SMS when a mediaspot becomes offline", :class => "col-sm-4 control-label" %>
+		    <div class="col-sm-8">
+					<%= f.check_box :sms_subscribed_alert_mediaspot_offline %>
+		    </div>
+		  </div>
+		  
+		  		  
+		  <div class="form-group">
+		  	<%= f.label :subscribed_alert_sync_error, "Receive an email when there is a syncing error on one of the mediaspots", :class => "col-sm-4 control-label" %>
+		    <div class="col-sm-8">
+					<%= f.check_box :subscribed_alert_sync_error %>
+		    </div>
+		  </div>
+		  		  
+		  <div class="form-group">
+		  	<%= f.label :sms_subscribed_alert_sync_error, "Receive an SMS when there is a syncing error on one of the mediaspots", :class => "col-sm-4 control-label" %>
+		    <div class="col-sm-8">
+					<%= f.check_box :sms_subscribed_alert_sync_error %>
+		    </div>
+		  </div>
+
+		  <div class="form-group">
+		  	<%= f.label :phone_number, 'Your phone number (with country code)', :class => "col-sm-4 control-label" %>
+		    <div class="col-sm-8">
+				<%= f.text_field :phone_number, :placeholder => "example: +33122334455", :class => "form-control" %>
+		    </div>
+		  </div>
+
+		  <div class="form-group">
+		    <div class="col-sm-offset-4 col-sm-8">
+		      <%= f.submit "Update", :class => "btn btn-primary" %>
+		    </div>
+		  </div>
+
+		<% end %>
+
+    </div>
+</div>
+
+<br>
+<!-- Receive an email when a mediaspot becomes offline -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Change your password</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8">
+		<%= form_for(@user, method: 'POST', :url => url_for(:controller => 'profile', :action => 'index'), :html => { :class => "form-horizontal", :role => "form" }) do |f| %>
+		  
+		  <div class="form-group">
+		  	<%= f.label :password, "Current password", :class => "col-sm-4 control-label" %>
+		    <div class="col-sm-8">
+				<%= f.password_field :password, autocomplete: "off", :placeholder => "Current password", :class => "form-control" %>
+		    </div>
+		  </div>
+		  
+		  <div class="form-group">
+		  	<%= f.label :password_new, "New password", :class => "col-sm-4 control-label" %>
+		    <div class="col-sm-8">
+				<%= f.password_field :password_new, autocomplete: "off", :placeholder => "New password", :class => "form-control" %>
+		    </div>
+		  </div>
+		  
+		  <div class="form-group">
+		  	<%= f.label :password_new_confirmation, "New password confirmation", :class => "col-sm-4 control-label" %>
+		    <div class="col-sm-8">
+				<%= f.password_field :password_new_confirmation, autocomplete: "off", :placeholder => "New password confirmation", :class => "form-control" %>
+		    </div>
+		  </div>
+
+		  <div class="form-group">
+		    <div class="col-sm-offset-4 col-sm-8">
+		      <%= f.submit "Update", :class => "btn btn-primary" %>
+		    </div>
+		  </div>
+
+		<% end %>
+
+    </div>
+</div>
+

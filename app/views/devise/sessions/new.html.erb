@@ -1,0 +1,70 @@
+
+<div id="login-box" class="login-box visible widget-box no-border">
+  <div class="widget-body">
+    <div class="widget-main">
+      <h4 class="header blue lighter bigger">
+        Please Sign In
+      </h4>
+
+      <div class="space-6"></div>
+
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <fieldset>
+          <label class="block clearfix">
+            <span class="block input-icon input-icon-right">
+              <%= f.email_field :email, autofocus: true, placeholder: "E-mail", class: "form-control" %>
+              <i class="ace-icon fa fa-user"></i>
+            </span>
+          </label>
+
+          <label class="block clearfix">
+            <span class="block input-icon input-icon-right">
+              <%= f.password_field :password, autocomplete: "off", placeholder: "Password", class: "form-control" %>
+              <i class="ace-icon fa fa-lock"></i>
+            </span>
+          </label>
+
+          <div class="space"></div>
+
+          <div class="clearfix">
+
+            <% if devise_mapping.rememberable? -%>
+
+<!--               <label class="inline">
+                <%= f.check_box :remember_me, class:"ace" %>
+                <span class="lbl"> Remember Me</span>
+              </label> -->
+              <label>
+                <%= f.check_box :remember_me %>
+                <span> Remember Me</span>
+              </label>
+            <% end -%>
+
+            <button type="submit" class="width-35 pull-right btn btn-sm btn-primary">
+              <i class="ace-icon fa fa-key"></i>
+              <span class="bigger-110">Login</span>
+            </button>
+          </div>
+
+          <div class="space-4"></div>
+        </fieldset>
+      <% end %>
+    </div><!-- /.widget-main -->
+
+    <div class="toolbar clearfix">
+      <div>
+        <a href="/users/password/new" data-target="#forgot-box" class="forgot-password-link">
+          <i class="ace-icon fa fa-arrow-left"></i>
+          I forgot my password
+        </a>
+      </div>
+
+<!--       <div>
+        <a href="#" data-target="#signup-box" class="user-signup-link">
+          I want to register
+          <i class="ace-icon fa fa-arrow-right"></i>
+        </a>
+      </div> -->
+    </div>
+  </div><!-- /.widget-body -->
+</div><!-- /.login-box -->

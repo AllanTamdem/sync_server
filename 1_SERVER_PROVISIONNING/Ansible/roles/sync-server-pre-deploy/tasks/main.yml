@@ -1,0 +1,19 @@
+---
+- name: Creates directory
+  file: path={{syncServerSharedFolder}}/config state=directory
+
+- name: copy secrets file
+  copy: src=secrets.yml dest={{syncServerSharedFolder}}/config/secrets.yml
+
+- name: Creates .ssh directory if it doesn't exists
+  file: path=~/.ssh state=directory
+
+- name: copy id_rsa
+  copy: src=id_rsa dest=~/.ssh/ mode=600
+
+- name: copy id_rsa.pub
+  copy: src=id_rsa.pub dest=~/.ssh/ mode=644
+
+- name: copy thin service file
+  sudo: yes
+  template: src=init_d_syncserver.j2 dest=/etc/init.d/syncserver mode=0755

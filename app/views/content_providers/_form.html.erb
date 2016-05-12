@@ -1,0 +1,112 @@
+
+<% if @content_provider.errors.any? %>
+  <div class="row">
+      <div class="col-md-12">
+      <div class="alert alert-danger" role="alert">
+          <strong><%= pluralize(@content_provider.errors.count, "error") %> :</strong>
+        <ul>
+          <% @content_provider.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>         
+        </div>
+      </div>
+  </div>
+<% end %>
+
+
+<div class="row">
+  <div class="col-md-6">
+    <%= form_for(@content_provider, :html => { :class => "form-horizontal", :role => "form" }) do |f| %>
+      
+      <div class="form-group">
+        <%= f.label :name, :class => "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <%= f.text_field :name, :autofocus => true, :placeholder => "Example: Acme Corporation", :class => "form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :description, :class => "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <%= f.text_area :description, :placeholder => "Description", :class => "form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :technical_name,'Client name',:class => "col-sm-4 control-label" %>
+      <div class="col-sm-8">
+          <%= f.text_field :technical_name, :placeholder => "Example: acme", :class => "form-control" %>
+          <span class="help-block"><i class="fa fa-question-circle"></i> The client name is used in content download URLs from mediaspots.</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :path_in_bucket,'Path in bucket',:class => "col-sm-4 control-label" %>
+      <div class="col-sm-8">
+          <%= f.text_field :path_in_bucket, :placeholder => "Example: acme/FCD/files/", :class => "form-control" %>
+          <span class="help-block"><i class="fa fa-question-circle"></i> (optional) Leave blank to set the path in the repository bucket for this content provider to the client name (recommended). If the content provider files are at a different path in the bucket, enter it here.</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :unzipping_files,'Unzip files after synchronization',:class => "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <% unzipping_files_types = ['No', 'Keep Hierarchy', 'Flatten Hierarchy'] %>
+          <%= f.collection_select(:unzipping_files, unzipping_files_types, :to_s, :to_s, {include_blank: false}, class: "form-control") %>
+          <span class="help-block"><i class="fa fa-question-circle"></i> Select “Keep Hierarchy” if ZIP files should be unzipped in-situ (into .unzipped folder) on the mediaspot, maintaining the directory hierarchy inside the ZIP, or “Flatten Hierarchy” if the hierarchy should be flattened. Note this requires additional storage space on the mediaspot.<br>Default “No” does not unzip ZIP files.</span>
+        </div>
+      </div>
+      
+
+      <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8">
+          <h4 class="header">AWS S3 bucket (optional) :</h4> <span class="help-block"><i class="fa fa-question-circle"></i> You can specify a bucket to use instead of the default sync-server's bucket.</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :aws_bucket_name, "Bucket name",  :class => "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <%= f.text_field :aws_bucket_name, :class => "form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :aws_bucket_region, "AWS region", :class => "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <% aws_regions = ['us-east-1', 'us-west-2', 'us-west-1', 'eu-west-1', 'eu-central-1', 'ap-southeast-1', 'ap-southeast-2', 'ap-northeast-1', 'sa-east-1'] %>
+
+          <%= f.collection_select(:aws_bucket_region, aws_regions, :to_s, :to_s, {include_blank: true}, class: "form-control") %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :aws_bucket_access_key_id, "Access Key", :class => "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <%= f.text_field :aws_bucket_access_key_id, :class => "form-control" %>
+          <span class="help-block"><i class="fa fa-question-circle"></i> Needs to have read and write access to the bucket.</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :aws_bucket_secret_access_key, "Secret Access Key", :class => "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <%= f.text_field :aws_bucket_secret_access_key, :class => "form-control" %>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8">
+          <%= f.submit "Submit", :class => "btn btn-primary" %>
+        </div>
+      </div>
+
+    <% end %>
+
+  </div>
+</div>
+
+<br>

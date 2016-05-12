@@ -1,0 +1,41 @@
+default: &default
+  encoding: unicode
+  adapter: postgresql
+  pool: 20
+  timeout: 3000
+  host: localhost
+  username: rails-mediaspot-sync
+  password: dx9zrBnq
+
+development:
+  <<: *default
+  pool: 20
+  timeout: 3000
+  database: development
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  <<: *default
+  database: test
+
+staging:
+  encoding: unicode
+  adapter: postgresql
+  pool: 20
+  timeout: 6000
+  host: localhost
+  database: staging
+  username: rails-mediaspot-sync
+  password: dx9zrBnq
+
+production:
+  encoding: unicode
+  adapter: postgresql
+  pool: 20
+  timeout: 6000
+  host: localhost
+  database: production
+  username: rails-mediaspot-sync
+  password: dx9zrBnq

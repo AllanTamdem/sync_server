@@ -1,0 +1,93 @@
+---
+- name: delete default site
+  sudo: yes
+  action: file path=/etc/nginx/sites-enabled/default state=absent
+  register: sync_server_nginx_default_removed
+  tags:
+   - nginx
+
+# - name: copy default nginx config file
+#   sudo: yes
+#   template: src=nginx_default_config.j2 dest=/etc/nginx/sites-available/default
+#   register: sync_server_nginx_default_config_created
+#   tags:
+#    - nginx
+
+# - name: enable the default website
+#   sudo: yes
+#   file: src=/etc/nginx/sites-available/default dest=/etc/nginx/sites-enabled/default state=link
+#   tags:
+#    - nginx
+
+- name: restart nginx
+  when: sync_server_nginx_default_removed|changed
+  sudo: yes
+  action: service name=nginx state=restarted
+  tags:
+   - nginx
+
+- name: copy syncserver nginx config file
+  sudo: yes
+  template: src=nginx_config.j2 dest=/etc/nginx/sites-available/sync-server
+  register: sync_server_nginx_config_created
+  tags:
+   - nginx
+
+- name: enable the syncserver website
+  sudo: yes
+  file: src=/etc/nginx/sites-available/sync-server dest=/etc/nginx/sites-enabled/sync-server state=link
+  tags:
+   - nginx
+
+- name: restart nginx
+  when: sync_server_nginx_config_created|changed
+  sudo: yes
+  action: service name=nginx state=restarted
+  tags:
+   - nginx
+
+- name: copy labgency php nginx config file
+  sudo: yes
+  template: src=nginx_labgency_php_config.j2 dest=/etc/nginx/sites-available/labgency-api
+  register: labgency_api_nginx_config_created
+  tags:
+   - nginx
+
+- name: enable the website
+  sudo: yes
+  file: src=/etc/nginx/sites-available/labgency-api dest=/etc/nginx/sites-enabled/labgency-api state=link
+  tags:
+   - nginx
+
+- name: restart nginx
+  when: labgency_api_nginx_config_created|changed
+  sudo: yes
+  action: service name=nginx state=restarted 
+  tags:
+   - nginx
+
+- name: copy password for websocket basic auth
+  sudo: yes
+  copy: src=ws-htpasswd dest=/etc/nginx/ws-htpasswd
+  tags:
+   - nginx
+
+- name: copy syncserver-ws nginx config file
+  sudo: yes
+  template: src=nginx_websocket_config.j2 dest=/etc/nginx/sites-available/syncserver-ws
+  register: syncserver_ws_nginx_config_created
+  tags:
+   - nginx
+
+- name: enable the website
+  sudo: yes
+  file: src=/etc/nginx/sites-available/syncserver-ws dest=/etc/nginx/sites-enabled/syncserver-ws state=link
+  tags:
+   - nginx
+
+- name: restart nginx
+  when: syncserver_ws_nginx_config_created|changed
+  sudo: yes
+  action: service name=nginx state=restarted
+  tags:
+   - nginx

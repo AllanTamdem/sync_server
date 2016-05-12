@@ -1,0 +1,4616 @@
+<div class="row">
+    <div class="col-lg-12">    
+        <h1 class="page-header">Analytics</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <h3>Mediaspots : </h3>
+        <ul class="list-inline">
+        	<% @mediaspots.each do |m| %>
+        		<li>
+    				<a href="#" class='link-mediaspot btn btn-white btn-primary' data-id="<%= m['_id'] %>" >
+
+    					<% if m['connected'] %>
+    						<i class="fa fa-circle" style="color:#0C0" title="online"></i>
+    					<% else %>
+    						<i class="fa fa-circle" style="color:red" title="offline"></i>
+    					<% end %>
+
+    					<% if m.include?('mediaspotName') && m['mediaspotName'].blank? == false %>
+    						<%= m['mediaspotName'] %>
+    					<% else %>
+    						<%= m['_id'] %>
+    					<% end %>
+    				</a>
+        		</li>
+        	<% end %>
+        </ul>
+    </div>
+</div>
+
+<div id="progress-bar" class="row" style="display:none;">
+    <div class="col-lg-2">
+		<div class="progress">
+		  <div class="progress-bar progress-bar-striped active" style="width: 100%">
+		  </div>
+		</div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div id="result-device-details" class="col-lg-12" style="display:none;">
+
+    	<div class="row">
+		    <div class="col-lg-12">
+
+		    	Analytics data updated <span id="span-last-updated"></span> ago. <button id="btn-update-analytics" class="btn btn-default btn-minier">Update now</button>
+		    	<br><br>
+
+		        <p id="msg-no-clients" class="alert alert-info" style="display:none;">
+					This mediaspot is not synced with any content provider at the moment.
+				</p>
+
+		        <ul id="list-clients" class="nav nav-tabs">
+		        </ul>
+				<br>
+		    </div>
+		</div>
+
+        <p id="msg-no-analytics" class="alert alert-info" style="display:none;">
+			No downloads so far.
+		</p>
+
+		<div id="result-client-details" style="display:none;">
+
+
+	    	<div class="row">
+			    <div class="col-lg-6">
+			        <div class="widget-box">
+						<div class="widget-header widget-header-flat widget-header-small">
+							<h5 class="widget-title">
+								<i class="ace-icon fa fa-pie-chart"></i>
+								Browsers (Click a slice to see the details)
+							</h5>
+						</div>
+			         	<div id="chart-browsers" style="width: 640px; height: 400px;"></div>
+					</div>
+			    </div>
+			    <div class="col-lg-6">
+			        <div class="widget-box">
+						<div class="widget-header widget-header-flat widget-header-small">
+							<h5 class="widget-title">
+								<i class="ace-icon fa fa-pie-chart"></i>
+								Operating Systems (Click a slice to see the details)
+							</h5>
+						</div>
+			         	<div id="chart-os" style="width: 640px; height: 400px;"></div>
+					</div>
+			    </div>
+			</div>
+
+			<br>
+			
+	    	<div class="row">
+			    <div class="col-lg-12">
+
+			        <div class="widget-box">
+						<div class="widget-header widget-header-flat widget-header-small">
+							<h5 class="widget-title">
+								<i class="ace-icon fa fa-bar-chart"></i>
+								Downloads per day
+							</h5>
+						</div>
+						<div id="chart-dl-day" style="width: 1100px; height: 500px; background-color: #FFFFFF;" ></div>
+					</div>
+			    </div>
+		    </div>
+
+			<br>
+
+	    	<div class="row">
+			    <div class="col-lg-12">
+			        <div class="widget-box">
+						<div class="widget-header widget-header-flat widget-header-small">
+							<h5 class="widget-title">
+								<i class="ace-icon fa fa-table"></i>
+								Files downloaded
+							</h5>
+						</div>
+						<table id="table-files" class="table table-hover table-condensed table-bordered table-striped">
+						</table>
+					</div>
+			    </div>
+			</div>
+		</div>
+    </div>
+</div>
+
+
+<br>
+<br>
+<br>
+<div id="debug">
+	
+</div>
+
+<script src="/assets/amcharts/amcharts.js" type="text/javascript"></script>
+<script src="/assets/amcharts/pie.js" type="text/javascript"></script>
+<script src="/assets/amcharts/serial.js" type="text/javascript"></script>
+<script src="/assets/amcharts/themes/light.js" type="text/javascript"></script>
+
+
+<script>
+	
+	$(function(){
+
+		var isWorking = false;
+
+		var clientsData = [];
+		var selectedClient = null;
+
+	    var tableFiles = $('#table-files').dataTable({
+            columns: [{
+            	data: 'data', title: 'File'
+            }, {
+            	data: 'hits', title: 'Downloads'
+            }, {
+            	data: 'speedDisplay',
+            	title: 'Average download speed',
+            	dataSort: 3
+            }, {
+            	data: 'speedSort',
+            	title: 'Average download speed (sort)',
+            	visible: false
+            }, {
+            	data: 'bytes',
+            	title: 'Total bandwidth',
+            	render: function(data){
+            		return bytesToSize(data);
+            	}
+            }, {
+            	data: 'time_served',
+            	title: 'Average time served',
+            	render: function(data){
+            		if(data != undefined){
+        				return microSecondsToTime(data);
+            		}
+            		return '';
+            	}
+            }],
+            order: [[1, 'desc']]
+        });
+
+		var chartDlDays = AmCharts.makeChart("chart-dl-day", {
+			type: "serial",
+			categoryField: "date",
+			theme: "light",
+			categoryAxis: {
+				gridPosition: "start",
+				labelRotation: 90
+			},
+			graphs: [{
+					balloonText: "[[date]]: [[value]] files downloaded",
+					fillAlphas: 1,
+					id: "hitsGraph",
+					title: "Downloads",
+					type: "column",
+					valueField: "hits",
+        			valueAxis: "hitsAxis"
+				}, {
+					balloonText: "[[date]]: [[value]] MB downloaded",
+					bullet: "round",
+					id: "bytesGraph",
+					lineThickness: 2,
+					title: "graph 2",
+					valueField: "bytes",
+        			valueAxis: "bytesAxis"
+				}
+			],
+			valueAxes: [ {
+					id: "hitsAxis",
+        			position: "left",
+					title: "Number of downloads by unique visitors"
+				}, {
+					id: "bytesAxis",
+        			position: "right",
+					title: "Megabytes"
+				}
+			],
+			dataProvider: []
+		});
+
+
+		var chartBrowsers = AmCharts.makeChart("chart-browsers", {
+			type: "pie",
+			balloonText: "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>",
+			titleField: "data",
+			valueField: "hits",
+			fontSize: 12,
+			pullOutDuration: 0,
+			startDuration: 0,
+			theme: "light",
+			marginBottom: 0,
+			marginTop: 0,
+    		pulledField: "pulled",
+    		colorField: "color",
+			dataProvider: []
+		});
+
+		var chartOs = AmCharts.makeChart("chart-os", {
+			type: "pie",
+			balloonText: "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>",
+			titleField: "data",
+			valueField: "hits",
+			fontSize: 12,
+			pullOutDuration: 0,
+			startDuration: 0,
+			theme: "light",
+			marginBottom: 0,
+			marginTop: 0,
+    		pulledField: "pulled",
+    		colorField: "color",
+			dataProvider: []
+		});
+
+		// add titles		
+  //       var chartTitles = "Click a slice to see the details";
+		// chartBrowsers.addTitle(chartTitles);
+		// chartOs.addTitle(chartTitles);
+
+	    // Add an event to handle slice clicks
+		function chartClickEvent(chart, event, func){
+	    	var selectedData;
+	    	if(event.dataItem.dataContext.pulled !== true){
+    			selectedData = event.dataItem.dataContext.data;
+	    	}
+
+	        chart.dataProvider = func(selectedData);
+	        chart.validateData();
+		}
+	    chartBrowsers.addListener("clickSlice", function (event) {
+	    	chartClickEvent(chartBrowsers, event, generateBrowserChartData);
+	    });
+	    chartOs.addListener("clickSlice", function (event) {
+	    	chartClickEvent(chartOs, event, generateOsChartData);
+	    });
+
+
+		function generateChartData(valueSelected, data, colors){
+	    	var chartData = [];
+
+	    	_.each(data, function(obj, i){
+
+	    		var color = colors[i % colors.length];
+
+	    		if(valueSelected === obj.data){
+	    			_.each(obj.items, function(subObj){
+			    		chartData.push({
+			    			hits: subObj.hits,
+			    			percent: subObj.percent,
+			    			data: subObj.data,
+			    			color: color,
+			    			pulled: true
+			    		});
+	    			});   			
+	    		}
+	    		else{
+		    		chartData.push({
+		    			hits: obj.hits,
+		    			percent: obj.percent,
+		    			data: obj.data,
+		    			color: color,
+		    			pulled: false
+		    		});	  
+	    		}
+	    	})
+		    return chartData;
+
+		}
+
+	    function generateBrowserChartData(valueSelected){
+
+	    	var colors = AmCharts.themes.light.AmSlicedChart.colors;
+
+	    	return generateChartData(valueSelected, selectedClient.analytics.browsers, colors);
+	    }
+
+	    function generateOsChartData(valueSelected){
+
+	    	var colors = AmCharts.themes.light.AmSlicedChart.colors;
+
+	    	colors = Array.prototype.slice.call(colors).reverse();
+
+	    	return generateChartData(valueSelected, selectedClient.analytics.os, colors);
+	    }
+
+		function bytesToSize(bytes) {
+			if(bytes == 0) return '0 Byte';
+			var k = 1024;
+			var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+			var i = Math.floor(Math.log(bytes) / Math.log(k));
+			return (bytes / Math.pow(k, i)).toPrecision(4) + ' ' + sizes[i];
+		};
+
+		function microSecondsToTime(microSecs) {
+			if(microSecs == 0) return '0';
+			var k = 1000;
+			var times = ['µ', 'ms', 's', 'mn', 'h'];
+			var i = Math.floor(Math.log(microSecs) / Math.log(k));
+			return (microSecs / Math.pow(k, i)).toPrecision(4) + ' ' + times[i];
+		};
+
+		function round(number, decimals){
+		    var multiplier = Math.pow(10, decimals);
+			return Math.round(number * multiplier) / multiplier;
+		}
+		
+		function numberWithCommas(x) {
+		    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		}
+
+		function populateSpeed(row){
+
+			row.speedDisplay = '';
+			row.speedSort = 0;
+
+			if(row.time_served && row.bytes){
+
+				var sizeOfFile = row.bytes / row.hits;
+				var s = row.time_served / 1000 / 1000;				
+
+				if(sizeOfFile > 0 && s > 0){
+					speedBytes = sizeOfFile / s;
+					row.speedSort = speedBytes;
+					row.speedDisplay = bytesToSize(speedBytes) + '/s';
+				}
+			}
+		}
+
+	    //choosing a mediaspot
+	    $(document).on("click", ".link-mediaspot", function() {
+
+	    	if($('#progress-bar').is(':visible')) return false;
+
+	    	$(".link-mediaspot").addClass('btn-white');
+	    	$(this).removeClass('btn-white');
+
+	    	getAnalytics($(this).data('id'));
+	    	$('#btn-update-analytics').data('id', $(this).data('id'));
+	        return false;
+	    });
+
+	    $(document).on("click", "#btn-update-analytics", function() {
+	    	getAnalytics($(this).data('id'), true);
+	        return false;
+	    });
+
+	    //get the analytics for this device
+	    function getAnalytics(deviceId, update){
+	    	$('#progress-bar').show();
+	    	$('#result-device-details').hide();
+			$('#result-client-details').hide();
+	        $.get('/analytics/get_analytics?device-id=' + deviceId + '&update=' + (update || false))
+	        .done(function(result){
+
+				$('#msg-no-analytics').hide();
+
+	        	if(result.error){
+	        		toastr.error(result.error);
+	        	}
+
+	        	clientsData = result.clients;
+
+	        	// clientsData.push({
+	        	// 	name: 'dummy test data',
+	        	// 	analytics: TestData
+	        	// });
+
+	        	_.each(result.clients, function(c){
+	        		if(c.analytics){
+		        		_.each(c.analytics.visitors, function(v){
+							v.bytes = (parseFloat(v.bytes) / (1024 * 1024));
+							v.bytes = round(v.bytes, 2);
+		        		});
+
+		        		c.analytics.visitors.reverse();
+
+		        		_.each(c.analytics.requests, function(r){
+		        			r.speed = populateSpeed(r);
+		        		});
+	        		}
+	        	});
+
+	        	if(result.clients.length == 0){
+	        		$('#msg-no-clients').show();
+	        		$('#list-clients').hide();
+	        	}
+	        	else{	        		
+		        	var htmlClients = _.reduce(clientsData, function(html, client){
+		        		var name = client.name;
+
+		        		if(client.content_provider != null){
+		        			name = client.content_provider.name;
+		        		}
+
+	        			return html + '<li><a href="#" data-client-name="' + client.name + '">' + name + '</a></li>' ;
+		        	}, '');
+
+		        	$('#list-clients').html(htmlClients);
+
+	        		$('#msg-no-clients').hide();
+	        		$('#list-clients').show();
+	        	}
+
+	        	$('#span-last-updated').html(result.date_updated_ago);
+
+	        	$('#result-device-details').show();
+
+	        	if(result.clients.length > 0){
+	        		$('#list-clients a').first().click();
+	        	}
+
+	        	// $('#debug').html('<pre>' + JSON.stringify(clientsData, null, 2) + '</pre>');
+	        }).complete(function(){
+	    		$('#progress-bar').hide();
+	        });
+	    }
+
+
+	    //click on a client
+	    $(document).on("click", "#list-clients a", function() {
+
+	    	var clientName = $(this).data('client-name');
+
+	    	$('#list-clients li').removeClass('active');
+	    	$(this).closest('li').addClass('active');
+
+			selectedClient = _.find(clientsData, function(c){
+				return c.name == clientName;
+			});
+
+			if(selectedClient.analytics == null) {
+				$('#result-client-details').hide();
+				$('#msg-no-analytics').show();
+			}
+			else {
+				//updating table of files
+				tableFiles.fnClearTable();
+				tableFiles.fnAddData(selectedClient.analytics.requests);
+
+				setTimeout(function(){
+
+					//updating browser chart
+					chartBrowsers.dataProvider = generateBrowserChartData();
+					chartBrowsers.validateData();
+
+					//updating os chart
+					chartOs.dataProvider = generateOsChartData();
+					chartOs.validateData();
+
+
+					//updating dl-days chart
+					chartDlDays.dataProvider = selectedClient.analytics.visitors;
+					chartDlDays.validateData();
+				}, 10);
+				$('#msg-no-analytics').hide();
+				$('#result-client-details').show();
+			}
+
+	        return false;
+	    });
+
+	});
+
+
+	var TestData = {
+	"general": {
+		"date_time": "2015-01-08 11:11:53",
+		"total_requests": 3795,
+		"unique_visitors": 40,
+		"referrers": 58,
+		"log_size": 770820,
+		"failed_requests": 168,
+		"unique_files": 286,
+		"unique_404": 57,
+		"bandwidth": 82168393,
+		"generation_time": 0,
+		"excluded_ip_hits": 0,
+		"static_files": 15,
+		"log_file": "tapngo-web-sync.log"
+	},
+	"visitors": [
+		{
+			"hits": "4",
+			"percent": "10.00%",
+			"date": "07/Jan/2015",
+			"bytes": "11186"
+		},
+		{
+			"hits": "2",
+			"percent": "5.00%",
+			"date": "06/Jan/2015",
+			"bytes": "16651321"
+		},
+		{
+			"hits": "4",
+			"percent": "10.00%",
+			"date": "05/Jan/2015",
+			"bytes": "2124989"
+		},
+		{
+			"hits": "1",
+			"percent": "2.50%",
+			"date": "04/Jan/2015",
+			"bytes": "503"
+		},
+		{
+			"hits": "1",
+			"percent": "2.50%",
+			"date": "03/Jan/2015",
+			"bytes": "3150"
+		},
+		{
+			"hits": "1",
+			"percent": "2.50%",
+			"date": "02/Jan/2015",
+			"bytes": "2357"
+		},
+		{
+			"hits": "2",
+			"percent": "5.00%",
+			"date": "01/Jan/2015",
+			"bytes": "5292"
+		},
+		{
+			"hits": "1",
+			"percent": "2.50%",
+			"date": "31/Dec/2014",
+			"bytes": "1586"
+		},
+		{
+			"hits": "1",
+			"percent": "2.50%",
+			"date": "30/Dec/2014",
+			"bytes": "112"
+		},
+		{
+			"hits": "1",
+			"percent": "2.50%",
+			"date": "29/Dec/2014",
+			"bytes": "224"
+		},
+		{
+			"hits": "1",
+			"percent": "2.50%",
+			"date": "28/Dec/2014",
+			"bytes": "224"
+		},
+		{
+			"hits": "1",
+			"percent": "2.50%",
+			"date": "27/Dec/2014",
+			"bytes": "2067"
+		},
+		{
+			"hits": "1",
+			"percent": "2.50%",
+			"date": "26/Dec/2014",
+			"bytes": "1586"
+		},
+		{
+			"hits": "2",
+			"percent": "5.00%",
+			"date": "25/Dec/2014",
+			"bytes": "12361413"
+		},
+		{
+			"hits": "2",
+			"percent": "5.00%",
+			"date": "24/Dec/2014",
+			"bytes": "20383425"
+		},
+		{
+			"hits": "3",
+			"percent": "7.50%",
+			"date": "22/Dec/2014",
+			"bytes": "4362914"
+		},
+		{
+			"hits": "1",
+			"percent": "2.50%",
+			"date": "21/Dec/2014",
+			"bytes": "8848"
+		},
+		{
+			"hits": "2",
+			"percent": "5.00%",
+			"date": "20/Dec/2014",
+			"bytes": "8451"
+		},
+		{
+			"hits": "3",
+			"percent": "7.50%",
+			"date": "19/Dec/2014",
+			"bytes": "2000007"
+		},
+		{
+			"hits": "2",
+			"percent": "5.00%",
+			"date": "18/Dec/2014",
+			"bytes": "2349529"
+		},
+		{
+			"hits": "4",
+			"percent": "10.00%",
+			"date": "17/Dec/2014",
+			"bytes": "21877340"
+		}
+	],
+	"requests": [
+		{
+			"hits": "1683",
+			"percent": "44.35%",
+			"data": "\/s3\/get_jobs",
+			"bytes": "14003",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "293",
+			"percent": "7.72%",
+			"data": "\/",
+			"bytes": "1483248",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "261",
+			"percent": "6.88%",
+			"data": "\/mediaspots",
+			"bytes": "1556110",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "63",
+			"percent": "1.66%",
+			"data": "\/assets\/fontawesome-webfont-c035b5ac9c359ad80538f56da1547393.woff?v=4.2.0",
+			"bytes": "3861668",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "63",
+			"percent": "1.66%",
+			"data": "\/users",
+			"bytes": "173204",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "59",
+			"percent": "1.55%",
+			"data": "\/content_providers",
+			"bytes": "153196",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "47",
+			"percent": "1.24%",
+			"data": "\/:3443",
+			"bytes": "75139",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "37",
+			"percent": "0.97%",
+			"data": "\/api",
+			"bytes": "148173",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "18",
+			"percent": "0.47%",
+			"data": "\/s3\/modify_file",
+			"bytes": "10395",
+			"protocol": "HTTP/1.1",
+			"method": "POST"
+		},
+		{
+			"hits": "10",
+			"percent": "0.26%",
+			"data": "\/",
+			"bytes": "2790",
+			"protocol": "HTTP/1.1",
+			"method": "OPTIONS"
+		},
+		{
+			"hits": "10",
+			"percent": "0.26%",
+			"data": "\/users\/sign_in",
+			"bytes": "22151",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "9",
+			"percent": "0.24%",
+			"data": "\/manager\/html",
+			"bytes": "35123",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "8",
+			"percent": "0.21%",
+			"data": "\/",
+			"bytes": "0",
+			"protocol": "HTTP/1.0",
+			"method": "HEAD"
+		},
+		{
+			"hits": "8",
+			"percent": "0.21%",
+			"data": "\/repository_log",
+			"bytes": "32335",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "5",
+			"percent": "0.13%",
+			"data": "\/content_providers\/2",
+			"bytes": "12350",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "5",
+			"percent": "0.13%",
+			"data": "\/users\/2\/edit",
+			"bytes": "14518",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "4",
+			"percent": "0.11%",
+			"data": "\/content_providers\/new",
+			"bytes": "10736",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "4",
+			"percent": "0.11%",
+			"data": "\/tmUnblock.cgi",
+			"bytes": "724",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "4",
+			"percent": "0.11%",
+			"data": "\/api\/files?api-key=hVzTmFr32yrNZ916S_WgOA",
+			"bytes": "7585",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "4",
+			"percent": "0.11%",
+			"data": "\/",
+			"bytes": "0",
+			"protocol": "HTTP/1.1",
+			"method": "HEAD"
+		},
+		{
+			"hits": "4",
+			"percent": "0.11%",
+			"data": "\/content_providers",
+			"bytes": "468",
+			"protocol": "HTTP/1.1",
+			"method": "POST"
+		},
+		{
+			"hits": "4",
+			"percent": "0.11%",
+			"data": "\/repository_log?page=6",
+			"bytes": "16620",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "4",
+			"percent": "0.11%",
+			"data": "\/repository_log?page=8",
+			"bytes": "16300",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "3",
+			"percent": "0.08%",
+			"data": "\/users\/sign_in",
+			"bytes": "337",
+			"protocol": "HTTP/1.1",
+			"method": "POST"
+		},
+		{
+			"hits": "3",
+			"percent": "0.08%",
+			"data": "\/users\/2",
+			"bytes": "8028",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "3",
+			"percent": "0.08%",
+			"data": "\/repository_log?page=2",
+			"bytes": "11970",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "3",
+			"percent": "0.08%",
+			"data": "\/repository_log?page=7",
+			"bytes": "11952",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "3",
+			"percent": "0.08%",
+			"data": "\/repository_log?page=5",
+			"bytes": "12030",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "2",
+			"percent": "0.05%",
+			"data": "\/profile",
+			"bytes": "5401",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "2",
+			"percent": "0.05%",
+			"data": "http:\/\/24x7-allrequestsallowed.com\/?PHPSESSID=4tz33fsa00356TVMRRH@B@ZZVC",
+			"bytes": "558",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "2",
+			"percent": "0.05%",
+			"data": "\/repository_log\/262",
+			"bytes": "11047",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "2",
+			"percent": "0.05%",
+			"data": "\/content_providers\/3",
+			"bytes": "4939",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "2",
+			"percent": "0.05%",
+			"data": "\/content_providers\/4",
+			"bytes": "5124",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "2",
+			"percent": "0.05%",
+			"data": "\/repository_log?page=4",
+			"bytes": "8020",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "2",
+			"percent": "0.05%",
+			"data": "\/repository_log?page=9",
+			"bytes": "7620",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "2",
+			"percent": "0.05%",
+			"data": "\/repository_log?page=1",
+			"bytes": "8192",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "2",
+			"percent": "0.05%",
+			"data": "\/repository_log?page=3",
+			"bytes": "8218",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1420508053653",
+			"bytes": "13708",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1420508066784",
+			"bytes": "13708",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1420509176830",
+			"bytes": "13699",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418804805532",
+			"bytes": "7392",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1420508818619",
+			"bytes": "13708",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418791797455",
+			"bytes": "8044",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419407549426",
+			"bytes": "9701",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1420509685297",
+			"bytes": "15126",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1418803280574",
+			"bytes": "13997",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418881726212",
+			"bytes": "8146",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418804791472",
+			"bytes": "0",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1418803280575",
+			"bytes": "13997",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419404850829",
+			"bytes": "9703",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418882068809",
+			"bytes": "9167",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418804793367",
+			"bytes": "7388",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418803951651",
+			"bytes": "7466",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418804771524",
+			"bytes": "7390",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419407424840",
+			"bytes": "9695",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419406145174",
+			"bytes": "9701",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419467664594",
+			"bytes": "9691",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419467664595",
+			"bytes": "9696",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1420509324137",
+			"bytes": "13699",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "178.237.17.180:443",
+			"bytes": "181",
+			"protocol": "HTTP/1.0",
+			"method": "CONNECT"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418948767050",
+			"bytes": "8663",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418881958442",
+			"bytes": "8150",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1420508054426",
+			"bytes": "13708",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1420509685294",
+			"bytes": "15017",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418804775934",
+			"bytes": "7390",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/users\/1",
+			"bytes": "105",
+			"protocol": "HTTP/1.1",
+			"method": "POST"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/users\/3",
+			"bytes": "105",
+			"protocol": "HTTP/1.1",
+			"method": "POST"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/users\/2",
+			"bytes": "105",
+			"protocol": "HTTP/1.1",
+			"method": "POST"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418786943129",
+			"bytes": "8058",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419407181041",
+			"bytes": "9695",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419210787331",
+			"bytes": "8677",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/repository_log?utf8=✓&search=thomas&sort=&direction=",
+			"bytes": "2856",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419210787333",
+			"bytes": "8674",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1420508842173",
+			"bytes": "9684",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418804789659",
+			"bytes": "0",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/content_providers\/1",
+			"bytes": "115",
+			"protocol": "HTTP/1.1",
+			"method": "POST"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/content_providers\/4",
+			"bytes": "117",
+			"protocol": "HTTP/1.1",
+			"method": "POST"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419406143376",
+			"bytes": "9703",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1420508065903",
+			"bytes": "13708",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1420508726940",
+			"bytes": "13708",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1418805019736",
+			"bytes": "13997",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418787104515",
+			"bytes": "8054",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1418805019737",
+			"bytes": "13997",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1418805019738",
+			"bytes": "13997",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1418805019739",
+			"bytes": "13997",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418786940497",
+			"bytes": "8040",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1420508055034",
+			"bytes": "13708",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418803228321",
+			"bytes": "7470",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1420508552614",
+			"bytes": "13708",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418948292298",
+			"bytes": "9168",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1420508552617",
+			"bytes": "13708",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1420508552615",
+			"bytes": "13708",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1418805019740",
+			"bytes": "13997",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1418785927758",
+			"bytes": "12833",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1420507799253",
+			"bytes": "13708",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419402404075",
+			"bytes": "9699",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1420508727706",
+			"bytes": "13708",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1420508063247",
+			"bytes": "13708",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/assets\/fontawesome-webfont-4929d0fe3a09ebec3445c48918ef3bfe.eot?",
+			"bytes": "56006",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1420508819794",
+			"bytes": "13708",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1420507798370",
+			"bytes": "9688",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419407250616",
+			"bytes": "9703",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418796211966",
+			"bytes": "8042",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418967861992",
+			"bytes": "8679",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1420508541784",
+			"bytes": "13708",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418968202497",
+			"bytes": "8681",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419406144228",
+			"bytes": "9709",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1420506777785",
+			"bytes": "9698",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1420506777786",
+			"bytes": "9708",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1420506777787",
+			"bytes": "9692",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1419474276925",
+			"bytes": "1477",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419207972318",
+			"bytes": "8670",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419400921482",
+			"bytes": "9697",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419400921483",
+			"bytes": "9709",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419400921484",
+			"bytes": "9707",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419400921485",
+			"bytes": "9709",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418796016214",
+			"bytes": "8046",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1420508726268",
+			"bytes": "13708",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1418862907055",
+			"bytes": "1616",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1420509685295",
+			"bytes": "9704",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1420507813432",
+			"bytes": "13708",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1418785966307",
+			"bytes": "12833",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418803738187",
+			"bytes": "7472",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/repository_log?utf8=✓&search=&sort=&direction=",
+			"bytes": "4139",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1420507813433",
+			"bytes": "13708",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/users\/new",
+			"bytes": "2779",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1420508067041",
+			"bytes": "13708",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419404838248",
+			"bytes": "9695",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419474272783",
+			"bytes": "9700",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418804876674",
+			"bytes": "7460",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419466487985",
+			"bytes": "9697",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1418796231910",
+			"bytes": "13997",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1418796231911",
+			"bytes": "13997",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1418796231912",
+			"bytes": "13997",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1418796231913",
+			"bytes": "13997",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1418796231914",
+			"bytes": "13997",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419229367802",
+			"bytes": "8677",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419229367801",
+			"bytes": "8687",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418949646505",
+			"bytes": "9178",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418949646506",
+			"bytes": "8668",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1419467747027",
+			"bytes": "12092",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418949646507",
+			"bytes": "8673",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419404849800",
+			"bytes": "9697",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1420508724394",
+			"bytes": "13708",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1420509675744",
+			"bytes": "15017",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418881944863",
+			"bytes": "8152",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418882096556",
+			"bytes": "9175",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419407212083",
+			"bytes": "9691",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418784178023",
+			"bytes": "8046",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418784200231",
+			"bytes": "8063",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418804787192",
+			"bytes": "0",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/content_providers\/1",
+			"bytes": "2568",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418804788020",
+			"bytes": "7398",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418791569780",
+			"bytes": "8040",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419229394838",
+			"bytes": "8677",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418784200232",
+			"bytes": "8060",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419217614031",
+			"bytes": "8679",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1420507954298",
+			"bytes": "13708",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419400945637",
+			"bytes": "9701",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419400945638",
+			"bytes": "9695",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1418785963300",
+			"bytes": "12833",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "http:\/\/www.baidu.com\/",
+			"bytes": "111",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418881755974",
+			"bytes": "8136",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1420508055242",
+			"bytes": "13708",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/3000",
+			"bytes": "22165",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419469882455",
+			"bytes": "9690",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418786257738",
+			"bytes": "8042",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418881834211",
+			"bytes": "8148",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418804785552",
+			"bytes": "7380",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1418804812427",
+			"bytes": "13997",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418785927757",
+			"bytes": "8052",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1418804812428",
+			"bytes": "13997",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1420507799252",
+			"bytes": "9688",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1420509262060",
+			"bytes": "13699",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/repository_log\/287",
+			"bytes": "11055",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419492348343",
+			"bytes": "9706",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1418805000461",
+			"bytes": "13997",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1418805000460",
+			"bytes": "13997",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419469887617",
+			"bytes": "9684",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419469887618",
+			"bytes": "9694",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418784182705",
+			"bytes": "8051",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418784182704",
+			"bytes": "8062",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/users\/1",
+			"bytes": "2792",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/users\/3",
+			"bytes": "2801",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/users\/3\/edit",
+			"bytes": "2901",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419217647288",
+			"bytes": "8674",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418804809644",
+			"bytes": "7376",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1419474484064",
+			"bytes": "12092",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1418805018127",
+			"bytes": "13997",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419474276923",
+			"bytes": "9692",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419474276924",
+			"bytes": "9694",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418881725872",
+			"bytes": "0",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419403264549",
+			"bytes": "9699",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1420509314548",
+			"bytes": "13699",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418862907054",
+			"bytes": "8082",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_form?path=&metaFields=[]",
+			"bytes": "389",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1420509323500",
+			"bytes": "13699",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1420507813434",
+			"bytes": "9706",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/api\/presigned_post?api-key=hVzTmFr32yrNZ916S_WgOA&path=netflix&meta_keys[]=description&meta_keys[]=owner",
+			"bytes": "587",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1419467664596",
+			"bytes": "12092",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419404626260",
+			"bytes": "9711",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419403264550",
+			"bytes": "9689",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1420509324646",
+			"bytes": "13699",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419402406438",
+			"bytes": "9719",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419406845787",
+			"bytes": "9699",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419466658256",
+			"bytes": "9687",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419406845786",
+			"bytes": "9680",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419400940752",
+			"bytes": "9703",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419467747026",
+			"bytes": "9696",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1419210787332",
+			"bytes": "12077",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419467747028",
+			"bytes": "9700",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419469980159",
+			"bytes": "9696",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "178.237.17.175:443",
+			"bytes": "181",
+			"protocol": "HTTP/1.0",
+			"method": "CONNECT"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419406677907",
+			"bytes": "9693",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419406677908",
+			"bytes": "9692",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1420508918869",
+			"bytes": "9690",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/.git\/HEAD",
+			"bytes": "279",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418881973197",
+			"bytes": "8144",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/content_providers\/4\/edit",
+			"bytes": "2712",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418804788930",
+			"bytes": "0",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418881625243",
+			"bytes": "8103",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418881625244",
+			"bytes": "8107",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1420508823860",
+			"bytes": "9700",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418787093193",
+			"bytes": "8044",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418784088302",
+			"bytes": "8048",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418881741211",
+			"bytes": "8134",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419406835863",
+			"bytes": "9706",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419398732586",
+			"bytes": "9707",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1420507806760",
+			"bytes": "13708",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1418803588341",
+			"bytes": "13997",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1420507954297",
+			"bytes": "9692",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419400938783",
+			"bytes": "9717",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419407214977",
+			"bytes": "9701",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418804790774",
+			"bytes": "0",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1420508552616",
+			"bytes": "9706",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419403354591",
+			"bytes": "9703",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418967014981",
+			"bytes": "8673",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418804790157",
+			"bytes": "0",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418888353528",
+			"bytes": "9180",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/",
+			"bytes": "279",
+			"protocol": "HTTP/1.0",
+			"method": "OPTIONS"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418787031931",
+			"bytes": "8042",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418804792126",
+			"bytes": "0",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1420507797573",
+			"bytes": "9698",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418804812423",
+			"bytes": "7388",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418804812424",
+			"bytes": "7412",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418804812425",
+			"bytes": "7406",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418967325369",
+			"bytes": "8694",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1420506777788",
+			"bytes": "13708",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418804812426",
+			"bytes": "7460",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1420508541783",
+			"bytes": "9692",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418791543847",
+			"bytes": "8038",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/",
+			"bytes": "96",
+			"protocol": "HTTP/1.0",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418803903689",
+			"bytes": "5157",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418807166512",
+			"bytes": "7458",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418807166513",
+			"bytes": "8084",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1418803738180",
+			"bytes": "13997",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1418803738181",
+			"bytes": "13997",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1418803287291",
+			"bytes": "13997",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1418803738183",
+			"bytes": "13997",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1418803738182",
+			"bytes": "13997",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1418803738185",
+			"bytes": "13997",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1418803738184",
+			"bytes": "13997",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419229344917",
+			"bytes": "8677",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1418803738186",
+			"bytes": "13997",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418804782748",
+			"bytes": "7392",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418967325371",
+			"bytes": "8689",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1420508066315",
+			"bytes": "13708",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419407218309",
+			"bytes": "9687",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418881742536",
+			"bytes": "8128",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418967325370",
+			"bytes": "8681",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418967325368",
+			"bytes": "8663",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418804773406",
+			"bytes": "7386",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1418804876675",
+			"bytes": "13997",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418791683001",
+			"bytes": "8058",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1419405956098",
+			"bytes": "9705",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418804773407",
+			"bytes": "7384",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418804792765",
+			"bytes": "0",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/delete?key=test2\/",
+			"bytes": "31",
+			"protocol": "HTTP/1.1",
+			"method": "DELETE"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418949667539",
+			"bytes": "8663",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1419229367800",
+			"bytes": "12092",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418948767048",
+			"bytes": "9172",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418948767049",
+			"bytes": "8661",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418882591316",
+			"bytes": "9175",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/s3\/get_files?_=1418882591317",
+			"bytes": "9172",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/users\/1\/edit",
+			"bytes": "2897",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/mediaspots\/get_mediaspots?_=1420509685296",
+			"bytes": "15111",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		}
+	],
+	"static_requests": [
+		{
+			"hits": "92",
+			"percent": "2.42%",
+			"data": "\/assets\/application-ccabbdb67123ec77c75bf4d385f7a784.js",
+			"bytes": "16129330",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "87",
+			"percent": "2.29%",
+			"data": "\/assets\/application-d176a15be3627423cbaf8b254c892acb.css",
+			"bytes": "28533183",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "87",
+			"percent": "2.29%",
+			"data": "\/assets\/application-4fb3752723e230811882b9a764342695.js",
+			"bytes": "14637012",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "80",
+			"percent": "2.11%",
+			"data": "\/assets\/dataTables\/sort_both-53ba7c2e397e70bf8428200aea7c3d32.png",
+			"bytes": "51120",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "76",
+			"percent": "2.00%",
+			"data": "\/assets\/application-611f038b773e22b28ab13059695f73f5.css",
+			"bytes": "7266200",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "64",
+			"percent": "1.69%",
+			"data": "\/assets\/dataTables\/sort_desc-3fbea7b36240411323fa91da1590d9bb.png",
+			"bytes": "43953",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "32",
+			"percent": "0.84%",
+			"data": "\/assets\/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff",
+			"bytes": "680636",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "18",
+			"percent": "0.47%",
+			"data": "\/assets\/dataTables\/sort_asc-2abee8733f76d39e60194d6d19d0db9d.png",
+			"bytes": "14534",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "12",
+			"percent": "0.32%",
+			"data": "http:\/\/s1.bdstatic.com\/r\/www\/cache\/static\/home\/img\/logos\/nuomi_ade5465d.png",
+			"bytes": "18182",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "12",
+			"percent": "0.32%",
+			"data": "\/favicon.ico",
+			"bytes": "279",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "11",
+			"percent": "0.29%",
+			"data": "\/assets\/application-2b858822bf4d77c61d49959fe9935271.css",
+			"bytes": "773595",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "8",
+			"percent": "0.21%",
+			"data": "\/assets\/application-d9e1c83dfb4a48a9d78ff4644d2bfcb3.css",
+			"bytes": "3759432",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "6",
+			"percent": "0.16%",
+			"data": "\/assets\/DXI1ORHCpsQm3Vp6mXoaTXhCUOGz7vYGh680lGh-uXM.woff",
+			"bytes": "113280",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/languages\/flags\/ptt_bbrr.gif",
+			"bytes": "181",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/robots.txt",
+			"bytes": "202",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		}
+	],
+	"not_found": [
+		{
+			"hits": "31",
+			"percent": "0.82%",
+			"data": "\/3000",
+			"bytes": "22165",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "23",
+			"percent": "0.61%",
+			"data": "\/manager\/html",
+			"bytes": "35123",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "14",
+			"percent": "0.37%",
+			"data": "http:\/\/s1.bdstatic.com\/r\/www\/cache\/static\/home\/img\/logos\/nuomi_ade5465d.png",
+			"bytes": "18182",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "8",
+			"percent": "0.21%",
+			"data": "\/:3443",
+			"bytes": "75139",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "4",
+			"percent": "0.11%",
+			"data": "\/clientaccesspolicy.xml",
+			"bytes": "6256",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "4",
+			"percent": "0.11%",
+			"data": "\/actionnews\/index\/",
+			"bytes": "2860",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "4",
+			"percent": "0.11%",
+			"data": "\/login.action",
+			"bytes": "6356",
+			"protocol": "HTTP/1.1",
+			"method": "POST"
+		},
+		{
+			"hits": "4",
+			"percent": "0.11%",
+			"data": "\/login.action",
+			"bytes": "0",
+			"protocol": "HTTP/1.1",
+			"method": "HEAD"
+		},
+		{
+			"hits": "3",
+			"percent": "0.08%",
+			"data": "\/3001",
+			"bytes": "2145",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "3",
+			"percent": "0.08%",
+			"data": "\/user\/soapCaller.bs",
+			"bytes": "2145",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "3",
+			"percent": "0.08%",
+			"data": "\/epgrec\/envSetting.php",
+			"bytes": "4692",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "2",
+			"percent": "0.05%",
+			"data": "\/index.action",
+			"bytes": "0",
+			"protocol": "HTTP/1.1",
+			"method": "HEAD"
+		},
+		{
+			"hits": "2",
+			"percent": "0.05%",
+			"data": "\/register.action",
+			"bytes": "0",
+			"protocol": "HTTP/1.1",
+			"method": "HEAD"
+		},
+		{
+			"hits": "2",
+			"percent": "0.05%",
+			"data": "\/vtigercrm\/test\/upload\/vtigercrm.txt",
+			"bytes": "3128",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "2",
+			"percent": "0.05%",
+			"data": "\/browserconfig.xml",
+			"bytes": "1430",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/phpMyAdmin\/scripts\/setup.php",
+			"bytes": "715",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/userInit.action",
+			"bytes": "0",
+			"protocol": "HTTP/1.1",
+			"method": "HEAD"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/rec\/envSetting.php",
+			"bytes": "1564",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/loginUDB.action",
+			"bytes": "0",
+			"protocol": "HTTP/1.1",
+			"method": "HEAD"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/epgrec\/gen-thumbnail.sh",
+			"bytes": "1564",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/shop.action",
+			"bytes": "0",
+			"protocol": "HTTP/1.1",
+			"method": "HEAD"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "http:\/\/wujieliulan.com\/mnews.htm",
+			"bytes": "1564",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/user.action",
+			"bytes": "0",
+			"protocol": "HTTP/1.1",
+			"method": "HEAD"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/struts2.action",
+			"bytes": "0",
+			"protocol": "HTTP/1.1",
+			"method": "HEAD"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/admin\/common\/ie.css",
+			"bytes": "1564",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/myadmin\/scripts\/setup.php",
+			"bytes": "715",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/\/pma\/scripts\/setup.php",
+			"bytes": "715",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/\/wp-login.php",
+			"bytes": "1564",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/\/myadmin\/scripts\/setup.php",
+			"bytes": "715",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/blog\/\/wp-login.php",
+			"bytes": "1564",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/\/phpmyadmin\/scripts\/setup.php",
+			"bytes": "715",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/tasks",
+			"bytes": "715",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/admin.action",
+			"bytes": "0",
+			"protocol": "HTTP/1.1",
+			"method": "HEAD"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/wwwroot.action",
+			"bytes": "0",
+			"protocol": "HTTP/1.1",
+			"method": "HEAD"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/pma\/scripts\/setup.php",
+			"bytes": "715",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/tv\/envSetting.php",
+			"bytes": "1564",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/wp\/\/wp-login.php",
+			"bytes": "1564",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/loginAction.action",
+			"bytes": "0",
+			"protocol": "HTTP/1.1",
+			"method": "HEAD"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/phpmyadmin\/scripts\/setup.php",
+			"bytes": "715",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/web.action",
+			"bytes": "0",
+			"protocol": "HTTP/1.1",
+			"method": "HEAD"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/userLogin.action",
+			"bytes": "0",
+			"protocol": "HTTP/1.1",
+			"method": "HEAD"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/muieblackcat",
+			"bytes": "715",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/root.action",
+			"bytes": "0",
+			"protocol": "HTTP/1.1",
+			"method": "HEAD"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/a2billing\/customer\/javascript\/misc.js",
+			"bytes": "1564",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/loginNew.action",
+			"bytes": "0",
+			"protocol": "HTTP/1.1",
+			"method": "HEAD"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/envSetting.php",
+			"bytes": "1564",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/MyAdmin\/scripts\/setup.php",
+			"bytes": "715",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/w00tw00t.at.blackhats.romanian.anti-sec:)",
+			"bytes": "715",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/unAuthorizedAccess.action",
+			"bytes": "0",
+			"protocol": "HTTP/1.1",
+			"method": "HEAD"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/download.action",
+			"bytes": "0",
+			"protocol": "HTTP/1.1",
+			"method": "HEAD"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/\/phpMyAdmin\/scripts\/setup.php",
+			"bytes": "715",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/\/MyAdmin\/scripts\/setup.php",
+			"bytes": "715",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/test.action",
+			"bytes": "0",
+			"protocol": "HTTP/1.1",
+			"method": "HEAD"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/Allegro",
+			"bytes": "1564",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/epgrec_old\/envSetting.php",
+			"bytes": "1564",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/wordpress\/\/wp-login.php",
+			"bytes": "1564",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "\/vtigercrm\/",
+			"bytes": "1564",
+			"protocol": "HTTP/1.1",
+			"method": "GET"
+		}
+	],
+	"hosts": [
+		{
+			"hits": "3402",
+			"percent": "89.64%",
+			"data": "202.33.141.21",
+			"bytes": "80427077",
+			"host": "Temporary failure in name resolution",
+			"country": "JP Japan"
+		},
+		{
+			"hits": "25",
+			"percent": "0.66%",
+			"data": "210.171.118.219",
+			"bytes": "1612508",
+			"host": "210171118219.cidr.odn.ne.jp",
+			"country": "JP Japan"
+		},
+		{
+			"hits": "22",
+			"percent": "0.58%",
+			"data": "222.186.21.41",
+			"bytes": "1589",
+			"host": "Name or service not known",
+			"country": "CN China"
+		},
+		{
+			"hits": "20",
+			"percent": "0.53%",
+			"data": "208.66.72.12",
+			"bytes": "17204",
+			"host": "host12.chocariangdi.com",
+			"country": "US United States"
+		},
+		{
+			"hits": "16",
+			"percent": "0.42%",
+			"data": "67.107.93.2",
+			"bytes": "4387",
+			"host": "cerberus.franklinamerican.com",
+			"country": "US United States"
+		},
+		{
+			"hits": "13",
+			"percent": "0.34%",
+			"data": "125.64.35.68",
+			"bytes": "9091",
+			"host": "Name or service not known",
+			"country": "CN China"
+		},
+		{
+			"hits": "13",
+			"percent": "0.34%",
+			"data": "125.64.35.67",
+			"bytes": "9091",
+			"host": "Name or service not known",
+			"country": "CN China"
+		},
+		{
+			"hits": "9",
+			"percent": "0.24%",
+			"data": "74.82.47.3",
+			"bytes": "1008",
+			"host": "scan-10.shadowserver.org",
+			"country": "US United States"
+		},
+		{
+			"hits": "9",
+			"percent": "0.24%",
+			"data": "74.82.47.2",
+			"bytes": "1008",
+			"host": "scan-09.shadowserver.org",
+			"country": "US United States"
+		},
+		{
+			"hits": "7",
+			"percent": "0.18%",
+			"data": "202.109.143.35",
+			"bytes": "10948",
+			"host": "Temporary failure in name resolution",
+			"country": "CN China"
+		},
+		{
+			"hits": "6",
+			"percent": "0.16%",
+			"data": "141.101.236.12",
+			"bytes": "4290",
+			"host": "Name or service not known",
+			"country": "RU Russian Federation"
+		},
+		{
+			"hits": "6",
+			"percent": "0.16%",
+			"data": "111.93.57.92",
+			"bytes": "4290",
+			"host": "static-92.57.93.111-tataidc.co.in",
+			"country": "IN India"
+		},
+		{
+			"hits": "5",
+			"percent": "0.13%",
+			"data": "85.17.25.28",
+			"bytes": "7820",
+			"host": "Name or service not known",
+			"country": "NL Netherlands"
+		},
+		{
+			"hits": "4",
+			"percent": "0.11%",
+			"data": "168.235.154.2",
+			"bytes": "6256",
+			"host": "c1110644-13630.cloudatcost.com",
+			"country": "Country Unknown"
+		},
+		{
+			"hits": "4",
+			"percent": "0.11%",
+			"data": "216.218.206.66",
+			"bytes": "448",
+			"host": "scan-05.shadowserver.org",
+			"country": "US United States"
+		},
+		{
+			"hits": "4",
+			"percent": "0.11%",
+			"data": "184.105.247.195",
+			"bytes": "448",
+			"host": "scan-14.shadowserver.org",
+			"country": "US United States"
+		},
+		{
+			"hits": "3",
+			"percent": "0.08%",
+			"data": "121.41.87.150",
+			"bytes": "3178",
+			"host": "Name or service not known",
+			"country": "CN China"
+		},
+		{
+			"hits": "3",
+			"percent": "0.08%",
+			"data": "89.46.102.162",
+			"bytes": "2145",
+			"host": "no-rdns.free.clues.ro",
+			"country": "RO Romania"
+		},
+		{
+			"hits": "3",
+			"percent": "0.08%",
+			"data": "161.202.70.132",
+			"bytes": "5783",
+			"host": "EpgrecUNA.dip.jp",
+			"country": "CH Switzerland"
+		},
+		{
+			"hits": "2",
+			"percent": "0.05%",
+			"data": "54.162.196.30",
+			"bytes": "1564",
+			"host": "ec2-54-162-196-30.compute-1.amazonaws.com",
+			"country": "US United States"
+		},
+		{
+			"hits": "2",
+			"percent": "0.05%",
+			"data": "109.201.143.231",
+			"bytes": "3128",
+			"host": "Name or service not known",
+			"country": "DE Germany"
+		},
+		{
+			"hits": "2",
+			"percent": "0.05%",
+			"data": "146.185.239.100",
+			"bytes": "558",
+			"host": "Name or service not known",
+			"country": "RU Russian Federation"
+		},
+		{
+			"hits": "2",
+			"percent": "0.05%",
+			"data": "178.162.212.20",
+			"bytes": "3128",
+			"host": "Name or service not known",
+			"country": "DE Germany"
+		},
+		{
+			"hits": "2",
+			"percent": "0.05%",
+			"data": "54.80.199.250",
+			"bytes": "1564",
+			"host": "ec2-54-80-199-250.compute-1.amazonaws.com",
+			"country": "US United States"
+		},
+		{
+			"hits": "2",
+			"percent": "0.05%",
+			"data": "54.162.103.133",
+			"bytes": "1564",
+			"host": "ec2-54-162-103-133.compute-1.amazonaws.com",
+			"country": "US United States"
+		},
+		{
+			"hits": "2",
+			"percent": "0.05%",
+			"data": "54.91.166.58",
+			"bytes": "1564",
+			"host": "ec2-54-91-166-58.compute-1.amazonaws.com",
+			"country": "US United States"
+		},
+		{
+			"hits": "2",
+			"percent": "0.05%",
+			"data": "88.255.215.100",
+			"bytes": "362",
+			"host": "88.255.215.100.static.turktelekom.com.tr",
+			"country": "TR Turkey"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "122.235.191.35",
+			"bytes": "1564",
+			"host": "Name or service not known",
+			"country": "CN China"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "1.234.45.181",
+			"bytes": "0",
+			"host": "Name or service not known",
+			"country": "KR Korea, Republic of"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "201.161.11.210",
+			"bytes": "1564",
+			"host": "201-161-11-210.internetmax.maxcom.net.mx",
+			"country": "MX Mexico"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "95.110.203.146",
+			"bytes": "1564",
+			"host": "host146-203-110-95.serverdedicati.aruba.it",
+			"country": "IT Italy"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "128.211.212.50",
+			"bytes": "181",
+			"host": "dhcp-212-50.resnet.purdue.edu",
+			"country": "US United States"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "97.73.64.153",
+			"bytes": "181",
+			"host": "host97730015364.direcway.com",
+			"country": "US United States"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "175.156.148.227",
+			"bytes": "181",
+			"host": "Name or service not known",
+			"country": "SG Singapore"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "173.164.244.83",
+			"bytes": "715",
+			"host": "173-164-244-83-SFBA.hfc.comcastbusiness.net",
+			"country": "US United States"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "123.249.19.59",
+			"bytes": "1564",
+			"host": "error-cdnzz-com.cdnzz.net",
+			"country": "CN China"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "46.165.220.215",
+			"bytes": "1564",
+			"host": "Name or service not known",
+			"country": "DE Germany"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "216.20.131.111",
+			"bytes": "715",
+			"host": "cas-wv-cpe-216-20-131-111.cascable.net",
+			"country": "US United States"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "185.28.193.98",
+			"bytes": "0",
+			"host": "98.193.28.185.gransy.com",
+			"country": "CZ Czech Republic"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "61.160.232.208",
+			"bytes": "1589",
+			"host": "Name or service not known",
+			"country": "CN China"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "115.239.248.56",
+			"bytes": "1564",
+			"host": "Name or service not known",
+			"country": "CN China"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "208.50.101.157",
+			"bytes": "112",
+			"host": "Name or service not known",
+			"country": "US United States"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "115.239.248.58",
+			"bytes": "0",
+			"host": "Name or service not known",
+			"country": "CN China"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "74.217.148.73",
+			"bytes": "4107",
+			"host": "Name or service not known",
+			"country": "US United States"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "104.151.231.66",
+			"bytes": "715",
+			"host": ".",
+			"country": "Country Unknown"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "93.174.93.106",
+			"bytes": "96",
+			"host": "voip.katxoweb.com",
+			"country": "NL Netherlands"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "216.154.10.104",
+			"bytes": "181",
+			"host": "Name or service not known",
+			"country": "CA Canada"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "189.14.84.90",
+			"bytes": "715",
+			"host": "189-14-84-90.vmaxnet.com.br",
+			"country": "BR Brazil"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "61.160.224.128",
+			"bytes": "1564",
+			"host": "Name or service not known",
+			"country": "CN China"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "49.98.133.31",
+			"bytes": "715",
+			"host": "s633031.xgsspn.imtp.tachikawa.spmode.ne.jp",
+			"country": "JP Japan"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "49.98.162.134",
+			"bytes": "715",
+			"host": "s662134.xgsspn.imtp.tachikawa.spmode.ne.jp",
+			"country": "JP Japan"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "103.10.87.113",
+			"bytes": "1564",
+			"host": "Name or service not known",
+			"country": "CN China"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "168.83.7.124",
+			"bytes": "0",
+			"host": "Name or service not known",
+			"country": "AR Argentina"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "221.123.165.197",
+			"bytes": "0",
+			"host": "Temporary failure in name resolution",
+			"country": "CN China"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "54.226.23.162",
+			"bytes": "112",
+			"host": "ec2-54-226-23-162.compute-1.amazonaws.com",
+			"country": "US United States"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "183.196.130.141",
+			"bytes": "0",
+			"host": "Temporary failure in name resolution",
+			"country": "CN China"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "61.132.47.38",
+			"bytes": "1564",
+			"host": "Name or service not known",
+			"country": "CN China"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "65.207.23.201",
+			"bytes": "715",
+			"host": "Name or service not known",
+			"country": "US United States"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "162.242.146.223",
+			"bytes": "0",
+			"host": "Name or service not known",
+			"country": "US United States"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "61.177.139.138",
+			"bytes": "0",
+			"host": "Name or service not known",
+			"country": "CN China"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "188.241.87.173",
+			"bytes": "181",
+			"host": "Temporary failure in name resolution",
+			"country": "RO Romania"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "123.151.149.222",
+			"bytes": "111",
+			"host": "Name or service not known",
+			"country": "CN China"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "14.63.217.97",
+			"bytes": "0",
+			"host": "Name or service not known",
+			"country": "KR Korea, Republic of"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "98.143.148.107",
+			"bytes": "279",
+			"host": "scanner01.metaintelligence.com",
+			"country": "US United States"
+		}
+	]
+,
+	"os": [
+		{
+			"hits": "27",
+			"percent": "67.50%",
+			"data": "Unknown",
+			"items": [
+				{
+					"hits": "27",
+					"percent": "67.50%",
+					"data": "Unknown"
+				}
+			]
+		},
+		{
+			"hits": "7",
+			"percent": "17.50%",
+			"data": "Linux",
+			"items": [
+				{
+					"hits": "7",
+					"percent": "17.50%",
+					"data": "Ubuntu"
+				}
+			]
+		},
+		{
+			"hits": "6",
+			"percent": "15.00%",
+			"data": "Windows",
+			"items": [
+				{
+					"hits": "2",
+					"percent": "5.00%",
+					"data": "Windows 7"
+				},
+				{
+					"hits": "2",
+					"percent": "5.00%",
+					"data": "Windows Vista"
+				},
+				{
+					"hits": "1",
+					"percent": "2.50%",
+					"data": "Windows 8.1"
+				},
+				{
+					"hits": "1",
+					"percent": "2.50%",
+					"data": "Windows XP"
+				}
+			]
+		}
+
+	],
+	"browsers": [
+		{
+			"hits": "25",
+			"percent": "62.50%",
+			"data": "Unknown",
+			"items": [
+				{
+					"hits": "25",
+					"percent": "62.50%",
+					"data": "Unknown"
+				}
+			]
+		},
+		{
+			"hits": "9",
+			"percent": "22.50%",
+			"data": "Firefox",
+			"items": [
+				{
+					"hits": "8",
+					"percent": "20.00%",
+					"data": "Firefox\/34.0"
+				},
+				{
+					"hits": "1",
+					"percent": "2.50%",
+					"data": "Firefox\/29.0"
+				}
+			]
+		},
+		{
+			"hits": "4",
+			"percent": "10.00%",
+			"data": "MSIE",
+			"items": [
+				{
+					"hits": "2",
+					"percent": "5.00%",
+					"data": "MSIE\/7.0"
+				},
+				{
+					"hits": "1",
+					"percent": "2.50%",
+					"data": "MSIE\/6.0"
+				},
+				{
+					"hits": "1",
+					"percent": "2.50%",
+					"data": "MSIE\/11.0"
+				}
+			]
+		},
+		{
+			"hits": "2",
+			"percent": "5.00%",
+			"data": "Others",
+			"items": [
+				{
+					"hits": "2",
+					"percent": "5.00%",
+					"data": "Mozilla\/5.0"
+				}
+			]
+		}
+
+	],
+	"referrers": [
+		{
+			"hits": "1252",
+			"percent": "32.99%",
+			"data": "http:\/\/54.64.152.224\/"
+		},
+		{
+			"hits": "809",
+			"percent": "21.32%",
+			"data": "-"
+		},
+		{
+			"hits": "804",
+			"percent": "21.19%",
+			"data": "https:\/\/54.64.152.224\/"
+		},
+		{
+			"hits": "167",
+			"percent": "4.40%",
+			"data": "http:\/\/54.64.152.224\/assets\/application-611f038b773e22b28ab13059695f73f5.css"
+		},
+		{
+			"hits": "110",
+			"percent": "2.90%",
+			"data": "https:\/\/54.64.152.224\/mediaspots"
+		},
+		{
+			"hits": "64",
+			"percent": "1.69%",
+			"data": "http:\/\/54.64.152.224\/mediaspots"
+		},
+		{
+			"hits": "58",
+			"percent": "1.53%",
+			"data": "http:\/\/54.64.152.224\/users"
+		},
+		{
+			"hits": "54",
+			"percent": "1.42%",
+			"data": "http:\/\/54.64.152.224\/content_providers"
+		},
+		{
+			"hits": "39",
+			"percent": "1.03%",
+			"data": "https:\/\/54.64.152.224\/assets\/application-d176a15be3627423cbaf8b254c892acb.css"
+		},
+		{
+			"hits": "34",
+			"percent": "0.90%",
+			"data": "https:\/\/ec2-54-64-152-224.ap-northeast-1.compute.amazonaws.com\/"
+		},
+		{
+			"hits": "23",
+			"percent": "0.61%",
+			"data": "http:\/\/54.64.152.224\/assets\/application-2b858822bf4d77c61d49959fe9935271.css"
+		},
+		{
+			"hits": "19",
+			"percent": "0.50%",
+			"data": "https:\/\/54.64.152.224\/api"
+		},
+		{
+			"hits": "14",
+			"percent": "0.37%",
+			"data": "https:\/\/54.64.152.224\/users"
+		},
+		{
+			"hits": "13",
+			"percent": "0.34%",
+			"data": "https:\/\/ec2-54-64-152-224.ap-northeast-1.compute.amazonaws.com\/api"
+		},
+		{
+			"hits": "12",
+			"percent": "0.32%",
+			"data": "http:\/\/54.64.152.224\/assets\/application-d9e1c83dfb4a48a9d78ff4644d2bfcb3.css"
+		},
+		{
+			"hits": "12",
+			"percent": "0.32%",
+			"data": "http:\/\/54.64.152.224\/api"
+		},
+		{
+			"hits": "11",
+			"percent": "0.29%",
+			"data": "https:\/\/54.64.152.224\/users\/sign_in"
+		},
+		{
+			"hits": "8",
+			"percent": "0.21%",
+			"data": "https:\/\/54.64.152.224\/content_providers"
+		},
+		{
+			"hits": "8",
+			"percent": "0.21%",
+			"data": "http:\/\/54.64.152.224:3001\/"
+		},
+		{
+			"hits": "8",
+			"percent": "0.21%",
+			"data": "http:\/\/54.64.152.224\/content_providers\/new"
+		},
+		{
+			"hits": "7",
+			"percent": "0.18%",
+			"data": "https:\/\/54.64.152.224\/repository_log"
+		},
+		{
+			"hits": "7",
+			"percent": "0.18%",
+			"data": "https:\/\/ec2-54-64-152-224.ap-northeast-1.compute.amazonaws.com\/assets\/application-d176a15be3627423cbaf8b254c892acb.css"
+		},
+		{
+			"hits": "6",
+			"percent": "0.16%",
+			"data": "https:\/\/ec2-54-64-152-224.ap-northeast-1.compute.amazonaws.com\/assets\/application-d9e1c83dfb4a48a9d78ff4644d2bfcb3.css"
+		},
+		{
+			"hits": "6",
+			"percent": "0.16%",
+			"data": "https:\/\/ec2-54-64-152-224.ap-northeast-1.compute.amazonaws.com\/users\/sign_in"
+		},
+		{
+			"hits": "5",
+			"percent": "0.13%",
+			"data": "http:\/\/54.64.152.224\/content_providers\/2"
+		},
+		{
+			"hits": "5",
+			"percent": "0.13%",
+			"data": "http:\/\/54.64.152.224\/users\/2\/edit"
+		},
+		{
+			"hits": "4",
+			"percent": "0.11%",
+			"data": "http:\/\/54.64.152.224:3001\/assets\/application-d176a15be3627423cbaf8b254c892acb.css"
+		},
+		{
+			"hits": "4",
+			"percent": "0.11%",
+			"data": "https:\/\/54.64.152.224\/repository_log?page=7"
+		},
+		{
+			"hits": "4",
+			"percent": "0.11%",
+			"data": "http:\/\/54.64.152.224\/content_providers\/4"
+		},
+		{
+			"hits": "4",
+			"percent": "0.11%",
+			"data": "http:\/\/54.64.152.224\/users\/sign_in"
+		},
+		{
+			"hits": "4",
+			"percent": "0.11%",
+			"data": "https:\/\/54.64.152.224\/repository_log?page=5"
+		},
+		{
+			"hits": "4",
+			"percent": "0.11%",
+			"data": "https:\/\/54.64.152.224\/repository_log?page=8"
+		},
+		{
+			"hits": "3",
+			"percent": "0.08%",
+			"data": "http:\/\/ec2-54-64-152-224.ap-northeast-1.compute.amazonaws.com\/assets\/application-d9e1c83dfb4a48a9d78ff4644d2bfcb3.css"
+		},
+		{
+			"hits": "3",
+			"percent": "0.08%",
+			"data": "https:\/\/54.64.152.224\/repository_log?utf8=✓&search=thomas&sort=&direction="
+		},
+		{
+			"hits": "3",
+			"percent": "0.08%",
+			"data": "https:\/\/54.64.152.224\/repository_log?page=1"
+		},
+		{
+			"hits": "3",
+			"percent": "0.08%",
+			"data": "http:\/\/54.64.152.224\/content_providers\/1"
+		},
+		{
+			"hits": "3",
+			"percent": "0.08%",
+			"data": "https:\/\/54.64.152.224\/repository_log?page=6"
+		},
+		{
+			"hits": "3",
+			"percent": "0.08%",
+			"data": "https:\/\/54.64.152.224\/repository_log?page=2"
+		},
+		{
+			"hits": "2",
+			"percent": "0.05%",
+			"data": "http:\/\/54.64.152.224\/users\/3\/edit"
+		},
+		{
+			"hits": "2",
+			"percent": "0.05%",
+			"data": "https:\/\/ec2-54-64-152-224.ap-northeast-1.compute.amazonaws.com\/users"
+		},
+		{
+			"hits": "2",
+			"percent": "0.05%",
+			"data": "http:\/\/54.64.152.224\/users\/1\/edit"
+		},
+		{
+			"hits": "2",
+			"percent": "0.05%",
+			"data": "http:\/\/54.64.152.224\/content_providers\/4\/edit"
+		},
+		{
+			"hits": "2",
+			"percent": "0.05%",
+			"data": "http:\/\/54.64.152.224\/repository_log"
+		},
+		{
+			"hits": "2",
+			"percent": "0.05%",
+			"data": "http:\/\/54.64.152.224\/users\/2"
+		},
+		{
+			"hits": "2",
+			"percent": "0.05%",
+			"data": "http:\/\/ec2-54-64-152-224.ap-northeast-1.compute.amazonaws.com\/users\/sign_in"
+		},
+		{
+			"hits": "2",
+			"percent": "0.05%",
+			"data": "https:\/\/54.64.152.224\/repository_log?page=4"
+		},
+		{
+			"hits": "2",
+			"percent": "0.05%",
+			"data": "https:\/\/54.64.152.224\/repository_log?page=3"
+		},
+		{
+			"hits": "2",
+			"percent": "0.05%",
+			"data": "https:\/\/54.64.152.224\/repository_log?page=9"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "https:\/\/54.64.152.224\/users\/2\/edit"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "https:\/\/54.64.152.224\/profile"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "https:\/\/54.64.152.224\/content_providers\/2"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "https:\/\/54.64.152.224\/users\/2"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "https:\/\/ec2-54-64-152-224.ap-northeast-1.compute.amazonaws.com\/content_providers"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "http:\/\/54.64.152.224\/users\/new"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "http:\/\/54.64.152.224\/content_providers\/3"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "https:\/\/54.64.152.224\/repository_log?utf8=✓&search=&sort=&direction="
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "http:\/\/54.64.152.224\/users\/1"
+		},
+		{
+			"hits": "1",
+			"percent": "0.03%",
+			"data": "http:\/\/54.64.152.224\/users\/3"
+		}
+
+	],
+	"referring_sites": [
+		{
+			"hits": "2732",
+			"percent": "71.99%",
+			"data": "54.64.152.224"
+		},
+		{
+			"hits": "74",
+			"percent": "1.95%",
+			"data": "ec2-54-64-152-224.ap-northeast-1.compute.amazonaws.com"
+		},
+		{
+			"hits": "12",
+			"percent": "0.32%",
+			"data": "54.64.152.224:3001"
+		}
+
+	],
+	"keyphrases": [
+
+	],
+	"geolocation": [
+		{
+			"hits": "22",
+			"percent": "55.00%",
+			"data": "NA North America",
+			"items": [
+				{
+					"hits": "22",
+					"percent": "55.00%",
+					"data": "US United States"
+				}
+			]
+		},
+		{
+			"hits": "14",
+			"percent": "35.00%",
+			"data": "AS Asia",
+			"items": [
+				{
+					"hits": "10",
+					"percent": "25.00%",
+					"data": "JP Japan"
+				},
+				{
+					"hits": "3",
+					"percent": "7.50%",
+					"data": "CN China"
+				},
+				{
+					"hits": "1",
+					"percent": "2.50%",
+					"data": "KR Korea, Republic of"
+				}
+			]
+		},
+		{
+			"hits": "3",
+			"percent": "7.50%",
+			"data": "EU Europe",
+			"items": [
+				{
+					"hits": "1",
+					"percent": "2.50%",
+					"data": "CZ Czech Republic"
+				},
+				{
+					"hits": "1",
+					"percent": "2.50%",
+					"data": "NL Netherlands"
+				},
+				{
+					"hits": "1",
+					"percent": "2.50%",
+					"data": "CH Switzerland"
+				}
+			]
+		},
+		{
+			"hits": "1",
+			"percent": "2.50%",
+			"data": "SA South America",
+			"items": [
+				{
+					"hits": "1",
+					"percent": "2.50%",
+					"data": "AR Argentina"
+				}
+			]
+		}
+
+	],
+	"status_codes": [
+		{
+			"hits": "1837",
+			"percent": "48.41%",
+			"data": "3xx Redirection",
+			"items": [
+				{
+					"hits": "1776",
+					"percent": "46.80%",
+					"data": "304 - Not Modified: Resource has not been modified"
+				},
+				{
+					"hits": "61",
+					"percent": "1.61%",
+					"data": "302 - Moved Temporarily (redirect)"
+				}
+			]
+		},
+		{
+			"hits": "1405",
+			"percent": "37.02%",
+			"data": "2xx Success",
+			"items": [
+				{
+					"hits": "1405",
+					"percent": "37.02%",
+					"data": "200 - OK: The request sent by the client was successful"
+				}
+			]
+		},
+		{
+			"hits": "211",
+			"percent": "5.56%",
+			"data": "4xx Client Error",
+			"items": [
+				{
+					"hits": "151",
+					"percent": "3.98%",
+					"data": "404 - Document Not Found: Requested resource could not be found"
+				},
+				{
+					"hits": "37",
+					"percent": "0.97%",
+					"data": "400 - Bad Request: The syntax of the request is invalid"
+				},
+				{
+					"hits": "23",
+					"percent": "0.61%",
+					"data": "Unknown"
+				}
+			]
+		},
+		{
+			"hits": "174",
+			"percent": "4.58%",
+			"data": "5xx Server Error",
+			"items": [
+				{
+					"hits": "168",
+					"percent": "4.43%",
+					"data": "502 - Bad Gateway: Received an invalid response from the upstream"
+				},
+				{
+					"hits": "6",
+					"percent": "0.16%",
+					"data": "500 - Internal Server Error"
+				}
+			]
+		}
+
+	]
+
+};
+
+</script>

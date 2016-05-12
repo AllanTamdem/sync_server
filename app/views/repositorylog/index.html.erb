@@ -1,0 +1,93 @@
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Repository Access Logs</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-4">
+		<%= form_tag '/repository_log', :method => 'get' do %>
+			<div class="input-group">
+		      <%= text_field_tag :search, params[:search], class: " form-control" %>
+		      <%= hidden_field_tag :sort, params[:sort] %>
+		      <%= hidden_field_tag :direction, params[:direction] %>
+		      <span class="input-group-btn">
+		        <button class="btn btn-primary btn-sm" type="submit">Search</button>
+		      </span>
+		    </div>
+		<% end %>
+    </div>
+</div>
+
+<div class="row" style="margin-top:0">
+    <div class="col-lg-12">
+
+		<%= will_paginate @logs, renderer: BootstrapPagination::Rails %>
+		<table class="table table-hover table-condensed table-bordered table-striped">
+			<thead>
+				<tr>
+					<th></th>
+					<th><%= sortable "created_at", "Date" %></th>
+					<th><%= sortable "interface", "Interface" %></th>
+					<th><%= sortable "user_ip", "User IP" %></th>
+					<th><%= sortable "user", "User information" %></th>
+					<th><%= sortable "action_type", "Action Type" %></th>
+					<th><%= sortable "content", "Content" %></th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @logs.each { |log| -%>
+				    <tr>
+				    	<td><button data-id="<%= log.id %>" class="btn btn-primary btn-sm"><i class="fa fa-info-circle fa-lg"></i> Details</button></td>
+				    	<td><%= log.created_at %></td>
+				    	<td><%= log.interface %></td>
+				    	<td><%= log.user_ip %></td>
+				    	<td><%= truncate(log.user, length: 100) %></td>
+				    	<td><%= log.action_type %></td>
+				    	<td><%= truncate(log.content, length: 100) %></td>
+				    </tr>
+				<% } -%>		
+			</tbody>
+		</table>
+    </div>
+</div>
+
+<div id="modal-details" class="modal fade bs-example-modal-lg" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+    	<pre></pre>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+	$(function(){
+
+		$('button[data-id]').on('click', function(){
+			$.get('/repository_log/' + $(this).data('id'), function(data){
+				try{
+					data.user = JSON.parse(data.user);
+				}
+				catch(e){
+					data.user = data.user;
+				}
+				try{
+					data.content = JSON.parse(data.content);
+				}
+				catch(e){
+					data.content = data.content;
+				}
+				$('#modal-details pre').html(JSON.stringify(data, null, 2));
+				$('#modal-details').modal('show');
+			})
+		})
+
+	});
+</script>
+
+
+
