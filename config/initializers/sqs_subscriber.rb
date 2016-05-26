@@ -14,7 +14,8 @@ if Rails.env.production? && !Rails.const_defined?('Console')   # otherwise, each
 	sqs_client = Aws::SQS::Client.new(
 	  region: Rails.configuration.aws_region,
 	  access_key_id: Rails.configuration.aws_access_key_id,
-	  secret_access_key: Rails.configuration.aws_secret_access_key
+	  secret_access_key: Rails.configuration.aws_secret_access_key,
+	  http_proxy: Rails.configuration.http_proxy
 	)
 
 	queue_url = sqs_client.get_queue_url(queue_name: Rails.configuration.aws_sqs_s3_events).queue_url

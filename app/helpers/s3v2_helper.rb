@@ -407,7 +407,8 @@ module S3v2Helper
       Aws::S3::Client.new(
           access_key_id: s3_info[:aws_bucket_access_key_id],
           secret_access_key: s3_info[:aws_bucket_secret_access_key],
-          region: s3_info[:aws_bucket_region])
+          region: s3_info[:aws_bucket_region],
+          http_proxy: Rails.configuration.http_proxy) #INT ENV
     else #fake S3
       Aws::S3::Client.new(
           access_key_id: s3_info[:aws_bucket_access_key_id],
@@ -422,17 +423,17 @@ module S3v2Helper
 
   def get_s3_bucket s3_info
 
-    if Rails.configuration.aws_endpoint.nil?
-      Aws::S3::Resource.new(
-          access_key_id: s3_info[:aws_bucket_access_key_id],
-          secret_access_key: s3_info[:aws_bucket_secret_access_key],
-          region: s3_info[:aws_bucket_region])
-          .bucket(s3_info[:aws_bucket_name])
-    else #fake S3
-      Aws::S3::Resource.new(
-          client: get_s3_client(s3_info))
-          .bucket(s3_info[:aws_bucket_name])
-    end
+    # if Rails.configuration.aws_endpoint.nil?
+    #   Aws::S3::Resource.new(
+    #       access_key_id: s3_info[:aws_bucket_access_key_id],
+    #       secret_access_key: s3_info[:aws_bucket_secret_access_key],
+    #       region: s3_info[:aws_bucket_region])
+    #       .bucket(s3_info[:aws_bucket_name])
+    # else #fake S3
+    Aws::S3::Resource.new(
+        client: get_s3_client(s3_info))
+        .bucket(s3_info[:aws_bucket_name])
+    # end
 
   end
 

@@ -137,4 +137,7 @@ Rails.application.configure do
   config.tr069_pubsub_host = '52.16.103.212' 
   config.tr069_pubsub_port = 6379
 
+  #HTTP PROXY
+  config.http_proxy = 'http://vis:visiteur@www-cache.aql.fr:3128'
+
 end
