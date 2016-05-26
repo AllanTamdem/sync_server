@@ -134,7 +134,7 @@ Rails.application.configure do
 
   ### tr069 redis pub/sub
   config.tr069_pubsub_scope = 'pubsub_tr069'
-  config.tr069_pubsub_host = '52.16.103.212' 
+  config.tr069_pubsub_host = '127.0.0.1' 
   config.tr069_pubsub_port = 6379
 
   #HTTP PROXY
