@@ -113,6 +113,8 @@ Rails.application.configure do
   config.aws_region = 'eu-west-1'
   config.aws_bucket = 'orange-fcd'
   config.aws_sqs_s3_events = 'Orange-FCD_S3-events'
+
+  config.aws_endpoint =
   #### End AWS S3 config
 
   #### Logs
