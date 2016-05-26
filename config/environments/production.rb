@@ -114,7 +114,7 @@ Rails.application.configure do
   config.aws_bucket = 'orange-fcd'
   config.aws_sqs_s3_events = 'Orange-FCD_S3-events'
 
-  config.aws_endpoint =
+  config.aws_endpoint = nil
   #### End AWS S3 config
 
   #### Logs
