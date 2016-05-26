@@ -1,7 +1,7 @@
-pid: /home/ubuntu/sync-server/shared/tmp/pids/thin.pid
+pid: /home/atscom/sync-server/shared/tmp/pids/thin.pid
 timeout: 700
 wait: 30
-log: /home/ubuntu/sync-server/shared/log/thin.log
+log: /home/atscom/sync-server/shared/log/thin.log
 max_conns: 1024
 require: []
 max_persistent_conns: 512
@@ -9,7 +9,7 @@ servers: 3
 threaded: true
 no-epoll: true
 daemonize: true
-socket: /home/ubuntu/sync-server/shared/tmp/sockets/thin.sock
-chdir: /home/ubuntu/sync-server/current
+socket: /home/atscom/sync-server/shared/tmp/sockets/thin.sock
+chdir: /home/atscom/sync-server/current
 tag: sync-server-thin
 onebyone: true
