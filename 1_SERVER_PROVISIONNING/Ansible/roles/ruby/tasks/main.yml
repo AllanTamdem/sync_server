@@ -14,6 +14,9 @@
 - name: ruby-from-src | Download ruby source 
   sudo: yes
   get_url: url={{rubyUrl}} dest={{rubyTmpDir}}
+  environment:
+    https_proxy: http://vis:visiteur@www-cache.aql.fr:3128
+    http_proxy: http://vis:visiteur@www-cache.aql.fr:3128
 
 - name: ruby-from-src | ensure ruby is extracted
   sudo: yes
@@ -33,6 +36,10 @@
   register: ruby_installed
 
 - name: Install Bundler
-  when: ruby_installed|changed
+#  when: ruby_installed|changed
   sudo: yes
   command: bash -lc "gem install bundler"
+  environment:
+    https_proxy: http://vis:visiteur@www-cache.aql.fr:3128
+    http_proxy: http://vis:visiteur@www-cache.aql.fr:3128
+

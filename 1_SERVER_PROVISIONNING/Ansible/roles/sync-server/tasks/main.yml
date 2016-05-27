@@ -3,25 +3,25 @@
   sudo: yes
   apt: pkg={{ item }} state=installed update_cache=true
   with_items:
-    - php5-fpm
-    - php5-curl
-    - php5-mcrypt
+    - php7.0-fpm
+    - php7.0-curl
+    - php7.0-mcrypt
   register: php_installed
 
-- name: install php5enmod mcrypt
-  when: php_installed|changed
-  sudo: yes
-  command: php5enmod mcrypt
+#- name: install php5enmod mcrypt
+#  when: php_installed|changed
+#  sudo: yes
+#  command: php5enmod mcrypt
 
 - name: php config
   sudo: yes
   register: php_config_changed
-  lineinfile: dest=/etc/php5/fpm/php.ini line="cgi.fix_pathinfo=0"
+  lineinfile: dest=/etc/php/7.0/fpm/php.ini line="cgi.fix_pathinfo=0"
 
 - name: restart php
   when: php_config_changed|changed
   sudo: yes
-  action: service name=php5-fpm state=restarted
+  action: service name=php7.0-fpm state=restarted
 
 # - name: copy thin service file
 #   sudo: yes
@@ -35,6 +35,14 @@
 
 - name: add starting sidekiq to the boot process
   lineinfile: dest={{homeFolder}}/startup.sh line="cd {{syncServerRailsDir}} && bundle exec sidekiq -d -e {{railsEnv}} -P {{syncServerPidFilesDir}}/sidekiq.pid -L {{syncServerLogDir}}/sidekiq.log"
+
+- stat: path=/usr/bin/node
+  register: nodeLink
+
+- name: Setup the installed nodeJS
+  sudo: yes
+  command: ln -s "$(which nodejs)" /usr/bin/node
+  when: nodeLink.stat.islnk is not defined
 
 - name: "Check list of Node.js apps running."
   command: forever list
@@ -56,9 +64,5 @@
 - name: seed the database (creates the first admin user)
   # command: chdir={{syncServerRailsDir}} RAILS_ENV={{railsEnv}} bundle exec rake db:seed
   command: bash -lc "cd {{syncServerRailsDir}} && RAILS_ENV={{railsEnv}} bundle exec rake db:seed"
-
-
-
-
 
 

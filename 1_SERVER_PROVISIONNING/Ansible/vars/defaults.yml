@@ -30,7 +30,7 @@ postgresDbUser: rails-mediaspot-sync
 postgresDbPassword: dx9zrBnq
 
 # domain names
-domainWebSocket: wseurope.tapngo.orangejapan.jp
+domainWebSocket: websocket.syncserver.localhost
 domainTr069Mediapost: mseurope.tapngo.orangejapan.jp
 
 

@@ -1,0 +1,1291 @@
+# Logfile created on 2016-05-25 11:48:44 +0200 by logger.rb/53141
+  INFO ---------------------------------------------------------------------------
+  INFO START 2016-05-25 11:48:44 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [ba866eeb] Running /usr/bin/env mkdir -p /tmp/sync-server/ as atscom@localhost
+  INFO [ba866eeb] Finished in 0.400 seconds with exit status 0 (successful).
+  INFO Uploading /tmp/sync-server/git-ssh.sh 100.0%
+  INFO [8ad63faf] Running /usr/bin/env chmod +rx /tmp/sync-server/git-ssh.sh as atscom@localhost
+  INFO [8ad63faf] Finished in 0.010 seconds with exit status 0 (successful).
+  INFO [4ca97ce9] Running /usr/bin/env git ls-remote --heads git@github.com:AllanTamdem/sync_server.git as atscom@localhost
+  INFO ---------------------------------------------------------------------------
+  INFO START 2016-05-25 14:10:52 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [1a906ab9] Running /usr/bin/env mkdir -p /tmp/sync-server/ as atscom@localhost
+  INFO [1a906ab9] Finished in 0.367 seconds with exit status 0 (successful).
+  INFO Uploading /tmp/sync-server/git-ssh.sh 100.0%
+  INFO [6a8b4d36] Running /usr/bin/env chmod +rx /tmp/sync-server/git-ssh.sh as atscom@localhost
+  INFO [6a8b4d36] Finished in 0.009 seconds with exit status 0 (successful).
+  INFO [0e535304] Running /usr/bin/env git ls-remote --heads git@github.com:AllanTamdem/sync_server.git as atscom@localhost
+  INFO ---------------------------------------------------------------------------
+  INFO START 2016-05-25 14:15:52 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [37796186] Running /usr/bin/env mkdir -p /tmp/sync-server/ as atscom@localhost
+  INFO [37796186] Finished in 0.330 seconds with exit status 0 (successful).
+  INFO Uploading /tmp/sync-server/git-ssh.sh 100.0%
+  INFO [0f9a26c3] Running /usr/bin/env chmod +rx /tmp/sync-server/git-ssh.sh as atscom@localhost
+  INFO [0f9a26c3] Finished in 0.015 seconds with exit status 0 (successful).
+  INFO [a293878e] Running /usr/bin/env git ls-remote --heads git@github.com:AllanTamdem/sync_server.git as atscom@localhost
+  INFO ---------------------------------------------------------------------------
+  INFO START 2016-05-25 14:16:29 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [f42c00c8] Running /usr/bin/env mkdir -p /tmp/sync-server/ as atscom@localhost
+  INFO [f42c00c8] Finished in 0.327 seconds with exit status 0 (successful).
+  INFO Uploading /tmp/sync-server/git-ssh.sh 100.0%
+  INFO [83c68348] Running /usr/bin/env chmod +rx /tmp/sync-server/git-ssh.sh as atscom@localhost
+  INFO [83c68348] Finished in 0.011 seconds with exit status 0 (successful).
+  INFO [968d5872] Running /usr/bin/env git ls-remote --heads git@github.com:AllanTamdem/sync_server.git as atscom@localhost
+  INFO ---------------------------------------------------------------------------
+  INFO START 2016-05-25 14:22:40 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [bf0876fb] Running /usr/bin/env mkdir -p /tmp/sync-server/ as atscom@localhost
+  INFO [bf0876fb] Finished in 0.345 seconds with exit status 0 (successful).
+  INFO Uploading /tmp/sync-server/git-ssh.sh 100.0%
+  INFO [091f6227] Running /usr/bin/env chmod +rx /tmp/sync-server/git-ssh.sh as atscom@localhost
+  INFO [091f6227] Finished in 0.020 seconds with exit status 0 (successful).
+  INFO [b8dd0631] Running /usr/bin/env git ls-remote --heads https://github.com/AllanTamdem/sync_server.git as atscom@localhost
+  INFO ---------------------------------------------------------------------------
+  INFO START 2016-05-25 14:37:41 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [7d95fa1c] Running /usr/bin/env mkdir -p /tmp/sync-server/ as atscom@localhost
+  INFO [7d95fa1c] Finished in 0.377 seconds with exit status 0 (successful).
+  INFO Uploading /tmp/sync-server/git-ssh.sh 100.0%
+  INFO [276dd5d2] Running /usr/bin/env chmod +rx /tmp/sync-server/git-ssh.sh as atscom@localhost
+  INFO [276dd5d2] Finished in 0.019 seconds with exit status 0 (successful).
+  INFO [9afa8368] Running /usr/bin/env git ls-remote --heads https://github.com/AllanTamdem/sync_server.git as atscom@localhost
+  INFO ---------------------------------------------------------------------------
+  INFO START 2016-05-25 14:59:05 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [05746cf4] Running /usr/bin/env mkdir -p /tmp/sync-server/ as atscom@localhost
+  INFO [05746cf4] Finished in 0.345 seconds with exit status 0 (successful).
+  INFO Uploading /tmp/sync-server/git-ssh.sh 100.0%
+  INFO [357d8ff4] Running /usr/bin/env chmod +rx /tmp/sync-server/git-ssh.sh as atscom@localhost
+  INFO [357d8ff4] Finished in 0.024 seconds with exit status 0 (successful).
+  INFO [8ea482fa] Running /usr/bin/env git ls-remote --heads https://github.com/AllanTamdem/sync_server.git as atscom@localhost
+  INFO ---------------------------------------------------------------------------
+  INFO START 2016-05-25 15:16:36 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [18488064] Running /usr/bin/env mkdir -p /tmp/sync-server/ as atscom@localhost
+  INFO [18488064] Finished in 0.345 seconds with exit status 0 (successful).
+  INFO Uploading /tmp/sync-server/git-ssh.sh 100.0%
+  INFO [e9f6a107] Running /usr/bin/env chmod +rx /tmp/sync-server/git-ssh.sh as atscom@localhost
+  INFO [e9f6a107] Finished in 0.011 seconds with exit status 0 (successful).
+  INFO [ff8eba7d] Running /usr/bin/env git ls-remote --heads https://github.com/AllanTamdem/sync_server.git as atscom@localhost
+  INFO ---------------------------------------------------------------------------
+  INFO START 2016-05-25 15:18:49 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [7bf9c8ce] Running /usr/bin/env mkdir -p /tmp/sync-server/ as atscom@localhost
+  INFO [7bf9c8ce] Finished in 0.323 seconds with exit status 0 (successful).
+  INFO Uploading /tmp/sync-server/git-ssh.sh 100.0%
+  INFO [33fa5025] Running /usr/bin/env chmod +rx /tmp/sync-server/git-ssh.sh as atscom@localhost
+  INFO [33fa5025] Finished in 0.020 seconds with exit status 0 (successful).
+  INFO [3abef0e5] Running /usr/bin/env git ls-remote --heads https://github.com/AllanTamdem/sync_server.git as atscom@localhost
+  INFO ---------------------------------------------------------------------------
+  INFO START 2016-05-25 15:27:02 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [3064444f] Running /usr/bin/env mkdir -p /tmp/sync-server/ as atscom@localhost
+  INFO [3064444f] Finished in 0.351 seconds with exit status 0 (successful).
+  INFO Uploading /tmp/sync-server/git-ssh.sh 100.0%
+  INFO [befd7931] Running /usr/bin/env chmod +rx /tmp/sync-server/git-ssh.sh as atscom@localhost
+  INFO [befd7931] Finished in 0.025 seconds with exit status 0 (successful).
+  INFO [5deb93d2] Running /usr/bin/env git ls-remote --heads https://github.com/AllanTamdem/sync_server.git as atscom@localhost
+  INFO ---------------------------------------------------------------------------
+  INFO START 2016-05-25 15:29:09 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [ad834f5b] Running /usr/bin/env mkdir -p /tmp/sync-server/ as atscom@localhost
+  INFO [ad834f5b] Finished in 0.348 seconds with exit status 0 (successful).
+  INFO Uploading /tmp/sync-server/git-ssh.sh 100.0%
+  INFO [3a4b371a] Running /usr/bin/env chmod +rx /tmp/sync-server/git-ssh.sh as atscom@localhost
+  INFO [3a4b371a] Finished in 0.009 seconds with exit status 0 (successful).
+  INFO [d8831102] Running /usr/bin/env git ls-remote --heads https://github.com/AllanTamdem/sync_server.git as atscom@localhost
+  INFO [d8831102] Finished in 0.831 seconds with exit status 0 (successful).
+  INFO [ce5a212b] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared /home/atscom/sync-server/releases as atscom@localhost
+  INFO [ce5a212b] Finished in 0.010 seconds with exit status 0 (successful).
+  INFO [e6891c2a] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared/log /home/atscom/sync-server/shared/tmp/pids /home/atscom/sync-server/shared/tmp/cache /home/atscom/sync-server/shared/tmp/sockets /home/atscom/sync-server/shared/vendor/bundle /home/atscom/sync-server/shared/public/system /home/atscom/sync-server/shared/public/assets as atscom@localhost
+  INFO [e6891c2a] Finished in 0.025 seconds with exit status 0 (successful).
+  INFO [1674e0ef] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared/config as atscom@localhost
+  INFO [1674e0ef] Finished in 0.013 seconds with exit status 0 (successful).
+  INFO [bdc5e55f] Running /usr/bin/env git clone --mirror https://github.com/AllanTamdem/sync_server.git /home/atscom/sync-server/repo as atscom@localhost
+  INFO [bdc5e55f] Finished in 7.235 seconds with exit status 0 (successful).
+  INFO [0ac877e7] Running /usr/bin/env git remote update --prune as atscom@localhost
+  INFO [0ac877e7] Finished in 0.899 seconds with exit status 0 (successful).
+  INFO [393b4220] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160525132911 as atscom@localhost
+  INFO [393b4220] Finished in 0.011 seconds with exit status 0 (successful).
+  INFO [ee80d3a7] Running /usr/bin/env git archive master | tar -x -f - -C /home/atscom/sync-server/releases/20160525132911 as atscom@localhost
+  INFO [ee80d3a7] Finished in 0.370 seconds with exit status 0 (successful).
+  INFO [46d1645c] Running /usr/bin/env echo "8cc829472b19133d8e50c6d38b45742327252700" >> REVISION as atscom@localhost
+  INFO [46d1645c] Finished in 0.029 seconds with exit status 0 (successful).
+  INFO [7c113318] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160525132911/config as atscom@localhost
+  INFO [7c113318] Finished in 0.010 seconds with exit status 0 (successful).
+  INFO [516c87d9] Running /usr/bin/env rm /home/atscom/sync-server/releases/20160525132911/config/secrets.yml as atscom@localhost
+  INFO [516c87d9] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO [c68b86b4] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/config/secrets.yml /home/atscom/sync-server/releases/20160525132911/config/secrets.yml as atscom@localhost
+  INFO [c68b86b4] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO [37b3684b] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160525132911 /home/atscom/sync-server/releases/20160525132911/tmp /home/atscom/sync-server/releases/20160525132911/vendor /home/atscom/sync-server/releases/20160525132911/public as atscom@localhost
+  INFO [37b3684b] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO [ccd064b7] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160525132911/log as atscom@localhost
+  INFO [ccd064b7] Finished in 0.012 seconds with exit status 0 (successful).
+  INFO [479ebb1e] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/log /home/atscom/sync-server/releases/20160525132911/log as atscom@localhost
+  INFO [479ebb1e] Finished in 0.010 seconds with exit status 0 (successful).
+  INFO [45c1501f] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/pids /home/atscom/sync-server/releases/20160525132911/tmp/pids as atscom@localhost
+  INFO [45c1501f] Finished in 0.020 seconds with exit status 0 (successful).
+  INFO [7d2e5db2] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160525132911/tmp/cache as atscom@localhost
+  INFO [7d2e5db2] Finished in 0.058 seconds with exit status 0 (successful).
+  INFO [3593b762] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/cache /home/atscom/sync-server/releases/20160525132911/tmp/cache as atscom@localhost
+  INFO [3593b762] Finished in 0.021 seconds with exit status 0 (successful).
+  INFO [327d6d81] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/sockets /home/atscom/sync-server/releases/20160525132911/tmp/sockets as atscom@localhost
+  INFO [327d6d81] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO [71fd3680] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/vendor/bundle /home/atscom/sync-server/releases/20160525132911/vendor/bundle as atscom@localhost
+  INFO [71fd3680] Finished in 0.011 seconds with exit status 0 (successful).
+  INFO [99aaf346] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/public/system /home/atscom/sync-server/releases/20160525132911/public/system as atscom@localhost
+  INFO [99aaf346] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO [df52671d] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/public/assets /home/atscom/sync-server/releases/20160525132911/public/assets as atscom@localhost
+  INFO [df52671d] Finished in 0.011 seconds with exit status 0 (successful).
+  INFO [b936b22a] Running /usr/bin/env bundle install --path /home/atscom/sync-server/shared/bundle --without development test --deployment --quiet as atscom@localhost
+  INFO ---------------------------------------------------------------------------
+  INFO START 2016-05-25 15:49:13 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [32c724f3] Running /usr/bin/env mkdir -p /tmp/sync-server/ as atscom@localhost
+  INFO [32c724f3] Finished in 0.404 seconds with exit status 0 (successful).
+  INFO Uploading /tmp/sync-server/git-ssh.sh 100.0%
+  INFO [fd1f90f0] Running /usr/bin/env chmod +rx /tmp/sync-server/git-ssh.sh as atscom@localhost
+  INFO [fd1f90f0] Finished in 0.011 seconds with exit status 0 (successful).
+  INFO [1162d512] Running /usr/bin/env git ls-remote --heads https://github.com/AllanTamdem/sync_server.git as atscom@localhost
+  INFO [1162d512] Finished in 0.859 seconds with exit status 0 (successful).
+  INFO [d26ba19d] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared /home/atscom/sync-server/releases as atscom@localhost
+  INFO [d26ba19d] Finished in 0.010 seconds with exit status 0 (successful).
+  INFO [0752f44a] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared/log /home/atscom/sync-server/shared/tmp/pids /home/atscom/sync-server/shared/tmp/cache /home/atscom/sync-server/shared/tmp/sockets /home/atscom/sync-server/shared/vendor/bundle /home/atscom/sync-server/shared/public/system /home/atscom/sync-server/shared/public/assets as atscom@localhost
+  INFO [0752f44a] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO [84c4763a] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared/config as atscom@localhost
+  INFO [84c4763a] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /home/atscom/sync-server/repo
+  INFO [8904da85] Running /usr/bin/env git remote update --prune as atscom@localhost
+  INFO [8904da85] Finished in 1.133 seconds with exit status 0 (successful).
+  INFO [a6d1f37a] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160525134914 as atscom@localhost
+  INFO [a6d1f37a] Finished in 0.024 seconds with exit status 0 (successful).
+  INFO [632511ea] Running /usr/bin/env git archive master | tar -x -f - -C /home/atscom/sync-server/releases/20160525134914 as atscom@localhost
+  INFO [632511ea] Finished in 0.289 seconds with exit status 0 (successful).
+  INFO [19273909] Running /usr/bin/env echo "98769ef46625a01861794a04aae0e40b25cb4b63" >> REVISION as atscom@localhost
+  INFO [19273909] Finished in 0.019 seconds with exit status 0 (successful).
+  INFO [aaa55a09] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160525134914/config as atscom@localhost
+  INFO [aaa55a09] Finished in 0.017 seconds with exit status 0 (successful).
+  INFO [91b7dac0] Running /usr/bin/env rm /home/atscom/sync-server/releases/20160525134914/config/secrets.yml as atscom@localhost
+  INFO [91b7dac0] Finished in 0.009 seconds with exit status 0 (successful).
+  INFO [6357f8c6] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/config/secrets.yml /home/atscom/sync-server/releases/20160525134914/config/secrets.yml as atscom@localhost
+  INFO [6357f8c6] Finished in 0.025 seconds with exit status 0 (successful).
+  INFO [d085ef26] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160525134914 /home/atscom/sync-server/releases/20160525134914/tmp /home/atscom/sync-server/releases/20160525134914/vendor /home/atscom/sync-server/releases/20160525134914/public as atscom@localhost
+  INFO [d085ef26] Finished in 0.012 seconds with exit status 0 (successful).
+  INFO [1a9ac646] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160525134914/log as atscom@localhost
+  INFO [1a9ac646] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO [06e114b6] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/log /home/atscom/sync-server/releases/20160525134914/log as atscom@localhost
+  INFO [06e114b6] Finished in 0.016 seconds with exit status 0 (successful).
+  INFO [ec0d9b5e] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/pids /home/atscom/sync-server/releases/20160525134914/tmp/pids as atscom@localhost
+  INFO [ec0d9b5e] Finished in 0.020 seconds with exit status 0 (successful).
+  INFO [84f9cea2] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160525134914/tmp/cache as atscom@localhost
+  INFO [84f9cea2] Finished in 0.047 seconds with exit status 0 (successful).
+  INFO [1dc40958] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/cache /home/atscom/sync-server/releases/20160525134914/tmp/cache as atscom@localhost
+  INFO [1dc40958] Finished in 0.015 seconds with exit status 0 (successful).
+  INFO [f2e9da0a] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/sockets /home/atscom/sync-server/releases/20160525134914/tmp/sockets as atscom@localhost
+  INFO [f2e9da0a] Finished in 0.015 seconds with exit status 0 (successful).
+  INFO [984f02d8] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/vendor/bundle /home/atscom/sync-server/releases/20160525134914/vendor/bundle as atscom@localhost
+  INFO [984f02d8] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO [7919f1bf] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/public/system /home/atscom/sync-server/releases/20160525134914/public/system as atscom@localhost
+  INFO [7919f1bf] Finished in 0.030 seconds with exit status 0 (successful).
+  INFO [24ee3472] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/public/assets /home/atscom/sync-server/releases/20160525134914/public/assets as atscom@localhost
+  INFO [24ee3472] Finished in 0.017 seconds with exit status 0 (successful).
+  INFO [5aedf529] Running /usr/bin/env bundle install --path /home/atscom/sync-server/shared/bundle --without development test --deployment --quiet as atscom@localhost
+  INFO ---------------------------------------------------------------------------
+  INFO START 2016-05-25 16:12:37 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [cba01f95] Running /usr/bin/env mkdir -p /tmp/sync-server/ as atscom@localhost
+  INFO [cba01f95] Finished in 0.750 seconds with exit status 0 (successful).
+  INFO Uploading /tmp/sync-server/git-ssh.sh 100.0%
+  INFO [5100b9ac] Running /usr/bin/env chmod +rx /tmp/sync-server/git-ssh.sh as atscom@localhost
+  INFO [5100b9ac] Finished in 0.020 seconds with exit status 0 (successful).
+  INFO [beeaa6db] Running /usr/bin/env git ls-remote --heads https://github.com/AllanTamdem/sync_server.git as atscom@localhost
+  INFO [beeaa6db] Finished in 0.958 seconds with exit status 0 (successful).
+  INFO [40ebc79d] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared /home/atscom/sync-server/releases as atscom@localhost
+  INFO [40ebc79d] Finished in 0.009 seconds with exit status 0 (successful).
+  INFO [13140766] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared/log /home/atscom/sync-server/shared/tmp/pids /home/atscom/sync-server/shared/tmp/cache /home/atscom/sync-server/shared/tmp/sockets /home/atscom/sync-server/shared/vendor/bundle /home/atscom/sync-server/shared/public/system /home/atscom/sync-server/shared/public/assets as atscom@localhost
+  INFO [13140766] Finished in 0.027 seconds with exit status 0 (successful).
+  INFO [64b78f00] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared/config as atscom@localhost
+  INFO [64b78f00] Finished in 0.019 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /home/atscom/sync-server/repo
+  INFO [b13a2904] Running /usr/bin/env git remote update --prune as atscom@localhost
+  INFO [b13a2904] Finished in 1.114 seconds with exit status 0 (successful).
+  INFO [a0d2b418] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160525141239 as atscom@localhost
+  INFO [a0d2b418] Finished in 0.025 seconds with exit status 0 (successful).
+  INFO [932cfffc] Running /usr/bin/env git archive master | tar -x -f - -C /home/atscom/sync-server/releases/20160525141239 as atscom@localhost
+  INFO [932cfffc] Finished in 0.323 seconds with exit status 0 (successful).
+  INFO [58ea76b7] Running /usr/bin/env echo "52962727908b1d5049d1c829849c6f1aade5667b" >> REVISION as atscom@localhost
+  INFO [58ea76b7] Finished in 0.012 seconds with exit status 0 (successful).
+  INFO [5e2fffbb] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160525141239/config as atscom@localhost
+  INFO [5e2fffbb] Finished in 0.010 seconds with exit status 0 (successful).
+  INFO [91625c82] Running /usr/bin/env rm /home/atscom/sync-server/releases/20160525141239/config/secrets.yml as atscom@localhost
+  INFO [91625c82] Finished in 0.015 seconds with exit status 0 (successful).
+  INFO [f977ae57] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/config/secrets.yml /home/atscom/sync-server/releases/20160525141239/config/secrets.yml as atscom@localhost
+  INFO [f977ae57] Finished in 0.020 seconds with exit status 0 (successful).
+  INFO [e4d8525e] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160525141239 /home/atscom/sync-server/releases/20160525141239/tmp /home/atscom/sync-server/releases/20160525141239/vendor /home/atscom/sync-server/releases/20160525141239/public as atscom@localhost
+  INFO [e4d8525e] Finished in 0.011 seconds with exit status 0 (successful).
+  INFO [f1839544] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160525141239/log as atscom@localhost
+  INFO [f1839544] Finished in 0.015 seconds with exit status 0 (successful).
+  INFO [fa94cb88] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/log /home/atscom/sync-server/releases/20160525141239/log as atscom@localhost
+  INFO [fa94cb88] Finished in 0.011 seconds with exit status 0 (successful).
+  INFO [849448bb] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/pids /home/atscom/sync-server/releases/20160525141239/tmp/pids as atscom@localhost
+  INFO [849448bb] Finished in 0.019 seconds with exit status 0 (successful).
+  INFO [806bbe67] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160525141239/tmp/cache as atscom@localhost
+  INFO [806bbe67] Finished in 0.046 seconds with exit status 0 (successful).
+  INFO [3738cfdc] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/cache /home/atscom/sync-server/releases/20160525141239/tmp/cache as atscom@localhost
+  INFO [3738cfdc] Finished in 0.009 seconds with exit status 0 (successful).
+  INFO [36bcf6ee] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/sockets /home/atscom/sync-server/releases/20160525141239/tmp/sockets as atscom@localhost
+  INFO [36bcf6ee] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO [1031f759] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/vendor/bundle /home/atscom/sync-server/releases/20160525141239/vendor/bundle as atscom@localhost
+  INFO [1031f759] Finished in 0.012 seconds with exit status 0 (successful).
+  INFO [864054f7] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/public/system /home/atscom/sync-server/releases/20160525141239/public/system as atscom@localhost
+  INFO [864054f7] Finished in 0.012 seconds with exit status 0 (successful).
+  INFO [bbb6430f] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/public/assets /home/atscom/sync-server/releases/20160525141239/public/assets as atscom@localhost
+  INFO [bbb6430f] Finished in 0.015 seconds with exit status 0 (successful).
+  INFO [04ab000c] Running /usr/bin/env bundle install --path /home/atscom/sync-server/shared/bundle --without development test --deployment --quiet as atscom@localhost
+  INFO ---------------------------------------------------------------------------
+  INFO START 2016-05-25 16:20:13 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [2be7572d] Running /usr/bin/env mkdir -p /tmp/sync-server/ as atscom@localhost
+  INFO [2be7572d] Finished in 0.484 seconds with exit status 0 (successful).
+  INFO Uploading /tmp/sync-server/git-ssh.sh 100.0%
+  INFO [a5fb2865] Running /usr/bin/env chmod +rx /tmp/sync-server/git-ssh.sh as atscom@localhost
+  INFO [a5fb2865] Finished in 0.018 seconds with exit status 0 (successful).
+  INFO [6e349e1e] Running /usr/bin/env git ls-remote --heads https://github.com/AllanTamdem/sync_server.git as atscom@localhost
+  INFO [6e349e1e] Finished in 1.271 seconds with exit status 0 (successful).
+  INFO [9fbb4c85] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared /home/atscom/sync-server/releases as atscom@localhost
+  INFO [9fbb4c85] Finished in 0.008 seconds with exit status 0 (successful).
+  INFO [f2f5f2c2] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared/log /home/atscom/sync-server/shared/tmp/pids /home/atscom/sync-server/shared/tmp/cache /home/atscom/sync-server/shared/tmp/sockets /home/atscom/sync-server/shared/vendor/bundle /home/atscom/sync-server/shared/public/system /home/atscom/sync-server/shared/public/assets as atscom@localhost
+  INFO [f2f5f2c2] Finished in 0.008 seconds with exit status 0 (successful).
+  INFO [968a6aaa] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared/config as atscom@localhost
+  INFO [968a6aaa] Finished in 0.013 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /home/atscom/sync-server/repo
+  INFO [51b6c97f] Running /usr/bin/env git remote update --prune as atscom@localhost
+  INFO [51b6c97f] Finished in 1.237 seconds with exit status 0 (successful).
+  INFO [9e7675cd] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160525142015 as atscom@localhost
+  INFO [9e7675cd] Finished in 0.009 seconds with exit status 0 (successful).
+  INFO [8c53464c] Running /usr/bin/env git archive master | tar -x -f - -C /home/atscom/sync-server/releases/20160525142015 as atscom@localhost
+  INFO [8c53464c] Finished in 0.269 seconds with exit status 0 (successful).
+  INFO [caa528e7] Running /usr/bin/env echo "52962727908b1d5049d1c829849c6f1aade5667b" >> REVISION as atscom@localhost
+  INFO [caa528e7] Finished in 0.010 seconds with exit status 0 (successful).
+  INFO [a5685a70] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160525142015/config as atscom@localhost
+  INFO [a5685a70] Finished in 0.009 seconds with exit status 0 (successful).
+  INFO [4e5c361d] Running /usr/bin/env rm /home/atscom/sync-server/releases/20160525142015/config/secrets.yml as atscom@localhost
+  INFO [4e5c361d] Finished in 0.013 seconds with exit status 0 (successful).
+  INFO [38727c5d] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/config/secrets.yml /home/atscom/sync-server/releases/20160525142015/config/secrets.yml as atscom@localhost
+  INFO [38727c5d] Finished in 0.012 seconds with exit status 0 (successful).
+  INFO [056f41d4] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160525142015 /home/atscom/sync-server/releases/20160525142015/tmp /home/atscom/sync-server/releases/20160525142015/vendor /home/atscom/sync-server/releases/20160525142015/public as atscom@localhost
+  INFO [056f41d4] Finished in 0.030 seconds with exit status 0 (successful).
+  INFO [82c931b5] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160525142015/log as atscom@localhost
+  INFO [82c931b5] Finished in 0.021 seconds with exit status 0 (successful).
+  INFO [38d64d3b] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/log /home/atscom/sync-server/releases/20160525142015/log as atscom@localhost
+  INFO [38d64d3b] Finished in 0.021 seconds with exit status 0 (successful).
+  INFO [47a5ec95] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/pids /home/atscom/sync-server/releases/20160525142015/tmp/pids as atscom@localhost
+  INFO [47a5ec95] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO [423abf3e] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160525142015/tmp/cache as atscom@localhost
+  INFO [423abf3e] Finished in 0.045 seconds with exit status 0 (successful).
+  INFO [9c2ba9d3] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/cache /home/atscom/sync-server/releases/20160525142015/tmp/cache as atscom@localhost
+  INFO [9c2ba9d3] Finished in 0.015 seconds with exit status 0 (successful).
+  INFO [5b277e6b] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/sockets /home/atscom/sync-server/releases/20160525142015/tmp/sockets as atscom@localhost
+  INFO [5b277e6b] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO [2155ae2b] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/vendor/bundle /home/atscom/sync-server/releases/20160525142015/vendor/bundle as atscom@localhost
+  INFO [2155ae2b] Finished in 0.008 seconds with exit status 0 (successful).
+  INFO [9cf8ffb8] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/public/system /home/atscom/sync-server/releases/20160525142015/public/system as atscom@localhost
+  INFO [9cf8ffb8] Finished in 0.030 seconds with exit status 0 (successful).
+  INFO [8f1c84b9] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/public/assets /home/atscom/sync-server/releases/20160525142015/public/assets as atscom@localhost
+  INFO [8f1c84b9] Finished in 0.030 seconds with exit status 0 (successful).
+  INFO [e53488e3] Running /usr/bin/env bundle install --path /home/atscom/sync-server/shared/bundle --without development test --deployment --quiet as atscom@localhost
+  INFO ---------------------------------------------------------------------------
+  INFO START 2016-05-25 16:37:51 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [60d1d30b] Running /usr/bin/env mkdir -p /tmp/sync-server/ as atscom@localhost
+  INFO [60d1d30b] Finished in 0.342 seconds with exit status 0 (successful).
+  INFO Uploading /tmp/sync-server/git-ssh.sh 100.0%
+  INFO [99c3d791] Running /usr/bin/env chmod +rx /tmp/sync-server/git-ssh.sh as atscom@localhost
+  INFO [99c3d791] Finished in 0.007 seconds with exit status 0 (successful).
+  INFO [7386919d] Running /usr/bin/env git ls-remote --heads https://github.com/AllanTamdem/sync_server.git as atscom@localhost
+  INFO [7386919d] Finished in 0.780 seconds with exit status 0 (successful).
+  INFO [ec681f52] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared /home/atscom/sync-server/releases as atscom@localhost
+  INFO [ec681f52] Finished in 0.009 seconds with exit status 0 (successful).
+  INFO [5cbc5d97] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared/log /home/atscom/sync-server/shared/tmp/pids /home/atscom/sync-server/shared/tmp/cache /home/atscom/sync-server/shared/tmp/sockets /home/atscom/sync-server/shared/vendor/bundle /home/atscom/sync-server/shared/public/system /home/atscom/sync-server/shared/public/assets as atscom@localhost
+  INFO [5cbc5d97] Finished in 0.022 seconds with exit status 0 (successful).
+  INFO [85b57f62] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared/config as atscom@localhost
+  INFO [85b57f62] Finished in 0.016 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /home/atscom/sync-server/repo
+  INFO [b191af9f] Running /usr/bin/env git remote update --prune as atscom@localhost
+  INFO [b191af9f] Finished in 0.846 seconds with exit status 0 (successful).
+  INFO [30ddbf34] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160525143753 as atscom@localhost
+  INFO [30ddbf34] Finished in 0.012 seconds with exit status 0 (successful).
+  INFO [92f67221] Running /usr/bin/env git archive master | tar -x -f - -C /home/atscom/sync-server/releases/20160525143753 as atscom@localhost
+  INFO [92f67221] Finished in 0.272 seconds with exit status 0 (successful).
+  INFO [eef447d3] Running /usr/bin/env echo "52962727908b1d5049d1c829849c6f1aade5667b" >> REVISION as atscom@localhost
+  INFO [eef447d3] Finished in 0.024 seconds with exit status 0 (successful).
+  INFO [fca4e9b6] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160525143753/config as atscom@localhost
+  INFO [fca4e9b6] Finished in 0.013 seconds with exit status 0 (successful).
+  INFO [acf6cd3a] Running /usr/bin/env rm /home/atscom/sync-server/releases/20160525143753/config/secrets.yml as atscom@localhost
+  INFO [acf6cd3a] Finished in 0.026 seconds with exit status 0 (successful).
+  INFO [5b79af54] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/config/secrets.yml /home/atscom/sync-server/releases/20160525143753/config/secrets.yml as atscom@localhost
+  INFO [5b79af54] Finished in 0.009 seconds with exit status 0 (successful).
+  INFO [a133e17b] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160525143753 /home/atscom/sync-server/releases/20160525143753/tmp /home/atscom/sync-server/releases/20160525143753/vendor /home/atscom/sync-server/releases/20160525143753/public as atscom@localhost
+  INFO [a133e17b] Finished in 0.020 seconds with exit status 0 (successful).
+  INFO [0f499f13] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160525143753/log as atscom@localhost
+  INFO [0f499f13] Finished in 0.020 seconds with exit status 0 (successful).
+  INFO [381010de] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/log /home/atscom/sync-server/releases/20160525143753/log as atscom@localhost
+  INFO [381010de] Finished in 0.023 seconds with exit status 0 (successful).
+  INFO [f2ebfcbe] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/pids /home/atscom/sync-server/releases/20160525143753/tmp/pids as atscom@localhost
+  INFO [f2ebfcbe] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO [9c334ed8] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160525143753/tmp/cache as atscom@localhost
+  INFO [9c334ed8] Finished in 0.046 seconds with exit status 0 (successful).
+  INFO [f943887d] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/cache /home/atscom/sync-server/releases/20160525143753/tmp/cache as atscom@localhost
+  INFO [f943887d] Finished in 0.019 seconds with exit status 0 (successful).
+  INFO [5a9fab03] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/sockets /home/atscom/sync-server/releases/20160525143753/tmp/sockets as atscom@localhost
+  INFO [5a9fab03] Finished in 0.025 seconds with exit status 0 (successful).
+  INFO [65cf1f7f] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/vendor/bundle /home/atscom/sync-server/releases/20160525143753/vendor/bundle as atscom@localhost
+  INFO [65cf1f7f] Finished in 0.013 seconds with exit status 0 (successful).
+  INFO [18569a39] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/public/system /home/atscom/sync-server/releases/20160525143753/public/system as atscom@localhost
+  INFO [18569a39] Finished in 0.017 seconds with exit status 0 (successful).
+  INFO [8980fe66] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/public/assets /home/atscom/sync-server/releases/20160525143753/public/assets as atscom@localhost
+  INFO [8980fe66] Finished in 0.008 seconds with exit status 0 (successful).
+  INFO [5658275b] Running /usr/bin/env bundle install --path /home/atscom/sync-server/shared/bundle --without development test --deployment --quiet as atscom@localhost
+  INFO ---------------------------------------------------------------------------
+  INFO START 2016-05-25 17:06:22 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [6579a083] Running /usr/bin/env mkdir -p /tmp/sync-server/ as atscom@localhost
+  INFO [6579a083] Finished in 0.365 seconds with exit status 0 (successful).
+  INFO Uploading /tmp/sync-server/git-ssh.sh 100.0%
+  INFO [c3ca306a] Running /usr/bin/env chmod +rx /tmp/sync-server/git-ssh.sh as atscom@localhost
+  INFO [c3ca306a] Finished in 0.026 seconds with exit status 0 (successful).
+  INFO [38a01966] Running /usr/bin/env git ls-remote --heads https://github.com/AllanTamdem/sync_server.git as atscom@localhost
+  INFO [38a01966] Finished in 0.812 seconds with exit status 0 (successful).
+  INFO [b86789d5] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared /home/atscom/sync-server/releases as atscom@localhost
+  INFO [b86789d5] Finished in 0.015 seconds with exit status 0 (successful).
+  INFO [a21f9ce3] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared/log /home/atscom/sync-server/shared/tmp/pids /home/atscom/sync-server/shared/tmp/cache /home/atscom/sync-server/shared/tmp/sockets /home/atscom/sync-server/shared/vendor/bundle /home/atscom/sync-server/shared/public/system /home/atscom/sync-server/shared/public/assets as atscom@localhost
+  INFO [a21f9ce3] Finished in 0.017 seconds with exit status 0 (successful).
+  INFO [5822e0f3] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared/config as atscom@localhost
+  INFO [5822e0f3] Finished in 0.012 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /home/atscom/sync-server/repo
+  INFO [093ce587] Running /usr/bin/env git remote update --prune as atscom@localhost
+  INFO [093ce587] Finished in 0.881 seconds with exit status 0 (successful).
+  INFO [24936fa4] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160525150623 as atscom@localhost
+  INFO [24936fa4] Finished in 0.009 seconds with exit status 0 (successful).
+  INFO [abc71440] Running /usr/bin/env git archive master | tar -x -f - -C /home/atscom/sync-server/releases/20160525150623 as atscom@localhost
+  INFO [abc71440] Finished in 0.254 seconds with exit status 0 (successful).
+  INFO [8584e83f] Running /usr/bin/env echo "52962727908b1d5049d1c829849c6f1aade5667b" >> REVISION as atscom@localhost
+  INFO [8584e83f] Finished in 0.013 seconds with exit status 0 (successful).
+  INFO [f97aca26] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160525150623/config as atscom@localhost
+  INFO [f97aca26] Finished in 0.013 seconds with exit status 0 (successful).
+  INFO [eaaf9784] Running /usr/bin/env rm /home/atscom/sync-server/releases/20160525150623/config/secrets.yml as atscom@localhost
+  INFO [eaaf9784] Finished in 0.015 seconds with exit status 0 (successful).
+  INFO [84e24638] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/config/secrets.yml /home/atscom/sync-server/releases/20160525150623/config/secrets.yml as atscom@localhost
+  INFO [84e24638] Finished in 0.009 seconds with exit status 0 (successful).
+  INFO [911ff13f] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160525150623 /home/atscom/sync-server/releases/20160525150623/tmp /home/atscom/sync-server/releases/20160525150623/vendor /home/atscom/sync-server/releases/20160525150623/public as atscom@localhost
+  INFO [911ff13f] Finished in 0.034 seconds with exit status 0 (successful).
+  INFO [883b23aa] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160525150623/log as atscom@localhost
+  INFO [883b23aa] Finished in 0.023 seconds with exit status 0 (successful).
+  INFO [7b9383f4] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/log /home/atscom/sync-server/releases/20160525150623/log as atscom@localhost
+  INFO [7b9383f4] Finished in 0.024 seconds with exit status 0 (successful).
+  INFO [5491397e] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/pids /home/atscom/sync-server/releases/20160525150623/tmp/pids as atscom@localhost
+  INFO [5491397e] Finished in 0.012 seconds with exit status 0 (successful).
+  INFO [921a2ad4] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160525150623/tmp/cache as atscom@localhost
+  INFO [921a2ad4] Finished in 0.051 seconds with exit status 0 (successful).
+  INFO [e95e711c] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/cache /home/atscom/sync-server/releases/20160525150623/tmp/cache as atscom@localhost
+  INFO [e95e711c] Finished in 0.012 seconds with exit status 0 (successful).
+  INFO [b0deb278] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/sockets /home/atscom/sync-server/releases/20160525150623/tmp/sockets as atscom@localhost
+  INFO [b0deb278] Finished in 0.013 seconds with exit status 0 (successful).
+  INFO [a198342f] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/vendor/bundle /home/atscom/sync-server/releases/20160525150623/vendor/bundle as atscom@localhost
+  INFO [a198342f] Finished in 0.011 seconds with exit status 0 (successful).
+  INFO [2aed6f23] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/public/system /home/atscom/sync-server/releases/20160525150623/public/system as atscom@localhost
+  INFO [2aed6f23] Finished in 0.008 seconds with exit status 0 (successful).
+  INFO [932d779b] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/public/assets /home/atscom/sync-server/releases/20160525150623/public/assets as atscom@localhost
+  INFO [932d779b] Finished in 0.018 seconds with exit status 0 (successful).
+  INFO [280ee585] Running /usr/bin/env bundle install --path /home/atscom/sync-server/shared/bundle --without development test --deployment --quiet as atscom@localhost
+  INFO ---------------------------------------------------------------------------
+  INFO START 2016-05-25 17:11:45 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [cea32c59] Running /usr/bin/env mkdir -p /tmp/sync-server/ as atscom@localhost
+  INFO [cea32c59] Finished in 0.464 seconds with exit status 0 (successful).
+  INFO Uploading /tmp/sync-server/git-ssh.sh 100.0%
+  INFO [227b6767] Running /usr/bin/env chmod +rx /tmp/sync-server/git-ssh.sh as atscom@localhost
+  INFO [227b6767] Finished in 0.018 seconds with exit status 0 (successful).
+  INFO [5df7066a] Running /usr/bin/env git ls-remote --heads https://github.com/AllanTamdem/sync_server.git as atscom@localhost
+  INFO [5df7066a] Finished in 0.831 seconds with exit status 0 (successful).
+  INFO [5d1ccb15] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared /home/atscom/sync-server/releases as atscom@localhost
+  INFO [5d1ccb15] Finished in 0.011 seconds with exit status 0 (successful).
+  INFO [58556878] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared/log /home/atscom/sync-server/shared/tmp/pids /home/atscom/sync-server/shared/tmp/cache /home/atscom/sync-server/shared/tmp/sockets /home/atscom/sync-server/shared/vendor/bundle /home/atscom/sync-server/shared/public/system /home/atscom/sync-server/shared/public/assets as atscom@localhost
+  INFO [58556878] Finished in 0.016 seconds with exit status 0 (successful).
+  INFO [d1af1ec1] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared/config as atscom@localhost
+  INFO [d1af1ec1] Finished in 0.013 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /home/atscom/sync-server/repo
+  INFO [243b1e36] Running /usr/bin/env git remote update --prune as atscom@localhost
+  INFO [243b1e36] Finished in 0.857 seconds with exit status 0 (successful).
+  INFO [4e6592e7] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160525151147 as atscom@localhost
+  INFO [4e6592e7] Finished in 0.016 seconds with exit status 0 (successful).
+  INFO [33cc764b] Running /usr/bin/env git archive master | tar -x -f - -C /home/atscom/sync-server/releases/20160525151147 as atscom@localhost
+  INFO [33cc764b] Finished in 0.312 seconds with exit status 0 (successful).
+  INFO [682676e2] Running /usr/bin/env echo "52962727908b1d5049d1c829849c6f1aade5667b" >> REVISION as atscom@localhost
+  INFO [682676e2] Finished in 0.017 seconds with exit status 0 (successful).
+  INFO [34756f21] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160525151147/config as atscom@localhost
+  INFO [34756f21] Finished in 0.016 seconds with exit status 0 (successful).
+  INFO [a3ab2e3c] Running /usr/bin/env rm /home/atscom/sync-server/releases/20160525151147/config/secrets.yml as atscom@localhost
+  INFO [a3ab2e3c] Finished in 0.013 seconds with exit status 0 (successful).
+  INFO [e4b6a3eb] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/config/secrets.yml /home/atscom/sync-server/releases/20160525151147/config/secrets.yml as atscom@localhost
+  INFO [e4b6a3eb] Finished in 0.026 seconds with exit status 0 (successful).
+  INFO [819ec3f1] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160525151147 /home/atscom/sync-server/releases/20160525151147/tmp /home/atscom/sync-server/releases/20160525151147/vendor /home/atscom/sync-server/releases/20160525151147/public as atscom@localhost
+  INFO [819ec3f1] Finished in 0.018 seconds with exit status 0 (successful).
+  INFO [460615fb] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160525151147/log as atscom@localhost
+  INFO [460615fb] Finished in 0.018 seconds with exit status 0 (successful).
+  INFO [aaa6cd22] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/log /home/atscom/sync-server/releases/20160525151147/log as atscom@localhost
+  INFO [aaa6cd22] Finished in 0.009 seconds with exit status 0 (successful).
+  INFO [612ddfb5] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/pids /home/atscom/sync-server/releases/20160525151147/tmp/pids as atscom@localhost
+  INFO [612ddfb5] Finished in 0.010 seconds with exit status 0 (successful).
+  INFO [ae6c74c0] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160525151147/tmp/cache as atscom@localhost
+  INFO [ae6c74c0] Finished in 0.053 seconds with exit status 0 (successful).
+  INFO [a0c1af6d] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/cache /home/atscom/sync-server/releases/20160525151147/tmp/cache as atscom@localhost
+  INFO [a0c1af6d] Finished in 0.011 seconds with exit status 0 (successful).
+  INFO [efa5662b] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/sockets /home/atscom/sync-server/releases/20160525151147/tmp/sockets as atscom@localhost
+  INFO [efa5662b] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO [a74cb497] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/vendor/bundle /home/atscom/sync-server/releases/20160525151147/vendor/bundle as atscom@localhost
+  INFO [a74cb497] Finished in 0.011 seconds with exit status 0 (successful).
+  INFO [c9c60a68] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/public/system /home/atscom/sync-server/releases/20160525151147/public/system as atscom@localhost
+  INFO [c9c60a68] Finished in 0.013 seconds with exit status 0 (successful).
+  INFO [c1ca4902] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/public/assets /home/atscom/sync-server/releases/20160525151147/public/assets as atscom@localhost
+  INFO [c1ca4902] Finished in 0.016 seconds with exit status 0 (successful).
+  INFO [9d7811d0] Running /usr/bin/env bundle install --path /home/atscom/sync-server/shared/bundle --without development test --deployment --quiet as atscom@localhost
+  INFO [9d7811d0] Finished in 149.401 seconds with exit status 0 (successful).
+  INFO [cb977ea1] Running bundle exec rake assets:precompile as atscom@localhost
+  INFO ---------------------------------------------------------------------------
+  INFO START 2016-05-25 17:18:24 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [30126a67] Running /usr/bin/env mkdir -p /tmp/sync-server/ as atscom@localhost
+  INFO [30126a67] Finished in 1.243 seconds with exit status 0 (successful).
+  INFO Uploading /tmp/sync-server/git-ssh.sh 100.0%
+  INFO [cdad9924] Running /usr/bin/env chmod +rx /tmp/sync-server/git-ssh.sh as atscom@localhost
+  INFO [cdad9924] Finished in 0.024 seconds with exit status 0 (successful).
+  INFO [49bf64e9] Running /usr/bin/env git ls-remote --heads https://github.com/AllanTamdem/sync_server.git as atscom@localhost
+  INFO [49bf64e9] Finished in 1.236 seconds with exit status 0 (successful).
+  INFO [d06d6e1c] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared /home/atscom/sync-server/releases as atscom@localhost
+  INFO [d06d6e1c] Finished in 0.017 seconds with exit status 0 (successful).
+  INFO [53d623a6] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared/log /home/atscom/sync-server/shared/tmp/pids /home/atscom/sync-server/shared/tmp/cache /home/atscom/sync-server/shared/tmp/sockets /home/atscom/sync-server/shared/vendor/bundle /home/atscom/sync-server/shared/public/system /home/atscom/sync-server/shared/public/assets as atscom@localhost
+  INFO [53d623a6] Finished in 0.019 seconds with exit status 0 (successful).
+  INFO [206ecade] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared/config as atscom@localhost
+  INFO [206ecade] Finished in 0.021 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /home/atscom/sync-server/repo
+  INFO [ebf173ea] Running /usr/bin/env git remote update --prune as atscom@localhost
+  INFO [ebf173ea] Finished in 0.906 seconds with exit status 0 (successful).
+  INFO [7e497159] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160525151826 as atscom@localhost
+  INFO [7e497159] Finished in 0.010 seconds with exit status 0 (successful).
+  INFO [f5c092ef] Running /usr/bin/env git archive master | tar -x -f - -C /home/atscom/sync-server/releases/20160525151826 as atscom@localhost
+  INFO [f5c092ef] Finished in 0.699 seconds with exit status 0 (successful).
+  INFO [ac8f9fbc] Running /usr/bin/env echo "52962727908b1d5049d1c829849c6f1aade5667b" >> REVISION as atscom@localhost
+  INFO [ac8f9fbc] Finished in 0.023 seconds with exit status 0 (successful).
+  INFO [fcdd9e38] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160525151826/config as atscom@localhost
+  INFO [fcdd9e38] Finished in 0.016 seconds with exit status 0 (successful).
+  INFO [4f8ebc12] Running /usr/bin/env rm /home/atscom/sync-server/releases/20160525151826/config/secrets.yml as atscom@localhost
+  INFO [4f8ebc12] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO [894eef14] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/config/secrets.yml /home/atscom/sync-server/releases/20160525151826/config/secrets.yml as atscom@localhost
+  INFO [894eef14] Finished in 0.012 seconds with exit status 0 (successful).
+  INFO [1e77a712] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160525151826 /home/atscom/sync-server/releases/20160525151826/tmp /home/atscom/sync-server/releases/20160525151826/vendor /home/atscom/sync-server/releases/20160525151826/public as atscom@localhost
+  INFO [1e77a712] Finished in 0.017 seconds with exit status 0 (successful).
+  INFO [52dd35f4] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160525151826/log as atscom@localhost
+  INFO [52dd35f4] Finished in 0.027 seconds with exit status 0 (successful).
+  INFO [a1c96582] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/log /home/atscom/sync-server/releases/20160525151826/log as atscom@localhost
+  INFO [a1c96582] Finished in 0.013 seconds with exit status 0 (successful).
+  INFO [9d248627] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/pids /home/atscom/sync-server/releases/20160525151826/tmp/pids as atscom@localhost
+  INFO [9d248627] Finished in 0.018 seconds with exit status 0 (successful).
+  INFO [03fda532] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160525151826/tmp/cache as atscom@localhost
+  INFO [03fda532] Finished in 0.040 seconds with exit status 0 (successful).
+  INFO [32eba4ef] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/cache /home/atscom/sync-server/releases/20160525151826/tmp/cache as atscom@localhost
+  INFO [32eba4ef] Finished in 0.021 seconds with exit status 0 (successful).
+  INFO [f6160f81] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/sockets /home/atscom/sync-server/releases/20160525151826/tmp/sockets as atscom@localhost
+  INFO [f6160f81] Finished in 0.020 seconds with exit status 0 (successful).
+  INFO [dccbddb0] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/vendor/bundle /home/atscom/sync-server/releases/20160525151826/vendor/bundle as atscom@localhost
+  INFO [dccbddb0] Finished in 0.012 seconds with exit status 0 (successful).
+  INFO [9081dc73] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/public/system /home/atscom/sync-server/releases/20160525151826/public/system as atscom@localhost
+  INFO [9081dc73] Finished in 0.024 seconds with exit status 0 (successful).
+  INFO [5f4a5aa0] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/public/assets /home/atscom/sync-server/releases/20160525151826/public/assets as atscom@localhost
+  INFO [5f4a5aa0] Finished in 0.028 seconds with exit status 0 (successful).
+  INFO [44987a30] Running /usr/bin/env bundle install --path /home/atscom/sync-server/shared/bundle --without development test --deployment --quiet as atscom@localhost
+  INFO [44987a30] Finished in 1.308 seconds with exit status 0 (successful).
+  INFO [f44af0fd] Running bundle exec rake assets:precompile as atscom@localhost
+  INFO ---------------------------------------------------------------------------
+  INFO START 2016-05-25 17:59:36 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [f888f4d3] Running /usr/bin/env mkdir -p /tmp/sync-server/ as atscom@localhost
+  INFO [f888f4d3] Finished in 0.468 seconds with exit status 0 (successful).
+  INFO Uploading /tmp/sync-server/git-ssh.sh 100.0%
+  INFO [3d0ede09] Running /usr/bin/env chmod +rx /tmp/sync-server/git-ssh.sh as atscom@localhost
+  INFO [3d0ede09] Finished in 0.012 seconds with exit status 0 (successful).
+  INFO [d36d9693] Running /usr/bin/env git ls-remote --heads https://github.com/AllanTamdem/sync_server.git as atscom@localhost
+  INFO [d36d9693] Finished in 1.201 seconds with exit status 0 (successful).
+  INFO [d8f30d16] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared /home/atscom/sync-server/releases as atscom@localhost
+  INFO [d8f30d16] Finished in 0.010 seconds with exit status 0 (successful).
+  INFO [4c5bfcaa] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared/log /home/atscom/sync-server/shared/tmp/pids /home/atscom/sync-server/shared/tmp/cache /home/atscom/sync-server/shared/tmp/sockets /home/atscom/sync-server/shared/vendor/bundle /home/atscom/sync-server/shared/public/system /home/atscom/sync-server/shared/public/assets as atscom@localhost
+  INFO [4c5bfcaa] Finished in 0.019 seconds with exit status 0 (successful).
+  INFO [9d796883] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared/config as atscom@localhost
+  INFO [9d796883] Finished in 0.008 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /home/atscom/sync-server/repo
+  INFO [a14f0e43] Running /usr/bin/env git remote update --prune as atscom@localhost
+  INFO [a14f0e43] Finished in 1.838 seconds with exit status 0 (successful).
+  INFO [6f896880] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160525155938 as atscom@localhost
+  INFO [6f896880] Finished in 0.015 seconds with exit status 0 (successful).
+  INFO [75ffc7d7] Running /usr/bin/env git archive master | tar -x -f - -C /home/atscom/sync-server/releases/20160525155938 as atscom@localhost
+  INFO [75ffc7d7] Finished in 0.226 seconds with exit status 0 (successful).
+  INFO [b8d64c5b] Running /usr/bin/env echo "4786016b874011dd8773e929cdfcbd0e35cff201" >> REVISION as atscom@localhost
+  INFO [b8d64c5b] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO [27464448] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160525155938/config as atscom@localhost
+  INFO [27464448] Finished in 0.018 seconds with exit status 0 (successful).
+  INFO [daafb2f4] Running /usr/bin/env rm /home/atscom/sync-server/releases/20160525155938/config/secrets.yml as atscom@localhost
+  INFO [daafb2f4] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO [7d6fd3c5] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/config/secrets.yml /home/atscom/sync-server/releases/20160525155938/config/secrets.yml as atscom@localhost
+  INFO [7d6fd3c5] Finished in 0.029 seconds with exit status 0 (successful).
+  INFO [936e8201] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160525155938 /home/atscom/sync-server/releases/20160525155938/tmp /home/atscom/sync-server/releases/20160525155938/vendor /home/atscom/sync-server/releases/20160525155938/public as atscom@localhost
+  INFO [936e8201] Finished in 0.022 seconds with exit status 0 (successful).
+  INFO [6bde16ad] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160525155938/log as atscom@localhost
+  INFO [6bde16ad] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO [982fb2f3] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/log /home/atscom/sync-server/releases/20160525155938/log as atscom@localhost
+  INFO [982fb2f3] Finished in 0.024 seconds with exit status 0 (successful).
+  INFO [a4d2c4c4] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/pids /home/atscom/sync-server/releases/20160525155938/tmp/pids as atscom@localhost
+  INFO [a4d2c4c4] Finished in 0.010 seconds with exit status 0 (successful).
+  INFO [deee519b] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160525155938/tmp/cache as atscom@localhost
+  INFO [deee519b] Finished in 0.038 seconds with exit status 0 (successful).
+  INFO [0662f670] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/cache /home/atscom/sync-server/releases/20160525155938/tmp/cache as atscom@localhost
+  INFO [0662f670] Finished in 0.023 seconds with exit status 0 (successful).
+  INFO [deb7b829] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/sockets /home/atscom/sync-server/releases/20160525155938/tmp/sockets as atscom@localhost
+  INFO [deb7b829] Finished in 0.012 seconds with exit status 0 (successful).
+  INFO [935ba760] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/vendor/bundle /home/atscom/sync-server/releases/20160525155938/vendor/bundle as atscom@localhost
+  INFO [935ba760] Finished in 0.022 seconds with exit status 0 (successful).
+  INFO [2477d2b8] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/public/system /home/atscom/sync-server/releases/20160525155938/public/system as atscom@localhost
+  INFO [2477d2b8] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO [7bdcce79] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/public/assets /home/atscom/sync-server/releases/20160525155938/public/assets as atscom@localhost
+  INFO [7bdcce79] Finished in 0.016 seconds with exit status 0 (successful).
+  INFO [a93d78d5] Running /usr/bin/env bundle install --path /home/atscom/sync-server/shared/bundle --without development test --deployment --quiet as atscom@localhost
+  INFO [a93d78d5] Finished in 0.970 seconds with exit status 0 (successful).
+  INFO [a984b9e5] Running bundle exec rake assets:precompile as atscom@localhost
+  INFO ---------------------------------------------------------------------------
+  INFO START 2016-05-26 10:48:20 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [a3dd8385] Running /usr/bin/env mkdir -p /tmp/sync-server/ as atscom@localhost
+  INFO [a3dd8385] Finished in 0.587 seconds with exit status 0 (successful).
+  INFO Uploading /tmp/sync-server/git-ssh.sh 100.0%
+  INFO [72cc5224] Running /usr/bin/env chmod +rx /tmp/sync-server/git-ssh.sh as atscom@localhost
+  INFO [72cc5224] Finished in 0.010 seconds with exit status 0 (successful).
+  INFO [799632cc] Running /usr/bin/env git ls-remote --heads https://github.com/AllanTamdem/sync_server.git as atscom@localhost
+  INFO [799632cc] Finished in 0.788 seconds with exit status 0 (successful).
+  INFO [c48edb49] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared /home/atscom/sync-server/releases as atscom@localhost
+  INFO [c48edb49] Finished in 0.010 seconds with exit status 0 (successful).
+  INFO [0061664c] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared/log /home/atscom/sync-server/shared/tmp/pids /home/atscom/sync-server/shared/tmp/cache /home/atscom/sync-server/shared/tmp/sockets /home/atscom/sync-server/shared/vendor/bundle /home/atscom/sync-server/shared/public/system /home/atscom/sync-server/shared/public/assets as atscom@localhost
+  INFO [0061664c] Finished in 0.016 seconds with exit status 0 (successful).
+  INFO [0d590432] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared/config as atscom@localhost
+  INFO [0d590432] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /home/atscom/sync-server/repo
+  INFO [82b6bf24] Running /usr/bin/env git remote update --prune as atscom@localhost
+  INFO [82b6bf24] Finished in 1.545 seconds with exit status 0 (successful).
+  INFO [be1d9cd1] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160526084822 as atscom@localhost
+  INFO [be1d9cd1] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO [ce6fec82] Running /usr/bin/env git archive master | tar -x -f - -C /home/atscom/sync-server/releases/20160526084822 as atscom@localhost
+  INFO [ce6fec82] Finished in 0.298 seconds with exit status 0 (successful).
+  INFO [d2a63816] Running /usr/bin/env echo "df393a5c0e950a5777191bf495a9f6f4a13858bb" >> REVISION as atscom@localhost
+  INFO [d2a63816] Finished in 0.030 seconds with exit status 0 (successful).
+  INFO [dd90b994] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160526084822/config as atscom@localhost
+  INFO [dd90b994] Finished in 0.018 seconds with exit status 0 (successful).
+  INFO [e6ba1bdf] Running /usr/bin/env rm /home/atscom/sync-server/releases/20160526084822/config/secrets.yml as atscom@localhost
+  INFO [e6ba1bdf] Finished in 0.041 seconds with exit status 0 (successful).
+  INFO [61a3a52c] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/config/secrets.yml /home/atscom/sync-server/releases/20160526084822/config/secrets.yml as atscom@localhost
+  INFO [61a3a52c] Finished in 0.017 seconds with exit status 0 (successful).
+  INFO [19a08e7a] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160526084822 /home/atscom/sync-server/releases/20160526084822/tmp /home/atscom/sync-server/releases/20160526084822/vendor /home/atscom/sync-server/releases/20160526084822/public as atscom@localhost
+  INFO [19a08e7a] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO [b305740c] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160526084822/log as atscom@localhost
+  INFO [b305740c] Finished in 0.022 seconds with exit status 0 (successful).
+  INFO [6a45c562] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/log /home/atscom/sync-server/releases/20160526084822/log as atscom@localhost
+  INFO [6a45c562] Finished in 0.021 seconds with exit status 0 (successful).
+  INFO [0352e096] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/pids /home/atscom/sync-server/releases/20160526084822/tmp/pids as atscom@localhost
+  INFO [0352e096] Finished in 0.012 seconds with exit status 0 (successful).
+  INFO [96a997d8] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160526084822/tmp/cache as atscom@localhost
+  INFO [96a997d8] Finished in 0.056 seconds with exit status 0 (successful).
+  INFO [f9ab6d6b] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/cache /home/atscom/sync-server/releases/20160526084822/tmp/cache as atscom@localhost
+  INFO [f9ab6d6b] Finished in 0.020 seconds with exit status 0 (successful).
+  INFO [078049c6] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/sockets /home/atscom/sync-server/releases/20160526084822/tmp/sockets as atscom@localhost
+  INFO [078049c6] Finished in 0.026 seconds with exit status 0 (successful).
+  INFO [cbc03ca7] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/vendor/bundle /home/atscom/sync-server/releases/20160526084822/vendor/bundle as atscom@localhost
+  INFO [cbc03ca7] Finished in 0.012 seconds with exit status 0 (successful).
+  INFO [7120f6da] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/public/system /home/atscom/sync-server/releases/20160526084822/public/system as atscom@localhost
+  INFO [7120f6da] Finished in 0.020 seconds with exit status 0 (successful).
+  INFO [24b57953] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/public/assets /home/atscom/sync-server/releases/20160526084822/public/assets as atscom@localhost
+  INFO [24b57953] Finished in 0.016 seconds with exit status 0 (successful).
+  INFO [420d4877] Running /usr/bin/env bundle install --path /home/atscom/sync-server/shared/bundle --without development test --deployment --quiet as atscom@localhost
+  INFO [420d4877] Finished in 1.103 seconds with exit status 0 (successful).
+  INFO [89dfad76] Running bundle exec rake assets:precompile as atscom@localhost
+  INFO [89dfad76] Finished in 72.446 seconds with exit status 0 (successful).
+  INFO [764558f1] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160526084822/assets_manifest_backup as atscom@localhost
+  INFO [764558f1] Finished in 0.047 seconds with exit status 0 (successful).
+  INFO [6587cef5] Running /usr/bin/env cp /home/atscom/sync-server/releases/20160526084822/public/assets/.sprockets-manifest-6e8700e8049449c4817eea5d2e0e5962.json /home/atscom/sync-server/releases/20160526084822/assets_manifest_backup as atscom@localhost
+  INFO [6587cef5] Finished in 0.030 seconds with exit status 0 (successful).
+  INFO [deploy:migrate] Run `rake db:migrate`
+  INFO [d9c6aa93] Running bundle exec rake db:migrate as atscom@localhost
+  INFO [d9c6aa93] Finished in 11.949 seconds with exit status 0 (successful).
+  INFO [a7ba51c5] Running /usr/bin/env bundle exec whenever --update-crontab sync-server --set environment=production --roles=web,app,db as atscom@localhost
+  INFO [a7ba51c5] Finished in 1.103 seconds with exit status 0 (successful).
+  INFO [39a39181] Running /usr/bin/env ln -s /home/atscom/sync-server/releases/20160526084822 /home/atscom/sync-server/releases/current as atscom@localhost
+  INFO [39a39181] Finished in 0.081 seconds with exit status 0 (successful).
+  INFO [026e3f38] Running /usr/bin/env mv /home/atscom/sync-server/releases/current /home/atscom/sync-server as atscom@localhost
+  INFO [026e3f38] Finished in 0.200 seconds with exit status 0 (successful).
+  INFO [36ef6a91] Running bundle exec sidekiq --index 0 --pidfile /home/atscom/sync-server/shared/tmp/pids/sidekiq-0.pid --environment production --logfile /home/atscom/sync-server/shared/log/sidekiq.log --daemon as atscom@localhost
+  INFO [36ef6a91] Finished in 1.148 seconds with exit status 0 (successful).
+  INFO [50c37620] Running /etc/init.d/syncserver restart as atscom@localhost
+  INFO [50c37620] Finished in 1.218 seconds with exit status 0 (successful).
+  INFO Keeping 5 of 10 deployed releases on localhost
+  INFO [8c6f05d5] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160525132911 /home/atscom/sync-server/releases/20160525134914 /home/atscom/sync-server/releases/20160525141239 /home/atscom/sync-server/releases/20160525142015 /home/atscom/sync-server/releases/20160525143753 as atscom@localhost
+  INFO [8c6f05d5] Finished in 1.504 seconds with exit status 0 (successful).
+  INFO [56904494] Running /usr/bin/env echo "Branch master (at df393a5c0e950a5777191bf495a9f6f4a13858bb) deployed as release 20160526084822 by root" >> /home/atscom/sync-server/revisions.log as atscom@localhost
+  INFO [56904494] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO ---------------------------------------------------------------------------
+  INFO START 2016-05-26 11:00:46 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [106e50cf] Running /usr/bin/env mkdir -p /tmp/sync-server/ as atscom@localhost
+  INFO [106e50cf] Finished in 0.556 seconds with exit status 0 (successful).
+  INFO Uploading /tmp/sync-server/git-ssh.sh 100.0%
+  INFO [0fdb4700] Running /usr/bin/env chmod +rx /tmp/sync-server/git-ssh.sh as atscom@localhost
+  INFO [0fdb4700] Finished in 0.016 seconds with exit status 0 (successful).
+  INFO [7aad1424] Running /usr/bin/env git ls-remote --heads https://github.com/AllanTamdem/sync_server.git as atscom@localhost
+  INFO [7aad1424] Finished in 0.856 seconds with exit status 0 (successful).
+  INFO [6eab30a6] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared /home/atscom/sync-server/releases as atscom@localhost
+  INFO [6eab30a6] Finished in 0.015 seconds with exit status 0 (successful).
+  INFO [86828f28] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared/log /home/atscom/sync-server/shared/tmp/pids /home/atscom/sync-server/shared/tmp/cache /home/atscom/sync-server/shared/tmp/sockets /home/atscom/sync-server/shared/vendor/bundle /home/atscom/sync-server/shared/public/system /home/atscom/sync-server/shared/public/assets as atscom@localhost
+  INFO [86828f28] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO [56034695] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared/config as atscom@localhost
+  INFO [56034695] Finished in 0.022 seconds with exit status 0 (successful).
+  INFO [5aab05a5] Running bundle exec sidekiqctl quiet /home/atscom/sync-server/shared/tmp/pids/sidekiq-0.pid as atscom@localhost
+  INFO [5aab05a5] Finished in 0.701 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /home/atscom/sync-server/repo
+  INFO [4e647ecd] Running /usr/bin/env git remote update --prune as atscom@localhost
+  INFO [4e647ecd] Finished in 1.027 seconds with exit status 0 (successful).
+  INFO [10d3d777] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160526090048 as atscom@localhost
+  INFO [10d3d777] Finished in 0.011 seconds with exit status 0 (successful).
+  INFO [fe266aac] Running /usr/bin/env git archive master | tar -x -f - -C /home/atscom/sync-server/releases/20160526090048 as atscom@localhost
+  INFO [fe266aac] Finished in 0.357 seconds with exit status 0 (successful).
+  INFO [8edf5725] Running /usr/bin/env echo "85be570b9ee39c87dc008a09bf34bcf5f8bb8ca5" >> REVISION as atscom@localhost
+  INFO [8edf5725] Finished in 0.021 seconds with exit status 0 (successful).
+  INFO [0cfa72bf] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160526090048/config as atscom@localhost
+  INFO [0cfa72bf] Finished in 0.018 seconds with exit status 0 (successful).
+  INFO [82fb2ad4] Running /usr/bin/env rm /home/atscom/sync-server/releases/20160526090048/config/secrets.yml as atscom@localhost
+  INFO [82fb2ad4] Finished in 0.016 seconds with exit status 0 (successful).
+  INFO [f26aaf1b] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/config/secrets.yml /home/atscom/sync-server/releases/20160526090048/config/secrets.yml as atscom@localhost
+  INFO [f26aaf1b] Finished in 0.030 seconds with exit status 0 (successful).
+  INFO [2947339b] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160526090048 /home/atscom/sync-server/releases/20160526090048/tmp /home/atscom/sync-server/releases/20160526090048/vendor /home/atscom/sync-server/releases/20160526090048/public as atscom@localhost
+  INFO [2947339b] Finished in 0.008 seconds with exit status 0 (successful).
+  INFO [a58442c2] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160526090048/log as atscom@localhost
+  INFO [a58442c2] Finished in 0.028 seconds with exit status 0 (successful).
+  INFO [f1afbf6a] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/log /home/atscom/sync-server/releases/20160526090048/log as atscom@localhost
+  INFO [f1afbf6a] Finished in 0.018 seconds with exit status 0 (successful).
+  INFO [db35a604] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/pids /home/atscom/sync-server/releases/20160526090048/tmp/pids as atscom@localhost
+  INFO [db35a604] Finished in 0.016 seconds with exit status 0 (successful).
+  INFO [28db40a9] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160526090048/tmp/cache as atscom@localhost
+  INFO [28db40a9] Finished in 0.050 seconds with exit status 0 (successful).
+  INFO [a6de693f] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/cache /home/atscom/sync-server/releases/20160526090048/tmp/cache as atscom@localhost
+  INFO [a6de693f] Finished in 0.017 seconds with exit status 0 (successful).
+  INFO [9e7a89ca] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/sockets /home/atscom/sync-server/releases/20160526090048/tmp/sockets as atscom@localhost
+  INFO [9e7a89ca] Finished in 0.013 seconds with exit status 0 (successful).
+  INFO [a69fc6c2] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/vendor/bundle /home/atscom/sync-server/releases/20160526090048/vendor/bundle as atscom@localhost
+  INFO [a69fc6c2] Finished in 0.022 seconds with exit status 0 (successful).
+  INFO [88890725] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/public/system /home/atscom/sync-server/releases/20160526090048/public/system as atscom@localhost
+  INFO [88890725] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO [e20cf6d0] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/public/assets /home/atscom/sync-server/releases/20160526090048/public/assets as atscom@localhost
+  INFO [e20cf6d0] Finished in 0.016 seconds with exit status 0 (successful).
+  INFO [f9ab07af] Running /usr/bin/env bundle install --path /home/atscom/sync-server/shared/bundle --without development test --deployment --quiet as atscom@localhost
+  INFO [f9ab07af] Finished in 1.171 seconds with exit status 0 (successful).
+  INFO [55f31303] Running bundle exec rake assets:precompile as atscom@localhost
+  INFO [55f31303] Finished in 30.950 seconds with exit status 0 (successful).
+  INFO [75322ede] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160526090048/assets_manifest_backup as atscom@localhost
+  INFO [75322ede] Finished in 0.031 seconds with exit status 0 (successful).
+  INFO [b2cc6ec9] Running /usr/bin/env cp /home/atscom/sync-server/releases/20160526090048/public/assets/.sprockets-manifest-6e8700e8049449c4817eea5d2e0e5962.json /home/atscom/sync-server/releases/20160526090048/assets_manifest_backup as atscom@localhost
+  INFO [b2cc6ec9] Finished in 0.029 seconds with exit status 0 (successful).
+  INFO [deploy:migrate] Run `rake db:migrate`
+  INFO [2754ce3e] Running bundle exec rake db:migrate as atscom@localhost
+  INFO [2754ce3e] Finished in 7.737 seconds with exit status 0 (successful).
+  INFO [f0d36b28] Running /usr/bin/env bundle exec whenever --update-crontab sync-server --set environment=production --roles=web,app,db as atscom@localhost
+  INFO [f0d36b28] Finished in 0.975 seconds with exit status 0 (successful).
+  INFO [4cf07064] Running bundle exec sidekiqctl stop /home/atscom/sync-server/shared/tmp/pids/sidekiq-0.pid 10 as atscom@localhost
+  INFO [4cf07064] Finished in 10.874 seconds with exit status 0 (successful).
+  INFO [f5e9d3bd] Running /usr/bin/env ln -s /home/atscom/sync-server/releases/20160526090048 /home/atscom/sync-server/releases/current as atscom@localhost
+  INFO [f5e9d3bd] Finished in 0.035 seconds with exit status 0 (successful).
+  INFO [972ba1fa] Running /usr/bin/env mv /home/atscom/sync-server/releases/current /home/atscom/sync-server as atscom@localhost
+  INFO [972ba1fa] Finished in 0.028 seconds with exit status 0 (successful).
+  INFO [db9c0c30] Running bundle exec sidekiq --index 0 --pidfile /home/atscom/sync-server/shared/tmp/pids/sidekiq-0.pid --environment production --logfile /home/atscom/sync-server/shared/log/sidekiq.log --daemon as atscom@localhost
+  INFO [db9c0c30] Finished in 1.056 seconds with exit status 0 (successful).
+  INFO [b545eea8] Running /etc/init.d/syncserver restart as atscom@localhost
+  INFO [b545eea8] Finished in 26.395 seconds with exit status 0 (successful).
+  INFO Keeping 5 of 6 deployed releases on localhost
+  INFO [b97e7355] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160525150623 as atscom@localhost
+  INFO [b97e7355] Finished in 0.341 seconds with exit status 0 (successful).
+  INFO [dbf4936d] Running /usr/bin/env echo "Branch master (at 85be570b9ee39c87dc008a09bf34bcf5f8bb8ca5) deployed as release 20160526090048 by root" >> /home/atscom/sync-server/revisions.log as atscom@localhost
+  INFO [dbf4936d] Finished in 0.026 seconds with exit status 0 (successful).
+  INFO ---------------------------------------------------------------------------
+  INFO START 2016-05-26 15:27:50 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [56f3793d] Running /usr/bin/env mkdir -p /tmp/sync-server/ as atscom@localhost
+  INFO [56f3793d] Finished in 0.452 seconds with exit status 0 (successful).
+  INFO Uploading /tmp/sync-server/git-ssh.sh 100.0%
+  INFO [7897bf41] Running /usr/bin/env chmod +rx /tmp/sync-server/git-ssh.sh as atscom@localhost
+  INFO [7897bf41] Finished in 0.016 seconds with exit status 0 (successful).
+  INFO [f3c9a312] Running /usr/bin/env git ls-remote --heads https://github.com/AllanTamdem/sync_server.git as atscom@localhost
+  INFO [f3c9a312] Finished in 1.019 seconds with exit status 0 (successful).
+  INFO [56aebae5] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared /home/atscom/sync-server/releases as atscom@localhost
+  INFO [56aebae5] Finished in 0.010 seconds with exit status 0 (successful).
+  INFO [ed9c4c50] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared/log /home/atscom/sync-server/shared/tmp/pids /home/atscom/sync-server/shared/tmp/cache /home/atscom/sync-server/shared/tmp/sockets /home/atscom/sync-server/shared/vendor/bundle /home/atscom/sync-server/shared/public/system /home/atscom/sync-server/shared/public/assets as atscom@localhost
+  INFO [ed9c4c50] Finished in 0.032 seconds with exit status 0 (successful).
+  INFO [81d15fee] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared/config as atscom@localhost
+  INFO [81d15fee] Finished in 0.016 seconds with exit status 0 (successful).
+  INFO [3e8f4ece] Running bundle exec sidekiqctl quiet /home/atscom/sync-server/shared/tmp/pids/sidekiq-0.pid as atscom@localhost
+  INFO [3e8f4ece] Finished in 0.838 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /home/atscom/sync-server/repo
+  INFO [311f2926] Running /usr/bin/env git remote update --prune as atscom@localhost
+  INFO [311f2926] Finished in 1.432 seconds with exit status 0 (successful).
+  INFO [cb80e180] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160526132753 as atscom@localhost
+  INFO [cb80e180] Finished in 0.050 seconds with exit status 0 (successful).
+  INFO [1ed6ef0e] Running /usr/bin/env git archive master | tar -x -f - -C /home/atscom/sync-server/releases/20160526132753 as atscom@localhost
+  INFO [1ed6ef0e] Finished in 0.590 seconds with exit status 0 (successful).
+  INFO [d236a7f6] Running /usr/bin/env echo "85be570b9ee39c87dc008a09bf34bcf5f8bb8ca5" >> REVISION as atscom@localhost
+  INFO [d236a7f6] Finished in 0.027 seconds with exit status 0 (successful).
+  INFO [d5c1945b] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160526132753/config as atscom@localhost
+  INFO [d5c1945b] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO [dcc57d2c] Running /usr/bin/env rm /home/atscom/sync-server/releases/20160526132753/config/secrets.yml as atscom@localhost
+  INFO [dcc57d2c] Finished in 0.016 seconds with exit status 0 (successful).
+  INFO [ad13d729] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/config/secrets.yml /home/atscom/sync-server/releases/20160526132753/config/secrets.yml as atscom@localhost
+  INFO [ad13d729] Finished in 0.031 seconds with exit status 0 (successful).
+  INFO [200ebaf4] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160526132753 /home/atscom/sync-server/releases/20160526132753/tmp /home/atscom/sync-server/releases/20160526132753/vendor /home/atscom/sync-server/releases/20160526132753/public as atscom@localhost
+  INFO [200ebaf4] Finished in 0.025 seconds with exit status 0 (successful).
+  INFO [4b814eb9] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160526132753/log as atscom@localhost
+  INFO [4b814eb9] Finished in 0.010 seconds with exit status 0 (successful).
+  INFO [80e54510] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/log /home/atscom/sync-server/releases/20160526132753/log as atscom@localhost
+  INFO [80e54510] Finished in 0.013 seconds with exit status 0 (successful).
+  INFO [de7157a6] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/pids /home/atscom/sync-server/releases/20160526132753/tmp/pids as atscom@localhost
+  INFO [de7157a6] Finished in 0.010 seconds with exit status 0 (successful).
+  INFO [0089ad47] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160526132753/tmp/cache as atscom@localhost
+  INFO [0089ad47] Finished in 0.056 seconds with exit status 0 (successful).
+  INFO [045bc2b7] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/cache /home/atscom/sync-server/releases/20160526132753/tmp/cache as atscom@localhost
+  INFO [045bc2b7] Finished in 0.008 seconds with exit status 0 (successful).
+  INFO [412b2546] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/sockets /home/atscom/sync-server/releases/20160526132753/tmp/sockets as atscom@localhost
+  INFO [412b2546] Finished in 0.015 seconds with exit status 0 (successful).
+  INFO [8dc71c66] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/vendor/bundle /home/atscom/sync-server/releases/20160526132753/vendor/bundle as atscom@localhost
+  INFO [8dc71c66] Finished in 0.028 seconds with exit status 0 (successful).
+  INFO [57c5bb5f] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/public/system /home/atscom/sync-server/releases/20160526132753/public/system as atscom@localhost
+  INFO [57c5bb5f] Finished in 0.010 seconds with exit status 0 (successful).
+  INFO [6004b6f4] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/public/assets /home/atscom/sync-server/releases/20160526132753/public/assets as atscom@localhost
+  INFO [6004b6f4] Finished in 0.021 seconds with exit status 0 (successful).
+  INFO [1febfbec] Running /usr/bin/env bundle install --path /home/atscom/sync-server/shared/bundle --without development test --deployment --quiet as atscom@localhost
+  INFO [1febfbec] Finished in 1.503 seconds with exit status 0 (successful).
+  INFO [1c200fdb] Running bundle exec rake assets:precompile as atscom@localhost
+  INFO [1c200fdb] Finished in 33.193 seconds with exit status 0 (successful).
+  INFO [01752d10] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160526132753/assets_manifest_backup as atscom@localhost
+  INFO [01752d10] Finished in 0.031 seconds with exit status 0 (successful).
+  INFO [a40e9340] Running /usr/bin/env cp /home/atscom/sync-server/releases/20160526132753/public/assets/.sprockets-manifest-6e8700e8049449c4817eea5d2e0e5962.json /home/atscom/sync-server/releases/20160526132753/assets_manifest_backup as atscom@localhost
+  INFO [a40e9340] Finished in 0.033 seconds with exit status 0 (successful).
+  INFO [deploy:migrate] Run `rake db:migrate`
+  INFO [74243445] Running bundle exec rake db:migrate as atscom@localhost
+  INFO [74243445] Finished in 6.233 seconds with exit status 0 (successful).
+  INFO [dca1a85b] Running /usr/bin/env bundle exec whenever --update-crontab sync-server --set environment=production --roles=web,app,db as atscom@localhost
+  INFO [dca1a85b] Finished in 0.859 seconds with exit status 0 (successful).
+  INFO [6736638c] Running bundle exec sidekiqctl stop /home/atscom/sync-server/shared/tmp/pids/sidekiq-0.pid 10 as atscom@localhost
+  INFO [6736638c] Finished in 10.770 seconds with exit status 0 (successful).
+  INFO [09cecccc] Running /usr/bin/env ln -s /home/atscom/sync-server/releases/20160526132753 /home/atscom/sync-server/releases/current as atscom@localhost
+  INFO [09cecccc] Finished in 0.049 seconds with exit status 0 (successful).
+  INFO [d654f605] Running /usr/bin/env mv /home/atscom/sync-server/releases/current /home/atscom/sync-server as atscom@localhost
+  INFO [d654f605] Finished in 0.036 seconds with exit status 0 (successful).
+  INFO [66ecd872] Running bundle exec sidekiq --index 0 --pidfile /home/atscom/sync-server/shared/tmp/pids/sidekiq-0.pid --environment production --logfile /home/atscom/sync-server/shared/log/sidekiq.log --daemon as atscom@localhost
+  INFO [66ecd872] Finished in 1.013 seconds with exit status 0 (successful).
+  INFO [bc4477f2] Running /etc/init.d/syncserver restart as atscom@localhost
+  INFO [bc4477f2] Finished in 9.446 seconds with exit status 0 (successful).
+  INFO Keeping 5 of 6 deployed releases on localhost
+  INFO [67b1faab] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160525151147 as atscom@localhost
+  INFO [67b1faab] Finished in 0.421 seconds with exit status 0 (successful).
+  INFO [871414d8] Running /usr/bin/env echo "Branch master (at 85be570b9ee39c87dc008a09bf34bcf5f8bb8ca5) deployed as release 20160526132753 by root" >> /home/atscom/sync-server/revisions.log as atscom@localhost
+  INFO [871414d8] Finished in 0.025 seconds with exit status 0 (successful).
+  INFO ---------------------------------------------------------------------------
+  INFO START 2016-05-26 16:02:53 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [39500140] Running /usr/bin/env mkdir -p /tmp/sync-server/ as atscom@localhost
+  INFO [39500140] Finished in 0.372 seconds with exit status 0 (successful).
+  INFO Uploading /tmp/sync-server/git-ssh.sh 100.0%
+  INFO [e374b328] Running /usr/bin/env chmod +rx /tmp/sync-server/git-ssh.sh as atscom@localhost
+  INFO [e374b328] Finished in 0.011 seconds with exit status 0 (successful).
+  INFO [b4e72b4e] Running /usr/bin/env git ls-remote --heads https://github.com/AllanTamdem/sync_server.git as atscom@localhost
+  INFO [b4e72b4e] Finished in 0.824 seconds with exit status 0 (successful).
+  INFO [d774d1ce] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared /home/atscom/sync-server/releases as atscom@localhost
+  INFO [d774d1ce] Finished in 0.010 seconds with exit status 0 (successful).
+  INFO [6f9331c6] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared/log /home/atscom/sync-server/shared/tmp/pids /home/atscom/sync-server/shared/tmp/cache /home/atscom/sync-server/shared/tmp/sockets /home/atscom/sync-server/shared/vendor/bundle /home/atscom/sync-server/shared/public/system /home/atscom/sync-server/shared/public/assets as atscom@localhost
+  INFO [6f9331c6] Finished in 0.017 seconds with exit status 0 (successful).
+  INFO [2189332b] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared/config as atscom@localhost
+  INFO [2189332b] Finished in 0.011 seconds with exit status 0 (successful).
+  INFO [31b4cd9f] Running bundle exec sidekiqctl quiet /home/atscom/sync-server/shared/tmp/pids/sidekiq-0.pid as atscom@localhost
+  INFO [31b4cd9f] Finished in 0.713 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /home/atscom/sync-server/repo
+  INFO [27914a61] Running /usr/bin/env git remote update --prune as atscom@localhost
+  INFO [27914a61] Finished in 1.131 seconds with exit status 0 (successful).
+  INFO [fb0507ba] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160526140255 as atscom@localhost
+  INFO [fb0507ba] Finished in 0.017 seconds with exit status 0 (successful).
+  INFO [9224161e] Running /usr/bin/env git archive master | tar -x -f - -C /home/atscom/sync-server/releases/20160526140255 as atscom@localhost
+  INFO [9224161e] Finished in 0.419 seconds with exit status 0 (successful).
+  INFO [8d18d2c9] Running /usr/bin/env echo "534155f6fef7ca45acff888dbe20debbfb85aa9a" >> REVISION as atscom@localhost
+  INFO [8d18d2c9] Finished in 0.018 seconds with exit status 0 (successful).
+  INFO [47f74bd4] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160526140255/config as atscom@localhost
+  INFO [47f74bd4] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO [2f15c22b] Running /usr/bin/env rm /home/atscom/sync-server/releases/20160526140255/config/secrets.yml as atscom@localhost
+  INFO [2f15c22b] Finished in 0.025 seconds with exit status 0 (successful).
+  INFO [43ba7935] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/config/secrets.yml /home/atscom/sync-server/releases/20160526140255/config/secrets.yml as atscom@localhost
+  INFO [43ba7935] Finished in 0.020 seconds with exit status 0 (successful).
+  INFO [c3d901bd] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160526140255 /home/atscom/sync-server/releases/20160526140255/tmp /home/atscom/sync-server/releases/20160526140255/vendor /home/atscom/sync-server/releases/20160526140255/public as atscom@localhost
+  INFO [c3d901bd] Finished in 0.011 seconds with exit status 0 (successful).
+  INFO [4a654587] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160526140255/log as atscom@localhost
+  INFO [4a654587] Finished in 0.010 seconds with exit status 0 (successful).
+  INFO [263dfb7a] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/log /home/atscom/sync-server/releases/20160526140255/log as atscom@localhost
+  INFO [263dfb7a] Finished in 0.026 seconds with exit status 0 (successful).
+  INFO [bae6b722] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/pids /home/atscom/sync-server/releases/20160526140255/tmp/pids as atscom@localhost
+  INFO [bae6b722] Finished in 0.027 seconds with exit status 0 (successful).
+  INFO [2e1c2e1d] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160526140255/tmp/cache as atscom@localhost
+  INFO [2e1c2e1d] Finished in 0.066 seconds with exit status 0 (successful).
+  INFO [5a0d9aa5] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/cache /home/atscom/sync-server/releases/20160526140255/tmp/cache as atscom@localhost
+  INFO [5a0d9aa5] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO [50300fa2] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/sockets /home/atscom/sync-server/releases/20160526140255/tmp/sockets as atscom@localhost
+  INFO [50300fa2] Finished in 0.009 seconds with exit status 0 (successful).
+  INFO [42afbafa] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/vendor/bundle /home/atscom/sync-server/releases/20160526140255/vendor/bundle as atscom@localhost
+  INFO [42afbafa] Finished in 0.018 seconds with exit status 0 (successful).
+  INFO [07b0ab06] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/public/system /home/atscom/sync-server/releases/20160526140255/public/system as atscom@localhost
+  INFO [07b0ab06] Finished in 0.006 seconds with exit status 0 (successful).
+  INFO [3d8c23d6] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/public/assets /home/atscom/sync-server/releases/20160526140255/public/assets as atscom@localhost
+  INFO [3d8c23d6] Finished in 0.024 seconds with exit status 0 (successful).
+  INFO [b2e023fc] Running /usr/bin/env bundle install --path /home/atscom/sync-server/shared/bundle --without development test --deployment --quiet as atscom@localhost
+  INFO [b2e023fc] Finished in 1.409 seconds with exit status 0 (successful).
+  INFO [e218a2cc] Running bundle exec rake assets:precompile as atscom@localhost
+  INFO [e218a2cc] Finished in 22.907 seconds with exit status 0 (successful).
+  INFO [22a378f1] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160526140255/assets_manifest_backup as atscom@localhost
+  INFO [22a378f1] Finished in 0.051 seconds with exit status 0 (successful).
+  INFO [8ffa668f] Running /usr/bin/env cp /home/atscom/sync-server/releases/20160526140255/public/assets/.sprockets-manifest-6e8700e8049449c4817eea5d2e0e5962.json /home/atscom/sync-server/releases/20160526140255/assets_manifest_backup as atscom@localhost
+  INFO [8ffa668f] Finished in 0.036 seconds with exit status 0 (successful).
+  INFO [deploy:migrate] Run `rake db:migrate`
+  INFO [097f97ca] Running bundle exec rake db:migrate as atscom@localhost
+  INFO [097f97ca] Finished in 7.984 seconds with exit status 0 (successful).
+  INFO [a19dc3de] Running /usr/bin/env bundle exec whenever --update-crontab sync-server --set environment=production --roles=web,app,db as atscom@localhost
+  INFO [a19dc3de] Finished in 0.994 seconds with exit status 0 (successful).
+  INFO [19fdbfc6] Running bundle exec sidekiqctl stop /home/atscom/sync-server/shared/tmp/pids/sidekiq-0.pid 10 as atscom@localhost
+  INFO [19fdbfc6] Finished in 10.749 seconds with exit status 0 (successful).
+  INFO [4d9148f9] Running /usr/bin/env ln -s /home/atscom/sync-server/releases/20160526140255 /home/atscom/sync-server/releases/current as atscom@localhost
+  INFO [4d9148f9] Finished in 0.068 seconds with exit status 0 (successful).
+  INFO [4f2f4c51] Running /usr/bin/env mv /home/atscom/sync-server/releases/current /home/atscom/sync-server as atscom@localhost
+  INFO [4f2f4c51] Finished in 0.067 seconds with exit status 0 (successful).
+  INFO [d6d88bba] Running bundle exec sidekiq --index 0 --pidfile /home/atscom/sync-server/shared/tmp/pids/sidekiq-0.pid --environment production --logfile /home/atscom/sync-server/shared/log/sidekiq.log --daemon as atscom@localhost
+  INFO [d6d88bba] Finished in 1.173 seconds with exit status 0 (successful).
+  INFO [f675133c] Running /etc/init.d/syncserver restart as atscom@localhost
+  INFO [f675133c] Finished in 9.731 seconds with exit status 0 (successful).
+  INFO Keeping 5 of 6 deployed releases on localhost
+  INFO [9a030647] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160525151826 as atscom@localhost
+  INFO [9a030647] Finished in 0.392 seconds with exit status 0 (successful).
+  INFO [dd96860a] Running /usr/bin/env echo "Branch master (at 534155f6fef7ca45acff888dbe20debbfb85aa9a) deployed as release 20160526140255 by root" >> /home/atscom/sync-server/revisions.log as atscom@localhost
+  INFO [dd96860a] Finished in 0.045 seconds with exit status 0 (successful).
+  INFO ---------------------------------------------------------------------------
+  INFO START 2016-05-26 16:14:53 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [1f867319] Running /usr/bin/env mkdir -p /tmp/sync-server/ as atscom@localhost
+  INFO [1f867319] Finished in 0.361 seconds with exit status 0 (successful).
+  INFO Uploading /tmp/sync-server/git-ssh.sh 100.0%
+  INFO [1c49e50e] Running /usr/bin/env chmod +rx /tmp/sync-server/git-ssh.sh as atscom@localhost
+  INFO [1c49e50e] Finished in 0.017 seconds with exit status 0 (successful).
+  INFO [eb791569] Running /usr/bin/env git ls-remote --heads https://github.com/AllanTamdem/sync_server.git as atscom@localhost
+  INFO [eb791569] Finished in 0.850 seconds with exit status 0 (successful).
+  INFO [5583e18d] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared /home/atscom/sync-server/releases as atscom@localhost
+  INFO [5583e18d] Finished in 0.010 seconds with exit status 0 (successful).
+  INFO [570b4f1d] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared/log /home/atscom/sync-server/shared/tmp/pids /home/atscom/sync-server/shared/tmp/cache /home/atscom/sync-server/shared/tmp/sockets /home/atscom/sync-server/shared/vendor/bundle /home/atscom/sync-server/shared/public/system /home/atscom/sync-server/shared/public/assets as atscom@localhost
+  INFO [570b4f1d] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO [b1c407fe] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared/config as atscom@localhost
+  INFO [b1c407fe] Finished in 0.011 seconds with exit status 0 (successful).
+  INFO [de6ca30f] Running bundle exec sidekiqctl quiet /home/atscom/sync-server/shared/tmp/pids/sidekiq-0.pid as atscom@localhost
+  INFO [de6ca30f] Finished in 0.670 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /home/atscom/sync-server/repo
+  INFO [83f4e67a] Running /usr/bin/env git remote update --prune as atscom@localhost
+  INFO [83f4e67a] Finished in 0.901 seconds with exit status 0 (successful).
+  INFO [1d7382ee] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160526141455 as atscom@localhost
+  INFO [1d7382ee] Finished in 0.020 seconds with exit status 0 (successful).
+  INFO [f3ad0bd5] Running /usr/bin/env git archive master | tar -x -f - -C /home/atscom/sync-server/releases/20160526141455 as atscom@localhost
+  INFO [f3ad0bd5] Finished in 0.274 seconds with exit status 0 (successful).
+  INFO [89e77484] Running /usr/bin/env echo "534155f6fef7ca45acff888dbe20debbfb85aa9a" >> REVISION as atscom@localhost
+  INFO [89e77484] Finished in 0.024 seconds with exit status 0 (successful).
+  INFO [6a3a818e] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160526141455/config as atscom@localhost
+  INFO [6a3a818e] Finished in 0.011 seconds with exit status 0 (successful).
+  INFO [9680290b] Running /usr/bin/env rm /home/atscom/sync-server/releases/20160526141455/config/secrets.yml as atscom@localhost
+  INFO [9680290b] Finished in 0.011 seconds with exit status 0 (successful).
+  INFO [419877a3] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/config/secrets.yml /home/atscom/sync-server/releases/20160526141455/config/secrets.yml as atscom@localhost
+  INFO [419877a3] Finished in 0.019 seconds with exit status 0 (successful).
+  INFO [9631549e] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160526141455 /home/atscom/sync-server/releases/20160526141455/tmp /home/atscom/sync-server/releases/20160526141455/vendor /home/atscom/sync-server/releases/20160526141455/public as atscom@localhost
+  INFO [9631549e] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO [4db425ee] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160526141455/log as atscom@localhost
+  INFO [4db425ee] Finished in 0.024 seconds with exit status 0 (successful).
+  INFO [5685554e] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/log /home/atscom/sync-server/releases/20160526141455/log as atscom@localhost
+  INFO [5685554e] Finished in 0.022 seconds with exit status 0 (successful).
+  INFO [793a90e7] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/pids /home/atscom/sync-server/releases/20160526141455/tmp/pids as atscom@localhost
+  INFO [793a90e7] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO [05698c9b] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160526141455/tmp/cache as atscom@localhost
+  INFO [05698c9b] Finished in 0.049 seconds with exit status 0 (successful).
+  INFO [29ef8fa0] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/cache /home/atscom/sync-server/releases/20160526141455/tmp/cache as atscom@localhost
+  INFO [29ef8fa0] Finished in 0.010 seconds with exit status 0 (successful).
+  INFO [c3c9c326] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/sockets /home/atscom/sync-server/releases/20160526141455/tmp/sockets as atscom@localhost
+  INFO [c3c9c326] Finished in 0.011 seconds with exit status 0 (successful).
+  INFO [7f5705b4] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/vendor/bundle /home/atscom/sync-server/releases/20160526141455/vendor/bundle as atscom@localhost
+  INFO [7f5705b4] Finished in 0.011 seconds with exit status 0 (successful).
+  INFO [a18eee8e] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/public/system /home/atscom/sync-server/releases/20160526141455/public/system as atscom@localhost
+  INFO [a18eee8e] Finished in 0.026 seconds with exit status 0 (successful).
+  INFO [e2e16788] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/public/assets /home/atscom/sync-server/releases/20160526141455/public/assets as atscom@localhost
+  INFO [e2e16788] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO [34c72a30] Running /usr/bin/env bundle install --path /home/atscom/sync-server/shared/bundle --without development test --deployment --quiet as atscom@localhost
+  INFO [34c72a30] Finished in 0.934 seconds with exit status 0 (successful).
+  INFO [bbb61939] Running bundle exec rake assets:precompile as atscom@localhost
+  INFO [bbb61939] Finished in 18.713 seconds with exit status 0 (successful).
+  INFO [8de83c13] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160526141455/assets_manifest_backup as atscom@localhost
+  INFO [8de83c13] Finished in 0.052 seconds with exit status 0 (successful).
+  INFO [3a61dc85] Running /usr/bin/env cp /home/atscom/sync-server/releases/20160526141455/public/assets/.sprockets-manifest-6e8700e8049449c4817eea5d2e0e5962.json /home/atscom/sync-server/releases/20160526141455/assets_manifest_backup as atscom@localhost
+  INFO [3a61dc85] Finished in 0.037 seconds with exit status 0 (successful).
+  INFO [deploy:migrate] Run `rake db:migrate`
+  INFO [940c5c74] Running bundle exec rake db:migrate as atscom@localhost
+  INFO [940c5c74] Finished in 5.979 seconds with exit status 0 (successful).
+  INFO [9becdb43] Running /usr/bin/env bundle exec whenever --update-crontab sync-server --set environment=production --roles=web,app,db as atscom@localhost
+  INFO [9becdb43] Finished in 0.758 seconds with exit status 0 (successful).
+  INFO [e0b0fb8e] Running bundle exec sidekiqctl stop /home/atscom/sync-server/shared/tmp/pids/sidekiq-0.pid 10 as atscom@localhost
+  INFO [e0b0fb8e] Finished in 1.701 seconds with exit status 0 (successful).
+  INFO [85de5cc0] Running /usr/bin/env ln -s /home/atscom/sync-server/releases/20160526141455 /home/atscom/sync-server/releases/current as atscom@localhost
+  INFO [85de5cc0] Finished in 0.008 seconds with exit status 0 (successful).
+  INFO [eeaa58b4] Running /usr/bin/env mv /home/atscom/sync-server/releases/current /home/atscom/sync-server as atscom@localhost
+  INFO [eeaa58b4] Finished in 0.008 seconds with exit status 0 (successful).
+  INFO [65606cac] Running bundle exec sidekiq --index 0 --pidfile /home/atscom/sync-server/shared/tmp/pids/sidekiq-0.pid --environment production --logfile /home/atscom/sync-server/shared/log/sidekiq.log --daemon as atscom@localhost
+  INFO [65606cac] Finished in 0.845 seconds with exit status 0 (successful).
+  INFO [bc3526ad] Running /etc/init.d/syncserver restart as atscom@localhost
+  INFO [bc3526ad] Finished in 9.170 seconds with exit status 0 (successful).
+  INFO Keeping 5 of 6 deployed releases on localhost
+  INFO [fda6fccd] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160525155938 as atscom@localhost
+  INFO [fda6fccd] Finished in 0.259 seconds with exit status 0 (successful).
+  INFO [2f1398fe] Running /usr/bin/env echo "Branch master (at 534155f6fef7ca45acff888dbe20debbfb85aa9a) deployed as release 20160526141455 by root" >> /home/atscom/sync-server/revisions.log as atscom@localhost
+  INFO [2f1398fe] Finished in 0.010 seconds with exit status 0 (successful).
+  INFO ---------------------------------------------------------------------------
+  INFO START 2016-05-26 16:18:53 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [34ce69b9] Running /usr/bin/env mkdir -p /tmp/sync-server/ as atscom@localhost
+  INFO [34ce69b9] Finished in 0.456 seconds with exit status 0 (successful).
+  INFO Uploading /tmp/sync-server/git-ssh.sh 100.0%
+  INFO [610dfc43] Running /usr/bin/env chmod +rx /tmp/sync-server/git-ssh.sh as atscom@localhost
+  INFO [610dfc43] Finished in 0.016 seconds with exit status 0 (successful).
+  INFO [78119737] Running /usr/bin/env git ls-remote --heads https://github.com/AllanTamdem/sync_server.git as atscom@localhost
+  INFO [78119737] Finished in 0.805 seconds with exit status 0 (successful).
+  INFO [c9584438] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared /home/atscom/sync-server/releases as atscom@localhost
+  INFO [c9584438] Finished in 0.010 seconds with exit status 0 (successful).
+  INFO [77003658] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared/log /home/atscom/sync-server/shared/tmp/pids /home/atscom/sync-server/shared/tmp/cache /home/atscom/sync-server/shared/tmp/sockets /home/atscom/sync-server/shared/vendor/bundle /home/atscom/sync-server/shared/public/system /home/atscom/sync-server/shared/public/assets as atscom@localhost
+  INFO [77003658] Finished in 0.018 seconds with exit status 0 (successful).
+  INFO [7522e562] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared/config as atscom@localhost
+  INFO [7522e562] Finished in 0.025 seconds with exit status 0 (successful).
+  INFO [b980fe1c] Running bundle exec sidekiqctl quiet /home/atscom/sync-server/shared/tmp/pids/sidekiq-0.pid as atscom@localhost
+  INFO [b980fe1c] Finished in 0.710 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /home/atscom/sync-server/repo
+  INFO [3b37b61c] Running /usr/bin/env git remote update --prune as atscom@localhost
+  INFO [3b37b61c] Finished in 0.761 seconds with exit status 0 (successful).
+  INFO [c6e74e0b] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160526141855 as atscom@localhost
+  INFO [c6e74e0b] Finished in 0.010 seconds with exit status 0 (successful).
+  INFO [648b97f6] Running /usr/bin/env git archive master | tar -x -f - -C /home/atscom/sync-server/releases/20160526141855 as atscom@localhost
+  INFO [648b97f6] Finished in 0.336 seconds with exit status 0 (successful).
+  INFO [acad8b92] Running /usr/bin/env echo "534155f6fef7ca45acff888dbe20debbfb85aa9a" >> REVISION as atscom@localhost
+  INFO [acad8b92] Finished in 0.007 seconds with exit status 0 (successful).
+  INFO [acd9d37e] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160526141855/config as atscom@localhost
+  INFO [acd9d37e] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO [ab5e9173] Running /usr/bin/env rm /home/atscom/sync-server/releases/20160526141855/config/secrets.yml as atscom@localhost
+  INFO [ab5e9173] Finished in 0.019 seconds with exit status 0 (successful).
+  INFO [d41cb192] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/config/secrets.yml /home/atscom/sync-server/releases/20160526141855/config/secrets.yml as atscom@localhost
+  INFO [d41cb192] Finished in 0.017 seconds with exit status 0 (successful).
+  INFO [05fa6935] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160526141855 /home/atscom/sync-server/releases/20160526141855/tmp /home/atscom/sync-server/releases/20160526141855/vendor /home/atscom/sync-server/releases/20160526141855/public as atscom@localhost
+  INFO [05fa6935] Finished in 0.021 seconds with exit status 0 (successful).
+  INFO [835bf8ef] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160526141855/log as atscom@localhost
+  INFO [835bf8ef] Finished in 0.015 seconds with exit status 0 (successful).
+  INFO [fc585e6c] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/log /home/atscom/sync-server/releases/20160526141855/log as atscom@localhost
+  INFO [fc585e6c] Finished in 0.008 seconds with exit status 0 (successful).
+  INFO [388225ab] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/pids /home/atscom/sync-server/releases/20160526141855/tmp/pids as atscom@localhost
+  INFO [388225ab] Finished in 0.011 seconds with exit status 0 (successful).
+  INFO [3cc55a9f] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160526141855/tmp/cache as atscom@localhost
+  INFO [3cc55a9f] Finished in 0.046 seconds with exit status 0 (successful).
+  INFO [87c18835] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/cache /home/atscom/sync-server/releases/20160526141855/tmp/cache as atscom@localhost
+  INFO [87c18835] Finished in 0.021 seconds with exit status 0 (successful).
+  INFO [e4a20203] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/sockets /home/atscom/sync-server/releases/20160526141855/tmp/sockets as atscom@localhost
+  INFO [e4a20203] Finished in 0.028 seconds with exit status 0 (successful).
+  INFO [3c9ab7a1] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/vendor/bundle /home/atscom/sync-server/releases/20160526141855/vendor/bundle as atscom@localhost
+  INFO [3c9ab7a1] Finished in 0.011 seconds with exit status 0 (successful).
+  INFO [5a58fd09] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/public/system /home/atscom/sync-server/releases/20160526141855/public/system as atscom@localhost
+  INFO [5a58fd09] Finished in 0.024 seconds with exit status 0 (successful).
+  INFO [15efec84] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/public/assets /home/atscom/sync-server/releases/20160526141855/public/assets as atscom@localhost
+  INFO [15efec84] Finished in 0.017 seconds with exit status 0 (successful).
+  INFO [241e81c0] Running /usr/bin/env bundle install --path /home/atscom/sync-server/shared/bundle --without development test --deployment --quiet as atscom@localhost
+  INFO [241e81c0] Finished in 0.930 seconds with exit status 0 (successful).
+  INFO [e9b937af] Running bundle exec rake assets:precompile as atscom@localhost
+  INFO [e9b937af] Finished in 17.909 seconds with exit status 0 (successful).
+  INFO [d223d553] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160526141855/assets_manifest_backup as atscom@localhost
+  INFO [d223d553] Finished in 0.017 seconds with exit status 0 (successful).
+  INFO [5cbb92e6] Running /usr/bin/env cp /home/atscom/sync-server/releases/20160526141855/public/assets/.sprockets-manifest-6e8700e8049449c4817eea5d2e0e5962.json /home/atscom/sync-server/releases/20160526141855/assets_manifest_backup as atscom@localhost
+  INFO [5cbb92e6] Finished in 0.015 seconds with exit status 0 (successful).
+  INFO [deploy:migrate] Run `rake db:migrate`
+  INFO [e05fce39] Running bundle exec rake db:migrate as atscom@localhost
+  INFO [e05fce39] Finished in 6.112 seconds with exit status 0 (successful).
+  INFO [9916c17f] Running /usr/bin/env bundle exec whenever --update-crontab sync-server --set environment=production --roles=web,app,db as atscom@localhost
+  INFO [9916c17f] Finished in 0.828 seconds with exit status 0 (successful).
+  INFO [09c1e7c2] Running bundle exec sidekiqctl stop /home/atscom/sync-server/shared/tmp/pids/sidekiq-0.pid 10 as atscom@localhost
+  INFO [09c1e7c2] Finished in 1.760 seconds with exit status 0 (successful).
+  INFO [fdacba75] Running /usr/bin/env ln -s /home/atscom/sync-server/releases/20160526141855 /home/atscom/sync-server/releases/current as atscom@localhost
+  INFO [fdacba75] Finished in 0.010 seconds with exit status 0 (successful).
+  INFO [4872338d] Running /usr/bin/env mv /home/atscom/sync-server/releases/current /home/atscom/sync-server as atscom@localhost
+  INFO [4872338d] Finished in 0.010 seconds with exit status 0 (successful).
+  INFO [0fa2d129] Running bundle exec sidekiq --index 0 --pidfile /home/atscom/sync-server/shared/tmp/pids/sidekiq-0.pid --environment production --logfile /home/atscom/sync-server/shared/log/sidekiq.log --daemon as atscom@localhost
+  INFO [0fa2d129] Finished in 0.999 seconds with exit status 0 (successful).
+  INFO [2e7b1fd2] Running /etc/init.d/syncserver restart as atscom@localhost
+  INFO [2e7b1fd2] Finished in 9.495 seconds with exit status 0 (successful).
+  INFO Keeping 5 of 6 deployed releases on localhost
+  INFO [154813d4] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160526084822 as atscom@localhost
+  INFO [154813d4] Finished in 0.241 seconds with exit status 0 (successful).
+  INFO [80f6dc8a] Running /usr/bin/env echo "Branch master (at 534155f6fef7ca45acff888dbe20debbfb85aa9a) deployed as release 20160526141855 by root" >> /home/atscom/sync-server/revisions.log as atscom@localhost
+  INFO [80f6dc8a] Finished in 0.022 seconds with exit status 0 (successful).
+  INFO ---------------------------------------------------------------------------
+  INFO START 2016-05-26 16:41:48 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [13106961] Running /usr/bin/env mkdir -p /tmp/sync-server/ as atscom@localhost
+  INFO [13106961] Finished in 0.489 seconds with exit status 0 (successful).
+  INFO Uploading /tmp/sync-server/git-ssh.sh 100.0%
+  INFO [c1e85b75] Running /usr/bin/env chmod +rx /tmp/sync-server/git-ssh.sh as atscom@localhost
+  INFO [c1e85b75] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO [40a26436] Running /usr/bin/env git ls-remote --heads https://github.com/AllanTamdem/sync_server.git as atscom@localhost
+  INFO [40a26436] Finished in 0.862 seconds with exit status 0 (successful).
+  INFO [94638950] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared /home/atscom/sync-server/releases as atscom@localhost
+  INFO [94638950] Finished in 0.011 seconds with exit status 0 (successful).
+  INFO [da6451b4] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared/log /home/atscom/sync-server/shared/tmp/pids /home/atscom/sync-server/shared/tmp/cache /home/atscom/sync-server/shared/tmp/sockets /home/atscom/sync-server/shared/vendor/bundle /home/atscom/sync-server/shared/public/system /home/atscom/sync-server/shared/public/assets as atscom@localhost
+  INFO [da6451b4] Finished in 0.021 seconds with exit status 0 (successful).
+  INFO [d35c5aef] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared/config as atscom@localhost
+  INFO [d35c5aef] Finished in 0.013 seconds with exit status 0 (successful).
+  INFO [4961772d] Running bundle exec sidekiqctl quiet /home/atscom/sync-server/shared/tmp/pids/sidekiq-0.pid as atscom@localhost
+  INFO [4961772d] Finished in 0.750 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /home/atscom/sync-server/repo
+  INFO [9a65a2b5] Running /usr/bin/env git remote update --prune as atscom@localhost
+  INFO [9a65a2b5] Finished in 1.450 seconds with exit status 0 (successful).
+  INFO [f32e308c] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160526144151 as atscom@localhost
+  INFO [f32e308c] Finished in 0.017 seconds with exit status 0 (successful).
+  INFO [83a047c5] Running /usr/bin/env git archive master | tar -x -f - -C /home/atscom/sync-server/releases/20160526144151 as atscom@localhost
+  INFO [83a047c5] Finished in 0.270 seconds with exit status 0 (successful).
+  INFO [6fcc0751] Running /usr/bin/env echo "9a9472af080b0cf7af17a0d55dcbcc7d547497c8" >> REVISION as atscom@localhost
+  INFO [6fcc0751] Finished in 0.026 seconds with exit status 0 (successful).
+  INFO [f2349603] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160526144151/config as atscom@localhost
+  INFO [f2349603] Finished in 0.010 seconds with exit status 0 (successful).
+  INFO [dd14d6e7] Running /usr/bin/env rm /home/atscom/sync-server/releases/20160526144151/config/secrets.yml as atscom@localhost
+  INFO [dd14d6e7] Finished in 0.013 seconds with exit status 0 (successful).
+  INFO [e64a3f05] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/config/secrets.yml /home/atscom/sync-server/releases/20160526144151/config/secrets.yml as atscom@localhost
+  INFO [e64a3f05] Finished in 0.012 seconds with exit status 0 (successful).
+  INFO [6af11947] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160526144151 /home/atscom/sync-server/releases/20160526144151/tmp /home/atscom/sync-server/releases/20160526144151/vendor /home/atscom/sync-server/releases/20160526144151/public as atscom@localhost
+  INFO [6af11947] Finished in 0.019 seconds with exit status 0 (successful).
+  INFO [ee1f4698] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160526144151/log as atscom@localhost
+  INFO [ee1f4698] Finished in 0.022 seconds with exit status 0 (successful).
+  INFO [c5d276f9] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/log /home/atscom/sync-server/releases/20160526144151/log as atscom@localhost
+  INFO [c5d276f9] Finished in 0.020 seconds with exit status 0 (successful).
+  INFO [c045fc10] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/pids /home/atscom/sync-server/releases/20160526144151/tmp/pids as atscom@localhost
+  INFO [c045fc10] Finished in 0.013 seconds with exit status 0 (successful).
+  INFO [123c3856] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160526144151/tmp/cache as atscom@localhost
+  INFO [123c3856] Finished in 0.069 seconds with exit status 0 (successful).
+  INFO [25434a3d] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/cache /home/atscom/sync-server/releases/20160526144151/tmp/cache as atscom@localhost
+  INFO [25434a3d] Finished in 0.021 seconds with exit status 0 (successful).
+  INFO [e93e471e] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/sockets /home/atscom/sync-server/releases/20160526144151/tmp/sockets as atscom@localhost
+  INFO [e93e471e] Finished in 0.012 seconds with exit status 0 (successful).
+  INFO [0e1954d3] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/vendor/bundle /home/atscom/sync-server/releases/20160526144151/vendor/bundle as atscom@localhost
+  INFO [0e1954d3] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO [2b6a82ed] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/public/system /home/atscom/sync-server/releases/20160526144151/public/system as atscom@localhost
+  INFO [2b6a82ed] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO [54a3b64b] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/public/assets /home/atscom/sync-server/releases/20160526144151/public/assets as atscom@localhost
+  INFO [54a3b64b] Finished in 0.020 seconds with exit status 0 (successful).
+  INFO [44bc3352] Running /usr/bin/env bundle install --path /home/atscom/sync-server/shared/bundle --without development test --deployment --quiet as atscom@localhost
+  INFO [44bc3352] Finished in 1.027 seconds with exit status 0 (successful).
+  INFO [b1856923] Running bundle exec rake assets:precompile as atscom@localhost
+  INFO [b1856923] Finished in 18.398 seconds with exit status 0 (successful).
+  INFO [2671519c] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160526144151/assets_manifest_backup as atscom@localhost
+  INFO [2671519c] Finished in 0.012 seconds with exit status 0 (successful).
+  INFO [57664223] Running /usr/bin/env cp /home/atscom/sync-server/releases/20160526144151/public/assets/.sprockets-manifest-6e8700e8049449c4817eea5d2e0e5962.json /home/atscom/sync-server/releases/20160526144151/assets_manifest_backup as atscom@localhost
+  INFO [57664223] Finished in 0.016 seconds with exit status 0 (successful).
+  INFO [deploy:migrate] Run `rake db:migrate`
+  INFO [2aedb38e] Running bundle exec rake db:migrate as atscom@localhost
+  INFO [2aedb38e] Finished in 7.149 seconds with exit status 0 (successful).
+  INFO [05ff4739] Running /usr/bin/env bundle exec whenever --update-crontab sync-server --set environment=production --roles=web,app,db as atscom@localhost
+  INFO [05ff4739] Finished in 0.894 seconds with exit status 0 (successful).
+  INFO [65810391] Running bundle exec sidekiqctl stop /home/atscom/sync-server/shared/tmp/pids/sidekiq-0.pid 10 as atscom@localhost
+  INFO [65810391] Finished in 1.868 seconds with exit status 0 (successful).
+  INFO [10026469] Running /usr/bin/env ln -s /home/atscom/sync-server/releases/20160526144151 /home/atscom/sync-server/releases/current as atscom@localhost
+  INFO [10026469] Finished in 0.008 seconds with exit status 0 (successful).
+  INFO [0552a605] Running /usr/bin/env mv /home/atscom/sync-server/releases/current /home/atscom/sync-server as atscom@localhost
+  INFO [0552a605] Finished in 0.009 seconds with exit status 0 (successful).
+  INFO [2fe066fe] Running bundle exec sidekiq --index 0 --pidfile /home/atscom/sync-server/shared/tmp/pids/sidekiq-0.pid --environment production --logfile /home/atscom/sync-server/shared/log/sidekiq.log --daemon as atscom@localhost
+  INFO [2fe066fe] Finished in 0.968 seconds with exit status 0 (successful).
+  INFO [af46fc8c] Running /etc/init.d/syncserver restart as atscom@localhost
+  INFO [af46fc8c] Finished in 9.761 seconds with exit status 0 (successful).
+  INFO Keeping 5 of 6 deployed releases on localhost
+  INFO [50b992a9] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160526090048 as atscom@localhost
+  INFO [50b992a9] Finished in 0.325 seconds with exit status 0 (successful).
+  INFO [9da73fe4] Running /usr/bin/env echo "Branch master (at 9a9472af080b0cf7af17a0d55dcbcc7d547497c8) deployed as release 20160526144151 by root" >> /home/atscom/sync-server/revisions.log as atscom@localhost
+  INFO [9da73fe4] Finished in 0.037 seconds with exit status 0 (successful).
+  INFO ---------------------------------------------------------------------------
+  INFO START 2016-05-26 17:26:00 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [6aa8c0ee] Running /usr/bin/env mkdir -p /tmp/sync-server/ as atscom@localhost
+  INFO [6aa8c0ee] Finished in 0.403 seconds with exit status 0 (successful).
+  INFO Uploading /tmp/sync-server/git-ssh.sh 100.0%
+  INFO [821a0218] Running /usr/bin/env chmod +rx /tmp/sync-server/git-ssh.sh as atscom@localhost
+  INFO [821a0218] Finished in 0.023 seconds with exit status 0 (successful).
+  INFO [e9bb412f] Running /usr/bin/env git ls-remote --heads https://github.com/AllanTamdem/sync_server.git as atscom@localhost
+  INFO [e9bb412f] Finished in 0.814 seconds with exit status 0 (successful).
+  INFO [cb7950bf] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared /home/atscom/sync-server/releases as atscom@localhost
+  INFO [cb7950bf] Finished in 0.009 seconds with exit status 0 (successful).
+  INFO [ee0dc646] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared/log /home/atscom/sync-server/shared/tmp/pids /home/atscom/sync-server/shared/tmp/cache /home/atscom/sync-server/shared/tmp/sockets /home/atscom/sync-server/shared/vendor/bundle /home/atscom/sync-server/shared/public/system /home/atscom/sync-server/shared/public/assets as atscom@localhost
+  INFO [ee0dc646] Finished in 0.007 seconds with exit status 0 (successful).
+  INFO [5856eef3] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared/config as atscom@localhost
+  INFO [5856eef3] Finished in 0.009 seconds with exit status 0 (successful).
+  INFO [7ec21d58] Running bundle exec sidekiqctl quiet /home/atscom/sync-server/shared/tmp/pids/sidekiq-0.pid as atscom@localhost
+  INFO [7ec21d58] Finished in 0.808 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /home/atscom/sync-server/repo
+  INFO [41f7bae3] Running /usr/bin/env git remote update --prune as atscom@localhost
+  INFO [41f7bae3] Finished in 1.143 seconds with exit status 0 (successful).
+  INFO [1764fb7b] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160526152602 as atscom@localhost
+  INFO [1764fb7b] Finished in 0.022 seconds with exit status 0 (successful).
+  INFO [4d4124b0] Running /usr/bin/env git archive master | tar -x -f - -C /home/atscom/sync-server/releases/20160526152602 as atscom@localhost
+  INFO [4d4124b0] Finished in 0.264 seconds with exit status 0 (successful).
+  INFO [e23f5aa2] Running /usr/bin/env echo "27f0a73c22755d9ad7d3394e6844290fb5391c17" >> REVISION as atscom@localhost
+  INFO [e23f5aa2] Finished in 0.013 seconds with exit status 0 (successful).
+  INFO [d66e1768] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160526152602/config as atscom@localhost
+  INFO [d66e1768] Finished in 0.016 seconds with exit status 0 (successful).
+  INFO [155f4f59] Running /usr/bin/env rm /home/atscom/sync-server/releases/20160526152602/config/secrets.yml as atscom@localhost
+  INFO [155f4f59] Finished in 0.016 seconds with exit status 0 (successful).
+  INFO [90cb0691] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/config/secrets.yml /home/atscom/sync-server/releases/20160526152602/config/secrets.yml as atscom@localhost
+  INFO [90cb0691] Finished in 0.008 seconds with exit status 0 (successful).
+  INFO [b3611bec] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160526152602 /home/atscom/sync-server/releases/20160526152602/tmp /home/atscom/sync-server/releases/20160526152602/vendor /home/atscom/sync-server/releases/20160526152602/public as atscom@localhost
+  INFO [b3611bec] Finished in 0.023 seconds with exit status 0 (successful).
+  INFO [226dcf36] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160526152602/log as atscom@localhost
+  INFO [226dcf36] Finished in 0.023 seconds with exit status 0 (successful).
+  INFO [f6b63150] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/log /home/atscom/sync-server/releases/20160526152602/log as atscom@localhost
+  INFO [f6b63150] Finished in 0.019 seconds with exit status 0 (successful).
+  INFO [ab9cde37] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/pids /home/atscom/sync-server/releases/20160526152602/tmp/pids as atscom@localhost
+  INFO [ab9cde37] Finished in 0.012 seconds with exit status 0 (successful).
+  INFO [cc8a6437] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160526152602/tmp/cache as atscom@localhost
+  INFO [cc8a6437] Finished in 0.036 seconds with exit status 0 (successful).
+  INFO [9a0ff1ee] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/cache /home/atscom/sync-server/releases/20160526152602/tmp/cache as atscom@localhost
+  INFO [9a0ff1ee] Finished in 0.017 seconds with exit status 0 (successful).
+  INFO [363c0c65] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/sockets /home/atscom/sync-server/releases/20160526152602/tmp/sockets as atscom@localhost
+  INFO [363c0c65] Finished in 0.017 seconds with exit status 0 (successful).
+  INFO [7682c454] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/vendor/bundle /home/atscom/sync-server/releases/20160526152602/vendor/bundle as atscom@localhost
+  INFO [7682c454] Finished in 0.019 seconds with exit status 0 (successful).
+  INFO [748d7287] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/public/system /home/atscom/sync-server/releases/20160526152602/public/system as atscom@localhost
+  INFO [748d7287] Finished in 0.017 seconds with exit status 0 (successful).
+  INFO [bbf0c818] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/public/assets /home/atscom/sync-server/releases/20160526152602/public/assets as atscom@localhost
+  INFO [bbf0c818] Finished in 0.011 seconds with exit status 0 (successful).
+  INFO [d7ad5a20] Running /usr/bin/env bundle install --path /home/atscom/sync-server/shared/bundle --without development test --deployment --quiet as atscom@localhost
+  INFO [d7ad5a20] Finished in 1.346 seconds with exit status 0 (successful).
+  INFO [35f043d2] Running bundle exec rake assets:precompile as atscom@localhost
+  INFO [35f043d2] Finished in 22.321 seconds with exit status 0 (successful).
+  INFO [4d6dd949] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160526152602/assets_manifest_backup as atscom@localhost
+  INFO [4d6dd949] Finished in 0.040 seconds with exit status 0 (successful).
+  INFO [bb5dc75d] Running /usr/bin/env cp /home/atscom/sync-server/releases/20160526152602/public/assets/.sprockets-manifest-6e8700e8049449c4817eea5d2e0e5962.json /home/atscom/sync-server/releases/20160526152602/assets_manifest_backup as atscom@localhost
+  INFO [bb5dc75d] Finished in 0.028 seconds with exit status 0 (successful).
+  INFO [deploy:migrate] Run `rake db:migrate`
+  INFO [4a3fd4ed] Running bundle exec rake db:migrate as atscom@localhost
+  INFO [4a3fd4ed] Finished in 7.375 seconds with exit status 0 (successful).
+  INFO [dec7534e] Running /usr/bin/env bundle exec whenever --update-crontab sync-server --set environment=production --roles=web,app,db as atscom@localhost
+  INFO [dec7534e] Finished in 0.882 seconds with exit status 0 (successful).
+  INFO [6a91b752] Running bundle exec sidekiqctl stop /home/atscom/sync-server/shared/tmp/pids/sidekiq-0.pid 10 as atscom@localhost
+  INFO [6a91b752] Finished in 1.700 seconds with exit status 0 (successful).
+  INFO [9adb8f9d] Running /usr/bin/env ln -s /home/atscom/sync-server/releases/20160526152602 /home/atscom/sync-server/releases/current as atscom@localhost
+  INFO [9adb8f9d] Finished in 0.010 seconds with exit status 0 (successful).
+  INFO [3e81a8aa] Running /usr/bin/env mv /home/atscom/sync-server/releases/current /home/atscom/sync-server as atscom@localhost
+  INFO [3e81a8aa] Finished in 0.072 seconds with exit status 0 (successful).
+  INFO [612b4e69] Running bundle exec sidekiq --index 0 --pidfile /home/atscom/sync-server/shared/tmp/pids/sidekiq-0.pid --environment production --logfile /home/atscom/sync-server/shared/log/sidekiq.log --daemon as atscom@localhost
+  INFO [612b4e69] Finished in 0.986 seconds with exit status 0 (successful).
+  INFO [1470bd30] Running /etc/init.d/syncserver restart as atscom@localhost
+  INFO [1470bd30] Finished in 9.645 seconds with exit status 0 (successful).
+  INFO Keeping 5 of 6 deployed releases on localhost
+  INFO [7400a7cc] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160526132753 as atscom@localhost
+  INFO [7400a7cc] Finished in 0.301 seconds with exit status 0 (successful).
+  INFO [6e4bf5bd] Running /usr/bin/env echo "Branch master (at 27f0a73c22755d9ad7d3394e6844290fb5391c17) deployed as release 20160526152602 by root" >> /home/atscom/sync-server/revisions.log as atscom@localhost
+  INFO [6e4bf5bd] Finished in 0.020 seconds with exit status 0 (successful).
+  INFO ---------------------------------------------------------------------------
+  INFO START 2016-05-27 13:51:27 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [05a8591d] Running /usr/bin/env mkdir -p /tmp/sync-server/ as atscom@localhost
+  INFO [05a8591d] Finished in 0.546 seconds with exit status 0 (successful).
+  INFO Uploading /tmp/sync-server/git-ssh.sh 100.0%
+  INFO [fd4a3bdd] Running /usr/bin/env chmod +rx /tmp/sync-server/git-ssh.sh as atscom@localhost
+  INFO [fd4a3bdd] Finished in 0.018 seconds with exit status 0 (successful).
+  INFO [736ebb07] Running /usr/bin/env git ls-remote --heads https://github.com/AllanTamdem/sync_server.git as atscom@localhost
+  INFO [736ebb07] Finished in 1.106 seconds with exit status 0 (successful).
+  INFO [c95ba21b] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared /home/atscom/sync-server/releases as atscom@localhost
+  INFO [c95ba21b] Finished in 0.011 seconds with exit status 0 (successful).
+  INFO [a61e1bb9] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared/log /home/atscom/sync-server/shared/tmp/pids /home/atscom/sync-server/shared/tmp/cache /home/atscom/sync-server/shared/tmp/sockets /home/atscom/sync-server/shared/vendor/bundle /home/atscom/sync-server/shared/public/system /home/atscom/sync-server/shared/public/assets as atscom@localhost
+  INFO [a61e1bb9] Finished in 0.013 seconds with exit status 0 (successful).
+  INFO [dec5b210] Running /usr/bin/env mkdir -p /home/atscom/sync-server/shared/config as atscom@localhost
+  INFO [dec5b210] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO [0db132f9] Running bundle exec sidekiqctl quiet /home/atscom/sync-server/shared/tmp/pids/sidekiq-0.pid as atscom@localhost
+  INFO [0db132f9] Finished in 0.728 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /home/atscom/sync-server/repo
+  INFO [469bf69f] Running /usr/bin/env git remote update --prune as atscom@localhost
+  INFO [469bf69f] Finished in 1.011 seconds with exit status 0 (successful).
+  INFO [d4433994] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160527115130 as atscom@localhost
+  INFO [d4433994] Finished in 0.037 seconds with exit status 0 (successful).
+  INFO [fbdedeb6] Running /usr/bin/env git archive master | tar -x -f - -C /home/atscom/sync-server/releases/20160527115130 as atscom@localhost
+  INFO [fbdedeb6] Finished in 0.524 seconds with exit status 0 (successful).
+  INFO [a27922f6] Running /usr/bin/env echo "27f0a73c22755d9ad7d3394e6844290fb5391c17" >> REVISION as atscom@localhost
+  INFO [a27922f6] Finished in 0.030 seconds with exit status 0 (successful).
+  INFO [e67b2751] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160527115130/config as atscom@localhost
+  INFO [e67b2751] Finished in 0.024 seconds with exit status 0 (successful).
+  INFO [4dc76d8a] Running /usr/bin/env rm /home/atscom/sync-server/releases/20160527115130/config/secrets.yml as atscom@localhost
+  INFO [4dc76d8a] Finished in 0.010 seconds with exit status 0 (successful).
+  INFO [bd7f35b0] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/config/secrets.yml /home/atscom/sync-server/releases/20160527115130/config/secrets.yml as atscom@localhost
+  INFO [bd7f35b0] Finished in 0.020 seconds with exit status 0 (successful).
+  INFO [61da437d] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160527115130 /home/atscom/sync-server/releases/20160527115130/tmp /home/atscom/sync-server/releases/20160527115130/vendor /home/atscom/sync-server/releases/20160527115130/public as atscom@localhost
+  INFO [61da437d] Finished in 0.009 seconds with exit status 0 (successful).
+  INFO [da20bb48] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160527115130/log as atscom@localhost
+  INFO [da20bb48] Finished in 0.027 seconds with exit status 0 (successful).
+  INFO [90158610] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/log /home/atscom/sync-server/releases/20160527115130/log as atscom@localhost
+  INFO [90158610] Finished in 0.009 seconds with exit status 0 (successful).
+  INFO [ee5d1dce] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/pids /home/atscom/sync-server/releases/20160527115130/tmp/pids as atscom@localhost
+  INFO [ee5d1dce] Finished in 0.016 seconds with exit status 0 (successful).
+  INFO [00018da1] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160527115130/tmp/cache as atscom@localhost
+  INFO [00018da1] Finished in 0.041 seconds with exit status 0 (successful).
+  INFO [502fa09a] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/cache /home/atscom/sync-server/releases/20160527115130/tmp/cache as atscom@localhost
+  INFO [502fa09a] Finished in 0.020 seconds with exit status 0 (successful).
+  INFO [2cc203b6] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/tmp/sockets /home/atscom/sync-server/releases/20160527115130/tmp/sockets as atscom@localhost
+  INFO [2cc203b6] Finished in 0.009 seconds with exit status 0 (successful).
+  INFO [810cc2a6] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/vendor/bundle /home/atscom/sync-server/releases/20160527115130/vendor/bundle as atscom@localhost
+  INFO [810cc2a6] Finished in 0.018 seconds with exit status 0 (successful).
+  INFO [46b7b986] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/public/system /home/atscom/sync-server/releases/20160527115130/public/system as atscom@localhost
+  INFO [46b7b986] Finished in 0.012 seconds with exit status 0 (successful).
+  INFO [c05620f8] Running /usr/bin/env ln -s /home/atscom/sync-server/shared/public/assets /home/atscom/sync-server/releases/20160527115130/public/assets as atscom@localhost
+  INFO [c05620f8] Finished in 0.017 seconds with exit status 0 (successful).
+  INFO [d8f53e83] Running /usr/bin/env bundle install --path /home/atscom/sync-server/shared/bundle --without development test --deployment --quiet as atscom@localhost
+  INFO [d8f53e83] Finished in 1.453 seconds with exit status 0 (successful).
+  INFO [d880ec4c] Running bundle exec rake assets:precompile as atscom@localhost
+  INFO [d880ec4c] Finished in 21.437 seconds with exit status 0 (successful).
+  INFO [9c4d6d75] Running /usr/bin/env mkdir -p /home/atscom/sync-server/releases/20160527115130/assets_manifest_backup as atscom@localhost
+  INFO [9c4d6d75] Finished in 0.040 seconds with exit status 0 (successful).
+  INFO [bdd292b6] Running /usr/bin/env cp /home/atscom/sync-server/releases/20160527115130/public/assets/.sprockets-manifest-6e8700e8049449c4817eea5d2e0e5962.json /home/atscom/sync-server/releases/20160527115130/assets_manifest_backup as atscom@localhost
+  INFO [bdd292b6] Finished in 0.028 seconds with exit status 0 (successful).
+  INFO [deploy:migrate] Run `rake db:migrate`
+  INFO [a7a74502] Running bundle exec rake db:migrate as atscom@localhost
+  INFO [a7a74502] Finished in 6.443 seconds with exit status 0 (successful).
+  INFO [6f7ca213] Running /usr/bin/env bundle exec whenever --update-crontab sync-server --set environment=production --roles=web,app,db as atscom@localhost
+  INFO [6f7ca213] Finished in 0.817 seconds with exit status 0 (successful).
+  INFO [ed2be302] Running bundle exec sidekiqctl stop /home/atscom/sync-server/shared/tmp/pids/sidekiq-0.pid 10 as atscom@localhost
+  INFO [ed2be302] Finished in 1.771 seconds with exit status 0 (successful).
+  INFO [00055bea] Running /usr/bin/env ln -s /home/atscom/sync-server/releases/20160527115130 /home/atscom/sync-server/releases/current as atscom@localhost
+  INFO [00055bea] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO [ec5e6d6b] Running /usr/bin/env mv /home/atscom/sync-server/releases/current /home/atscom/sync-server as atscom@localhost
+  INFO [ec5e6d6b] Finished in 0.039 seconds with exit status 0 (successful).
+  INFO [cadc8e9a] Running bundle exec sidekiq --index 0 --pidfile /home/atscom/sync-server/shared/tmp/pids/sidekiq-0.pid --environment production --logfile /home/atscom/sync-server/shared/log/sidekiq.log --daemon as atscom@localhost
+  INFO [cadc8e9a] Finished in 0.968 seconds with exit status 0 (successful).
+  INFO [a62cd28d] Running /etc/init.d/syncserver restart as atscom@localhost
+  INFO [a62cd28d] Finished in 9.239 seconds with exit status 0 (successful).
+  INFO Keeping 5 of 6 deployed releases on localhost
+  INFO [b2370aa6] Running /usr/bin/env rm -rf /home/atscom/sync-server/releases/20160526140255 as atscom@localhost
+  INFO [b2370aa6] Finished in 0.222 seconds with exit status 0 (successful).
+  INFO [e3afe709] Running /usr/bin/env echo "Branch master (at 27f0a73c22755d9ad7d3394e6844290fb5391c17) deployed as release 20160527115130 by root" >> /home/atscom/sync-server/revisions.log as atscom@localhost
+  INFO [e3afe709] Finished in 0.040 seconds with exit status 0 (successful).

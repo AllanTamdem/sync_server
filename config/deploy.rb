@@ -1,18 +1,22 @@
-lock '3.4.0'
+lock '3.5.0'
 
 set :application, 'sync-server'
 
 # capistrano will deploy the code from this repo to the target machine
-set :repo_url, 'git@github.com:AllanTamdem/sync_server.git'
+set :repo_url, 'https://github.com/AllanTamdem/sync_server.git'
+# 'git@github.com:AllanTamdem/sync_server.git'
 
 # capistrano will deploy the code this folder
 set :deploy_to, '/home/atscom/sync-server'
-
 
 set :log_level, :info
 set :linked_files, fetch(:linked_files, []).push('config/secrets.yml')
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
 
+set :default_environment, {
+  'https_proxy' => 'http://vis:visiteur@www-cache.aql.fr:3128',
+  'http_proxy' => 'http://vis:visiteur@www-cache.aql.fr:3128'
+}
 
 namespace :deploy do
 

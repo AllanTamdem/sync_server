@@ -11,9 +11,9 @@
   file: path='/etc/apt/sources.list.d/chris-lea-node_js-{{ ansible_distribution_release }}.list' state=absent
   when: distrosupported|success
 
-- name: Add Nodesource Keys
-  sudo: yes
-  apt_key: url=https://deb.nodesource.com/gpgkey/nodesource.gpg.key state=present
+#- name: Add Nodesource Keys
+#  sudo: yes
+#  apt_key: url=https://deb.nodesource.com/gpgkey/nodesource.gpg.key state=present validate_certs=no
 
 - name: Add Nodesource Apt Sources List Deb
   sudo: yes

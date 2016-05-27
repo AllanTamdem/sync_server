@@ -3,7 +3,7 @@ tr069 ansible_ssh_host=52.16.103.212
 
 
 [syncserverprod]
-syncserver-prod ansible_ssh_host=localhost
+syncserver-prod ansible_ssh_host=localhost ansible_sudo_pass=Siemens
 
 
 [syncserverprod:vars]
