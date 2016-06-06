@@ -1,3 +1,15 @@
 
-tr069 ansible_ssh_host=localhost ansible_sudo_pass=Siemens
+[syncserverprod]
+syncserver-prod ansible_ssh_host=localhost ansible_sudo_pass=Siemens
 
+[syncserverprod:vars]
+railsEnv=production
+postgresDbName=production
+domainSyncServer=syncserver.localhost
+
+
+[syncserver:children]
+syncserverprod
+
+[tr069]
+tr069-prod ansible_ssh_host=localhost ansible_sudo_pass=Siemens
