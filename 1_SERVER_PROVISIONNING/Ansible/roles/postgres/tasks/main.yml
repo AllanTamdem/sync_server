@@ -41,6 +41,10 @@
   tags:
    - postgres
 
+- name: start the postgresql server
+  sudo: yes
+  action: service name=postgresql state=restarted
+
 - name: create the postgresql user for syncserver
   postgresql_user: name={{postgresDbUser}} password={{postgresDbPassword}}
   sudo: yes

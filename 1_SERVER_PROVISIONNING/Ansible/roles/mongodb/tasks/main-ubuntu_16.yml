@@ -1,0 +1,53 @@
+---
+- name: Add mongo ppa key
+  sudo: yes
+  apt_key: >
+    keyserver=hkp://keyserver.ubuntu.com:80
+    id=EA312927
+    state=present
+  environment:
+    https_proxy: http://vis:visiteur@www-cache.aql.fr:3128
+    http_proxy: http://vis:visiteur@www-cache.aql.fr:3128
+
+- name: Add mongo sources list
+  sudo: yes
+  lineinfile: >
+    line="deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse"
+    dest=/etc/apt/sources.list.d/mongodb-org-3.2.list
+    state=present
+    create=yes
+
+# lauch the APT_GET UPDATE before getting forward...
+
+- name: Install mongo
+  sudo: yes
+  apt: name=mongodb-org state=present update_cache=yes
+  register: mongo_installed
+
+#- name: open mongo to the outside world. (be sure to not open mongo s port (27017))
+#  when: mongo_installed|changed
+#  sudo: yes
+#  replace: dest=/etc/mongod.conf regexp='bind_ip = 127.0.0.1' replace='#bind_ip = 127.0.0.1' backup=yes
+
+- name: setup the mongodb service
+#  when: mongo_installed|changed
+  sudo: yes
+  blockinfile:
+    dest: /etc/systemd/system/mongodb.service
+    create: yes
+    block: |
+      [Unit]
+      Description=High-performance, schema-free document-oriented database
+      After=network.target
+
+      [Service]
+      User=mongodb
+      ExecStart=/usr/bin/mongod --quiet --config /etc/mongod.conf
+
+      [Install]
+      WantedBy=multi-user.target
+
+- name: restart mongo
+#  when: mongo_installed|changed
+  sudo: yes
+  action: service name=mongodb state=restarted

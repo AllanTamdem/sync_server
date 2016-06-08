@@ -20,6 +20,14 @@ set :default_environment, {
 
 namespace :deploy do
 
+  desc 'format the deployed version bin files'  
+  task :finished do
+    on roles(:app) do
+      execute 'sed -i\'\' -E \'s/\r$//g\' /home/atscom/sync-server/current/bin/*'
+    end
+  end
+
+
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
