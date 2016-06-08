@@ -31,8 +31,7 @@ postgresDbPassword: dx9zrBnq
 
 # domain names
 domainWebSocket: websocket.syncserver.localhost
-domainTr069Mediapost: mseurope.tapngo.orangejapan.jp
-
+domainTr069Mediapost: tr069.syncserver.localhost
 
 # AWS credentials for CloudWatch
 AwsCloudWatchAccessKeyId: AKIAJJ6X7F572SSXXXSA

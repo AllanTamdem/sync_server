@@ -1,10 +1,6 @@
 
-tr069 ansible_ssh_host=52.16.103.212
-
-
 [syncserverprod]
 syncserver-prod ansible_ssh_host=localhost ansible_sudo_pass=Siemens
-
 
 [syncserverprod:vars]
 railsEnv=production
@@ -14,3 +10,6 @@ domainSyncServer=syncserver.localhost
 
 [syncserver:children]
 syncserverprod
+
+[tr069]
+tr069-prod ansible_ssh_host=localhost ansible_sudo_pass=Siemens

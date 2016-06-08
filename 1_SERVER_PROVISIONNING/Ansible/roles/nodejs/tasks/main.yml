@@ -4,6 +4,7 @@
   register: distrosupported
 
 - name: Remove Old Chris Lea PPA
+  sudo: yes
   apt_repository: repo='ppa:chris-lea/node.js' state=absent
   when: distrosupported|success
 
@@ -11,9 +12,12 @@
   file: path='/etc/apt/sources.list.d/chris-lea-node_js-{{ ansible_distribution_release }}.list' state=absent
   when: distrosupported|success
 
-#- name: Add Nodesource Keys
-#  sudo: yes
-#  apt_key: url=https://deb.nodesource.com/gpgkey/nodesource.gpg.key state=present validate_certs=no
+- name: Add Nodesource Keys
+  sudo: yes
+  apt_key: url=https://deb.nodesource.com/gpgkey/nodesource.gpg.key state=present validate_certs=no
+  environment:
+    https_proxy: http://vis:visiteur@www-cache.aql.fr:3128
+    http_proxy: http://vis:visiteur@www-cache.aql.fr:3128
 
 - name: Add Nodesource Apt Sources List Deb
   sudo: yes

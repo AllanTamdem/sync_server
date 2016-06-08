@@ -6,15 +6,24 @@
 - name: Install genieacs with git clone
   git: repo=https://github.com/Kalagan/genieacs.git dest={{genieacsDir}} version=07f4f8d6f5312399b1d8288f17f59fc9dd7ac5e7
   register: genieacs_cloned
+  environment:
+    https_proxy: http://vis:visiteur@www-cache.aql.fr:3128
+    http_proxy: http://vis:visiteur@www-cache.aql.fr:3128
 
 - name: install node-gyp
   command: npm install -g node-gyp
   sudo: yes
   when: genieacs_cloned|changed
+  environment:
+    https_proxy: http://vis:visiteur@www-cache.aql.fr:3128
+    http_proxy: http://vis:visiteur@www-cache.aql.fr:3128
 
 - name: install hiredis
   command: npm install hiredis@0.1.17 chdir={{genieacsDir}}
   when: genieacs_cloned|changed
+  environment:
+    https_proxy: http://vis:visiteur@www-cache.aql.fr:3128
+    http_proxy: http://vis:visiteur@www-cache.aql.fr:3128
 
 # - name: node-gyp rebuild
 #   command: node-gyp rebuild chdir={{genieacsDir}}
@@ -26,10 +35,16 @@
   command: npm install chdir={{genieacsDir}}
   sudo: yes
   when: genieacs_cloned|changed
+  environment:
+    https_proxy: http://vis:visiteur@www-cache.aql.fr:3128
+    http_proxy: http://vis:visiteur@www-cache.aql.fr:3128
 
 - name: npm install
   command: npm install chdir={{genieacsDir}}
   when: genieacs_cloned|changed
+  environment:
+    https_proxy: http://vis:visiteur@www-cache.aql.fr:3128
+    http_proxy: http://vis:visiteur@www-cache.aql.fr:3128
 
 # - name: run npm Install
 #   npm: path={{genieacsDir}}
