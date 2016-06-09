@@ -13,9 +13,6 @@
   apt_key: url=http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc
   tags:
    - postgres
-  environment:
-    https_proxy: http://vis:visiteur@www-cache.aql.fr:3128
-    http_proxy: http://vis:visiteur@www-cache.aql.fr:3128
 
 - name: Add PostgreSQL repo
   sudo: yes

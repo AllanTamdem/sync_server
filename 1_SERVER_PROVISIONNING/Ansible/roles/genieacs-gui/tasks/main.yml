@@ -6,9 +6,6 @@
   git: repo=https://github.com/zaidka/genieacs-gui.git dest={{genieacsGuiDir}} version=85f3e0dfca100ebd8121b4e3f9beb67722c25940
   when: not genieacs_gui_already_cloned.stat.exists
   register: genieacs_gui_cloned
-  environment:
-    https_proxy: http://vis:visiteur@www-cache.aql.fr:3128
-    http_proxy: http://vis:visiteur@www-cache.aql.fr:3128
 
 - name: copy config files
   when: genieacs_gui_cloned|changed
@@ -43,17 +40,11 @@
   sudo: yes
   when: genieacs_gui_cloned|changed
   command: gem install json
-  environment:
-    https_proxy: http://vis:visiteur@www-cache.aql.fr:3128
-    http_proxy: http://vis:visiteur@www-cache.aql.fr:3128
   
 - name: run bundle
   sudo: yes
   when: genieacs_gui_cloned|changed
   command: bundle chdir={{genieacsGuiDir}}
-  environment:
-    https_proxy: http://vis:visiteur@www-cache.aql.fr:3128
-    http_proxy: http://vis:visiteur@www-cache.aql.fr:3128
 
 - include: nginx_config.yml
 

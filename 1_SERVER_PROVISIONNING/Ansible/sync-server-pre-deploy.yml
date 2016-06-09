@@ -7,3 +7,6 @@
   roles:
     - postgres
     - sync-server-pre-deploy
+  environment:
+    https_proxy: http://vis:visiteur@www-cache.aql.fr:3128
+    http_proxy: http://vis:visiteur@www-cache.aql.fr:3128

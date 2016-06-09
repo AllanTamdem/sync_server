@@ -2,7 +2,3 @@
 - name: "Install forever (to run Node.js app)."
   sudo: yes
   npm: name=forever global=yes state=present
-  environment:
-    https_proxy: http://vis:visiteur@www-cache.aql.fr:3128
-    http_proxy: http://vis:visiteur@www-cache.aql.fr:3128
-

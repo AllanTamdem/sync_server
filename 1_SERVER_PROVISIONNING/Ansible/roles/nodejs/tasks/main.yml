@@ -15,9 +15,6 @@
 - name: Add Nodesource Keys
   sudo: yes
   apt_key: url=https://deb.nodesource.com/gpgkey/nodesource.gpg.key state=present validate_certs=no
-  environment:
-    https_proxy: http://vis:visiteur@www-cache.aql.fr:3128
-    http_proxy: http://vis:visiteur@www-cache.aql.fr:3128
 
 - name: Add Nodesource Apt Sources List Deb
   sudo: yes

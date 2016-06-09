@@ -8,3 +8,6 @@
     - certification
     - genieacs
     - genieacs-gui
+  environment:
+    https_proxy: http://vis:visiteur@www-cache.aql.fr:3128
+    http_proxy: http://vis:visiteur@www-cache.aql.fr:3128
